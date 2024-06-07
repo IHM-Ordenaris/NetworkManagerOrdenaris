@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - :::: Objetos REQUEST ::::
-final class Servicio: Codable{
+final class Servicio: Codable {
     var nombre: String
     var headers: [Headers]?
     var url: String
     var printResponse: Bool
     
-    required init(nombre: String, headers: [Headers] = [Headers(nombre: "", valor: "")], url: String){
+    required init(nombre: String, headers: [Headers] = [Headers(nombre: "", valor: "")], url: String) {
         self.nombre = nombre
         self.headers = headers
         self.url = url
@@ -22,26 +22,24 @@ final class Servicio: Codable{
     }
 }
 
-final class Headers: Codable{
+final class Headers: Codable {
     var nombre: String
     var valor: String
     
-    required init( nombre:String, valor:String ){
+    required init( nombre: String, valor: String ) {
         self.nombre = nombre
         self.valor = valor
     }
 }
 
-
 // MARK: - :::: Objetos response SUCCESS ::::
-typealias CallbackCustomResponse = (_ response: customResponseObject?, _ failure: ErrorResponse?) -> ()
+typealias CallbackCustomResponse = (_ response: CustomResponseObject?, _ failure: ErrorResponse?) -> ()
 
-struct customResponseObject{
-    var success:Bool = false
-    var data:Data?
+struct CustomResponseObject {
+    var success: Bool = false
+    var data: Data?
     var responseStr: String?
 }
-
 
 // MARK: - :::: Objetos response ERROR ::::
 /// Error que responde el callback de todos los servicios hacia el Model

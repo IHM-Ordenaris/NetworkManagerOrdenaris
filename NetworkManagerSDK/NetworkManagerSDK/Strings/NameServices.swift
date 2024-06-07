@@ -9,15 +9,15 @@ import Foundation
 struct Service {
     struct General {
 //        static var BASE_SERVER  = "https://rickandmortyapi.com/api"   //Prod
-        static var BASE_SERVER  = "https://rickandmortyapi.com/api" //QA
+        static var BASE_SERVER  = "https://rickandmortyapi.com/api" // QA
     }
     
-    ///Headers Request
+    /// Headers Request
     struct Headers {
         static let APPLICATION_JSON = "application/json"
     }
     
-    ///Example
+    /// Example
     struct GetCharacters {
         static let NAME = "getCharacters"
         static let API  = Service.General.BASE_SERVER + "/character"

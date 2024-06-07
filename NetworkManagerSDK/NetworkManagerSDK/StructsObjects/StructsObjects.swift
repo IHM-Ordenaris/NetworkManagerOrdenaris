@@ -8,15 +8,15 @@
 import Foundation
 
 public struct ServicesPlugInResponse {
-    public var status: statusService
-    public var response: responseService
+    public var status: StatusService
+    public var response: ResponseService
     
     init() {
         status = .start
         response = .request
     }
     
-    init(_ status: statusService, response: responseService = .request) {
+    init(_ status: StatusService, response: ResponseService = .request) {
         self.status = status
         self.response = response
     }

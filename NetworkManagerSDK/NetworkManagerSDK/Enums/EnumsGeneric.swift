@@ -8,20 +8,20 @@
 import Foundation
 
 // Enumeraciòn para estatus de servicio
-public enum statusService: Int {
+public enum StatusService: Int {
     case start = 1
     case finish = 2
 }
 
 // Enumeraciòn para estatus de servicio
-public enum responseService {
+public enum ResponseService {
     case request
     case success
     case error
 }
 
 // Enumeraciòn para metodo de request
-public enum methodRequest: String {
+public enum MethodRequest: String {
     case get = "GET"
     case post = "POST"
     case put = "PUT"

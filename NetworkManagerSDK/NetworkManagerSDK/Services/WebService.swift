@@ -11,11 +11,11 @@ import Foundation
 /// WebService implementa las funciones para las llamadas a servicios
 /// Una instancia de esta clasedará acceso a las funciones para obtención de datos desde Servicio
 public class WebService {
-    ///Notificación de estatus de llamada a servicio (start / finish)
+    /// Notificación de estatus de llamada a servicio (start / finish)
     public var callbackServices: ((ServicesPlugInResponse) -> Void)?
     
-    public init (){
-        ///Inicializador
+    public init () {
+        /// Inicializador
     }
     
     // MARK: - ⚠️ Métodos GET ::::::::::::::::
@@ -26,27 +26,27 @@ public class WebService {
     /// - Parameters:
     ///   - idAccount: - identificador de cuenta
     ///   - callback: ObjResponseGetCharacters (⎷ response) / ErrorResponseGral (⌀ error)
-    public func getCharacters(callback:@escaping CallbackResponseGetCharacters){
+    public func getCharacters(callback: @escaping CallbackResponseGetCharacters) {
         self.callbackServices?(ServicesPlugInResponse(.start))
         
-        let urlStr:String = Service.GetCharacters.API
+        let urlStr: String = Service.GetCharacters.API
         let headers: [Headers] = []
-        let service = Servicio(nombre: Service.GetCharacters.NAME, headers: headers , url: urlStr)
+        let service = Servicio(nombre: Service.GetCharacters.NAME, headers: headers, url: urlStr)
         service.printResponse = true
-        var params = [String:Any]()
+        var params = [String: Any]()
         
-        Network().methodGet(servicio: service, params: params){ response, failure in
+        Network().methodGet(servicio: service, params: params) { response, failure in
             if let error = failure {
                 callback(ObjResponseGetCharacters(), error)
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 return
-            }else{
+            } else {
                 let decoder = JSONDecoder()
                 do {
                     let datos = response!.data!
                     let decodedResponse = try decoder.decode(ObjResponseGetCharacters.self, from: datos)
                     callback(decodedResponse, nil)
-                }catch {
+                } catch {
                     callback(ObjResponseGetCharacters(), self.errorParse(error: error))
                 }
                 self.callbackServices?(ServicesPlugInResponse(.finish))

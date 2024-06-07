@@ -33,7 +33,7 @@ final public class ObjResponseGetCharacters: Codable {
     public var info: ObjInfoCharacter
     public var results: [ObjCharacter]
     
-    init(){
+    init() {
         self.info = ObjInfoCharacter()
         self.results = []
     }
