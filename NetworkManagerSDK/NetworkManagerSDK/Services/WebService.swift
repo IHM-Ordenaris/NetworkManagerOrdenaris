@@ -47,7 +47,7 @@ public class WebService {
                     let decodedResponse = try decoder.decode(ObjResponseGetCharacters.self, from: datos)
                     callback(decodedResponse, nil)
                 } catch {
-                    callback(ObjResponseGetCharacters(), self.errorParse(error: error))
+                    callback(ObjResponseGetCharacters(), ErrorResponse())
                 }
                 self.callbackServices?(ServicesPlugInResponse(.finish))
             }

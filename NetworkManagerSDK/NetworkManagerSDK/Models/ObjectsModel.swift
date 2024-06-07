@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - ⚠️ typealias & Objects GET ::::::::::::::::
-public typealias CallbackResponseGetCharacters = (_ response: ObjResponseGetCharacters, _ error: ErrorResponseGral?) -> ()
+public typealias CallbackResponseGetCharacters = (_ response: ObjResponseGetCharacters, _ error: ErrorResponse?) -> ()
 
 // MARK: - :::: Objetos response ERROR GRAL ::::
 public class ErrorResponseGral: Codable, Error {
@@ -31,11 +31,9 @@ public class ErrorResponseGral: Codable, Error {
 
 final public class ObjResponseGetCharacters: Codable {
     public var info: ObjInfoCharacter
-    public var results: [ObjCharacter]
     
     init() {
         self.info = ObjInfoCharacter()
-        self.results = []
     }
 }
 
