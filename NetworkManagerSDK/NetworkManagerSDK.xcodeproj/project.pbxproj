@@ -1,0 +1,534 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41C2C13951100558B60 /* ObjectsModel.swift */; };
+		7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */; };
+		B67026F52B168801001B36E1 /* NetworkManagerSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */; };
+		B67026FB2B168801001B36E1 /* NetworkManagerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */; };
+		B67027012B168801001B36E1 /* NetworkManagerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B67026F32B168801001B36E1 /* NetworkManagerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B67027BD2B225417001B36E1 /* EnumsGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027BC2B225417001B36E1 /* EnumsGeneric.swift */; };
+		B67027C02B22542C001B36E1 /* NameServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027BF2B22542C001B36E1 /* NameServices.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B67026FC2B168801001B36E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B67026E72B168801001B36E1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B67026EF2B168801001B36E1;
+			remoteInfo = NetworkManagerSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7AE6D41C2C13951100558B60 /* ObjectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsModel.swift; sourceTree = "<group>"; };
+		7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsBodyParams.swift; sourceTree = "<group>"; };
+		B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkManagerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B67026F32B168801001B36E1 /* NetworkManagerSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerSDK.h; sourceTree = "<group>"; };
+		B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = NetworkManagerSDK.docc; sourceTree = "<group>"; };
+		B67026FA2B168801001B36E1 /* NetworkManagerSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkManagerSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B67027A52B1E65FA001B36E1 /* StructsObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructsObjects.swift; sourceTree = "<group>"; };
+		B67027A62B1E6602001B36E1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		B67027A72B1E6605001B36E1 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		B67027A92B1E667C001B36E1 /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		B67027BC2B225417001B36E1 /* EnumsGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumsGeneric.swift; sourceTree = "<group>"; };
+		B67027BF2B22542C001B36E1 /* NameServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameServices.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B67026ED2B168801001B36E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B67026F72B168801001B36E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B67026FB2B168801001B36E1 /* NetworkManagerSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B67026E62B168801001B36E1 = {
+			isa = PBXGroup;
+			children = (
+				B67026F22B168801001B36E1 /* NetworkManagerSDK */,
+				B67026F12B168801001B36E1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B67026F12B168801001B36E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */,
+				B67026FA2B168801001B36E1 /* NetworkManagerSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B67026F22B168801001B36E1 /* NetworkManagerSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B67027BB2B225417001B36E1 /* Enums */,
+				B67027A42B1E6599001B36E1 /* Models */,
+				B67027BE2B22542C001B36E1 /* Strings */,
+				B67027A32B1E658F001B36E1 /* Services */,
+				B67027A22B1E6579001B36E1 /* StructsObjects */,
+				B67026F32B168801001B36E1 /* NetworkManagerSDK.h */,
+				B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */,
+			);
+			path = NetworkManagerSDK;
+			sourceTree = "<group>";
+		};
+		B67027A22B1E6579001B36E1 /* StructsObjects */ = {
+			isa = PBXGroup;
+			children = (
+				B67027A52B1E65FA001B36E1 /* StructsObjects.swift */,
+			);
+			path = StructsObjects;
+			sourceTree = "<group>";
+		};
+		B67027A32B1E658F001B36E1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B67027A62B1E6602001B36E1 /* Network.swift */,
+				B67027A72B1E6605001B36E1 /* WebService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B67027A42B1E6599001B36E1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B67027A92B1E667C001B36E1 /* NetworkModel.swift */,
+				7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */,
+				7AE6D41C2C13951100558B60 /* ObjectsModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B67027BB2B225417001B36E1 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				B67027BC2B225417001B36E1 /* EnumsGeneric.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		B67027BE2B22542C001B36E1 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				B67027BF2B22542C001B36E1 /* NameServices.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B67026EB2B168801001B36E1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B67027012B168801001B36E1 /* NetworkManagerSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B67026EF2B168801001B36E1 /* NetworkManagerSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B67027042B168801001B36E1 /* Build configuration list for PBXNativeTarget "NetworkManagerSDK" */;
+			buildPhases = (
+				B67026EB2B168801001B36E1 /* Headers */,
+				B67026EC2B168801001B36E1 /* Sources */,
+				B67026ED2B168801001B36E1 /* Frameworks */,
+				B67026EE2B168801001B36E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetworkManagerSDK;
+			productName = NetworkManagerSDK;
+			productReference = B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B67026F92B168801001B36E1 /* NetworkManagerSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B67027072B168801001B36E1 /* Build configuration list for PBXNativeTarget "NetworkManagerSDKTests" */;
+			buildPhases = (
+				B67026F62B168801001B36E1 /* Sources */,
+				B67026F72B168801001B36E1 /* Frameworks */,
+				B67026F82B168801001B36E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B67026FD2B168801001B36E1 /* PBXTargetDependency */,
+			);
+			name = NetworkManagerSDKTests;
+			productName = NetworkManagerSDKTests;
+			productReference = B67026FA2B168801001B36E1 /* NetworkManagerSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B67026E72B168801001B36E1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B67026EF2B168801001B36E1 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					B67026F92B168801001B36E1 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = B67026EA2B168801001B36E1 /* Build configuration list for PBXProject "NetworkManagerSDK" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B67026E62B168801001B36E1;
+			productRefGroup = B67026F12B168801001B36E1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B67026EF2B168801001B36E1 /* NetworkManagerSDK */,
+				B67026F92B168801001B36E1 /* NetworkManagerSDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B67026EE2B168801001B36E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B67026F82B168801001B36E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B67026EC2B168801001B36E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */,
+				7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */,
+				B67027C02B22542C001B36E1 /* NameServices.swift in Sources */,
+				B67027BD2B225417001B36E1 /* EnumsGeneric.swift in Sources */,
+				B67026F52B168801001B36E1 /* NetworkManagerSDK.docc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B67026F62B168801001B36E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B67026FD2B168801001B36E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B67026EF2B168801001B36E1 /* NetworkManagerSDK */;
+			targetProxy = B67026FC2B168801001B36E1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B67027022B168801001B36E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B67027032B168801001B36E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B67027052B168801001B36E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.citi.NetworkManagerSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B67027062B168801001B36E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.citi.NetworkManagerSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B67027082B168801001B36E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.citi.NetworkManagerSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B67027092B168801001B36E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.citi.NetworkManagerSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B67026EA2B168801001B36E1 /* Build configuration list for PBXProject "NetworkManagerSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B67027022B168801001B36E1 /* Debug */,
+				B67027032B168801001B36E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B67027042B168801001B36E1 /* Build configuration list for PBXNativeTarget "NetworkManagerSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B67027052B168801001B36E1 /* Debug */,
+				B67027062B168801001B36E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B67027072B168801001B36E1 /* Build configuration list for PBXNativeTarget "NetworkManagerSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B67027082B168801001B36E1 /* Debug */,
+				B67027092B168801001B36E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B67026E72B168801001B36E1 /* Project object */;
+}
