@@ -8,67 +8,8 @@
 import Foundation
 
 // MARK: - ⚠️ typealias & Objects GET ::::::::::::::::
-public typealias CallbackResponseLoadSetting = (_ response: Bool?, _ error: ErrorResponse?) -> ()
-public typealias CallbackResponseGetCharacters = (_ response: String?, _ error: ErrorResponse?) -> ()
+public typealias CallbackResponseTarget = (_ response: ServiceClass?, _ error: ErrorResponse?) -> ()
 
-// MARK: - :::: Objetos response ERROR GRAL ::::
-public class ErrorResponseGral: Codable, Error {
-    public var statusCode: Int
-    public var responseCode: Int
-    public var errorMessage: String
-    
-    enum CodingKeys: Int, CodingKey {
-        case statusCode
-        case responseCode
-        case errorMessage
-    }
-    
-    init() {
-        statusCode = 0
-        responseCode = 0
-        errorMessage = ""
-    }
-}
-
-final public class ObjResponseGetCharacters: Codable {
-    public var info: ObjInfoCharacter
-    
-    init() {
-        self.info = ObjInfoCharacter()
-    }
-}
-
-final public class ObjInfoCharacter: Codable {
-    public var count: Int
-    public var pages: Int
-    public var next: String
-    
-    init() {
-        self.count = 0
-        self.pages = 0
-        self.next = ""
-    }
-}
-
-final public class ObjCharacter: Codable {
-    public var id: Int
-    public var name: String
-    public var status: Int
-    public var species: String
-    public var type: String
-    public var gender: String
-    public var image: String
-    
-    init() {
-        self.id = 0
-        self.name = ""
-        self.status = 0
-        self.species = ""
-        self.type = ""
-        self.gender = ""
-        self.image = ""
-    }
-}
 
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
 

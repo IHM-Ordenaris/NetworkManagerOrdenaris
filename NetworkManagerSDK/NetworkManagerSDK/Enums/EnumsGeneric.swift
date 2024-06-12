@@ -19,17 +19,19 @@ public enum ResponseService {
     case error
 }
 
+/// Lista de propiedades para seleccionar el entorno a consultar
 public enum Environment {
     case qa
     case pr
 }
 
+/// Clases con propiedades y funciones para obtener la urls de consultar
 internal class ProductService {
-    private enum ApiURL {
+    enum ApiURL {
         case bait(environment: Environment)
         case db
         
-        internal var baseURL: String {
+        var baseURL: String {
             switch self {
             case .bait(let env):
                 switch env{
@@ -45,7 +47,7 @@ internal class ProductService {
         case CDN(environment: Environment)
         case file(_ name: String)
 
-        private var path: String {
+        var path: String {
             switch self {
             case .CDN:
                 return "/api/core/servicio/resources/app/cdn2"
@@ -62,12 +64,13 @@ internal class ProductService {
     }
 }
 
+/// Catalogo de errores que puedes existir en la consulta de los servicios 
 internal enum CustomError {
     case noConnection, noData, noFile, noUrl
 }
 
 extension CustomError{
-    internal var errorDescription: String? {
+    var errorDescription: String? {
         switch self {
         case .noData: return "No existe información"
         case .noConnection: return "No hay conexión a internet"

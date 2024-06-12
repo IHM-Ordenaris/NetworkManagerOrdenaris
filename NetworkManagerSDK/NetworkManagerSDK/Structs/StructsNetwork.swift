@@ -7,7 +7,7 @@
 
 import Foundation
 
-// Enumeraciòn para metodo de request
+//TODO: Catálogo de solicitud de métodos HTTP
 internal struct HTTPMethod: RawRepresentable, Equatable, Hashable {
     public static let connect = HTTPMethod(rawValue: "CONNECT")
     public static let delete = HTTPMethod(rawValue: "DELETE")
@@ -26,6 +26,7 @@ internal struct HTTPMethod: RawRepresentable, Equatable, Hashable {
     }
 }
 
+//TODO: Constantes
 internal struct K {
     static let ordServicio = "ordServicio"
     static let ordServicioValue = "57bfb26735aa4ec3a1baafa864006d7d"

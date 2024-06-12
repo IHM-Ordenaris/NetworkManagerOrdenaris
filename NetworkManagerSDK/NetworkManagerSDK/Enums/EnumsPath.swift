@@ -7,6 +7,13 @@
 
 import Foundation
 
+/// Lista de servicios a consultar
 public enum ServiceName: String{
-    case widget
+    case version
+}
+
+
+public enum ServiceClass{
+    case version(Servicio)
+    case widget(General)
 }

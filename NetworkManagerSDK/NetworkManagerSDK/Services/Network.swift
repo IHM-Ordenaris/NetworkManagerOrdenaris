@@ -14,8 +14,9 @@ internal struct Network {
     /// - Parameters:
     ///   - servicio: Objeto tipo Servicio
     ///   - params: Diccionario de paràmetros
-    ///   - completion: CustomResponseObject (case response) / NSError (case failure)
-    internal static func methodGet(servicio: Servicio, params: Dictionary<String, Any>?, _ printResponse: Bool, completion: @escaping CallbackCustomResponse) {
+    ///   - printResponse: Bandera para imprimir log de la petición
+    ///   - completion: CustomResponseObject (case response) / ErrorResponse (case failure)
+    static func methodGet(servicio: Servicio, params: Dictionary<String, Any>?, _ printResponse: Bool, completion: @escaping CallbackCustomResponse) {
         guard Reachability.isConnectedToNetwork() else {
             let error = ErrorResponse()
             error.statusCode = -1
@@ -145,7 +146,13 @@ internal struct Network {
         task.resume()
     }
     
-    internal static func setConfigurationFile(name: String, _ targets: Dictionary<String, Servicio>) -> Bool{
+    
+    // MARK: - Utilidades
+    /// Función para almacenar información en un plist, regresa una bandera booleana
+    /// - Parameters:
+    ///   - name: Nombre del archivo plist
+    ///   - targets: Datos del CDN
+    static func setConfigurationFile(name: String, _ targets: Dictionary<String, Servicio>) -> Bool{
         guard let url = URL(string: ProductService.Endpoint.file(name).url) else {
             return false
         }
@@ -160,7 +167,11 @@ internal struct Network {
         }
     }
     
-    internal static func fetchConfigurationFile(name: String, path: ServiceName) -> Servicio?{
+    /// Función para obtener la información de un plist y regresa un objeto del tipo "Servicio"
+    /// - Parameters:
+    ///   - name: Nombre del archivo plist
+    ///   - key: Llave del target a obtener
+    static func fetchConfigurationFile(name: String, key: ServiceName) -> Servicio?{
         guard let url = URL(string: ProductService.Endpoint.file(name).url) else {
             return nil
         }
@@ -168,7 +179,7 @@ internal struct Network {
             let decoder = PropertyListDecoder()
             do{
                 let target = try decoder.decode(Dictionary<String, Servicio>.self, from: data)
-                return target[path.rawValue]
+                return target[key.rawValue]
             }catch{
                 return nil
             }

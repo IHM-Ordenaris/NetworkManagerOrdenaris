@@ -8,12 +8,13 @@
 import Foundation
 
 // MARK: - :::: Objetos REQUEST ::::
-internal struct MainServicio: Codable{
+public typealias CallbackResponseLoadSetting = (_ response: Bool?, _ error: ErrorResponse?) -> ()
+public struct MainServicio: Codable{
     let nombre: String
     let servicios: [Servicio]
 }
 
-internal struct Servicio: Codable {
+public struct Servicio: Codable {
     let nombre: String
     let headers: Bool?
     let method: String?
@@ -22,14 +23,19 @@ internal struct Servicio: Codable {
     let url: String?
 }
 
-internal struct Headers: Codable {
+public struct Headers: Codable {
     let nombre: String
     let valor: String
 }
 
+public struct General {
+    let structura: Codable
+    let type: Any
+}
+
 // MARK: - :::: Objetos response SUCCESS ::::
 typealias CallbackCustomResponse = (_ response: CustomResponseObject?, _ failure: ErrorResponse?) -> ()
-
+/// Función obtener status token device
 internal struct CustomResponseObject {
     var success: Bool = false
     var data: Data?

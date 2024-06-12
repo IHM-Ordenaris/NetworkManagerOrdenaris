@@ -9,27 +9,27 @@ import UIKit
 import Foundation
 
 /// WebService implementa las funciones para las llamadas a servicios
-/// Una instancia de esta clasedará acceso a las funciones para obtención de datos desde Servicio
+/// Una instancia de esta clase dará acceso a las funciones para obtención de datos desde Servicio
 public class WebService {
     /// Notificación de estatus de llamada a servicio (start / finish)
     public var callbackServices: ((ServicesPlugInResponse) -> Void)?
     private var environment: Environment
     private var appVersion: String
     
+    /// Inicializador
+    /// - Parameters:
+    ///   - environment: Parametro del entorno a consultar
+    ///   - appVersion: Versión de compilcación de la app
     public init(environment: Environment = .pr, appVersion: String) {
-        /// Inicializador
         self.environment = environment
         self.appVersion = appVersion
     }
     
-    // MARK: - ⚠️ Métodos GET ::::::::::::::::
-    /// Función obtener status token device
-    ///  ```
-    /// func getCuentasById(idAccount:String, callback: { response, error in }
-    /// ```
+    // MARK: - ⚠️ Métodos genericos ::::::::::::::::
+    /// Función para obtener la información del CDN
     /// - Parameters:
+    ///   - printResponse: Bandera para imprimir log de la petición
     ///   - callback: ObjResponse (⎷ response) / ErrorResponseGral (⌀ error)
-    
     public func loadConfiguration(printResponse: Bool, callback: @escaping CallbackResponseLoadSetting){
         self.callbackServices?(ServicesPlugInResponse(.start))
         let headers = [
@@ -72,28 +72,28 @@ public class WebService {
         }
     }
     
-    public func fetchData(target: ServiceName, callback: @escaping CallbackResponseGetCharacters) {
+    /// Función para solicitar una petición de una API
+    /// - Parameters:
+    ///   - target: Servicio a consultar
+    ///   - callback: ServiceClass (⎷ response "Catálogo de Classes") / ErrorResponseGral (⌀ error)
+    public func fetchData(target: ServiceName, callback: @escaping CallbackResponseTarget) {
         self.callbackServices?(ServicesPlugInResponse(.start))
-        let service = Network.fetchConfigurationFile(name: K.pListName, path: target)
-        callback(service?.url, nil)
+        guard let service = Network.fetchConfigurationFile(name: K.pListName, key: target) else {
+            let error = ErrorResponse()
+            error.statusCode = -3
+            error.responseCode = -3
+            error.errorMessage = CustomError.noFile.errorDescription
+            callback(nil, error)
+            return
+        }
         
-        /*Network().methodGet(servicio: service, params: params) { response, failure in
-            if let error = failure {
-                callback(ObjResponseGetCharacters(), error)
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                return
-            } else {
-                let decoder = JSONDecoder()
-                do {
-                    let datos = response!.data!
-                    let decodedResponse = try decoder.decode(ObjResponseGetCharacters.self, from: datos)
-                    callback(decodedResponse, nil)
-                } catch {
-                    callback(ObjResponseGetCharacters(), ErrorResponse())
-                }
-                self.callbackServices?(ServicesPlugInResponse(.finish))
-            }
-        }*/
+        switch target{
+        case .version:
+            callback(.version(service), nil)
+        case .version:
+            callback(.widget(General(structura: String(), type: String())), nil)
+        }
     }
+    
 }
     
