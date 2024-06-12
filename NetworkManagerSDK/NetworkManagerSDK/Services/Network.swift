@@ -8,25 +8,57 @@
 import Foundation
 
 /// Estructura con métodos DELETE,  GET,  POST y PUT para llamadas a servicios
-struct Network {
+internal struct Network {
     // MARK: - Petición GET
     /// Función genérica para peticion de servicios con método "GET"
     /// - Parameters:
     ///   - servicio: Objeto tipo Servicio
     ///   - params: Diccionario de paràmetros
     ///   - completion: CustomResponseObject (case response) / NSError (case failure)
-    func methodGet(servicio: Servicio, params: Dictionary<String, Any>, completion: @escaping CallbackCustomResponse) {
-        let url = URL(string: servicio.url)!
-        let bodyDict = params
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        if !bodyDict.isEmpty {
-            let jsonData = try? JSONSerialization.data(withJSONObject: bodyDict)
-            request.httpBody = jsonData
+    internal static func methodGet(servicio: Servicio, params: Dictionary<String, Any>?, _ printResponse: Bool, completion: @escaping CallbackCustomResponse) {
+        guard Reachability.isConnectedToNetwork() else {
+            let error = ErrorResponse()
+            error.statusCode = -1
+            error.responseCode = -1
+            error.errorMessage = CustomError.noData.errorDescription
+            completion(nil, error)
+            return
         }
-        if let headers = servicio.headers {
+        
+        guard let urlString = servicio.url, var urlComps = URLComponents(string: urlString) else {
+            let error = ErrorResponse()
+            error.statusCode = 0
+            error.responseCode = 0
+            error.errorMessage = CustomError.noUrl.errorDescription
+            completion(nil, error)
+            return
+        }
+        
+        if let body = params as? Dictionary<String, String>{
+            var queryItems: [URLQueryItem] = []
+            body.forEach {
+                queryItems.append(URLQueryItem(name: $0.key, value: $0.value))
+            }
+            urlComps.queryItems = queryItems
+//            let jsonData = try? JSONSerialization.data(withJSONObject: body)
+//            request.httpBody = jsonData
+        }
+        
+        guard var url = urlComps.url else {
+            let error = ErrorResponse()
+            error.statusCode = 0
+            error.responseCode = 0
+            error.errorMessage = CustomError.noUrl.errorDescription
+            completion(nil, error)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = servicio.method
+        
+        if let headers = servicio.valores, let isHeaders = servicio.headers, isHeaders{
             for newheader in headers {
-                request.setValue( newheader.valor, forHTTPHeaderField: newheader.nombre)
+                request.setValue(newheader.valor, forHTTPHeaderField: newheader.nombre)
             }
         }
 //        request.httpShouldHandleCookies = false
@@ -39,17 +71,17 @@ struct Network {
                 case .some(let error as NSError) where error.code == NSURLErrorNotConnectedToInternet: // showOffline
                     err.statusCode = error.code
                     err.errorMessage = error.localizedDescription
-                    completion(CustomResponseObject(), err)
+                    completion(nil, err)
                 case .some(let error as NSError) where error.code == NSURLErrorTimedOut: // Timed Out
                     err.statusCode = error.code
                     err.errorMessage = error.localizedDescription
-                    completion(CustomResponseObject(), err)
+                    completion(nil, err)
                 case .some(let error as NSError): // showGenericError
-                    completion(CustomResponseObject(), err)
+                    completion(nil, err)
                     err.statusCode = error.code
                     err.errorMessage = error.localizedDescription
                 case .none:
-                    completion(CustomResponseObject(), nil)
+                    completion(nil, nil)
                 }
                 return
             }
@@ -69,7 +101,7 @@ struct Network {
                     } else {
                         print("unable to parse response as string")
                         let err: ErrorResponse = ErrorResponse()
-                        completion(CustomResponseObject(), err)
+                        completion(nil, err)
                     }
                 }
                 return
@@ -79,7 +111,7 @@ struct Network {
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 DispatchQueue.main.async {
-                    if servicio.printResponse {
+                    if printResponse {
                         print("RESPONSE:\n\(responseJSON)")
                     }
                     var objResponse = CustomResponseObject()
@@ -90,11 +122,11 @@ struct Network {
             } else {
                 // parsing json error
                 DispatchQueue.main.async {
-                    if servicio.printResponse {
+                    if printResponse{
                         print("\n\n\(responseG.description)")
                     }
                     if let responseString = String(data: data, encoding: .utf8) {
-                        if servicio.printResponse {
+                        if printResponse{
                             print("\n\n::::::::: RESPONSE - String :::::::::\n \(responseString)")
                         }
                         var objResponse = CustomResponseObject()
@@ -104,7 +136,7 @@ struct Network {
                     } else {
                         print("unable to parse response as string")
                         let err: ErrorResponse = ErrorResponse()
-                        completion(CustomResponseObject(), err)
+                        completion(nil, err)
                     }
                 }
             }
@@ -112,4 +144,37 @@ struct Network {
         print("Request a Servicio...")
         task.resume()
     }
+    
+    internal static func setConfigurationFile(name: String, _ targets: Dictionary<String, Servicio>) -> Bool{
+        guard let url = URL(string: ProductService.Endpoint.file(name).url) else {
+            return false
+        }
+        let encoder = PropertyListEncoder()
+        do{
+            let data = try encoder.encode(targets)
+            try data.write(to: url)
+            return true
+        }catch{
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    internal static func fetchConfigurationFile(name: String, path: ServiceName) -> Servicio?{
+        guard let url = URL(string: ProductService.Endpoint.file(name).url) else {
+            return nil
+        }
+        if let data = try? Data(contentsOf: url){
+            let decoder = PropertyListDecoder()
+            do{
+                let target = try decoder.decode(Dictionary<String, Servicio>.self, from: data)
+                return target[path.rawValue]
+            }catch{
+                return nil
+            }
+        }else{
+            return nil
+        }
+    }
 }
+
