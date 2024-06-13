@@ -11,6 +11,10 @@
 		31060B472C1A7AE300F8952C /* EnumsGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31060B462C1A7AE300F8952C /* EnumsGeneric.swift */; };
 		31060B492C1A7AFD00F8952C /* EnumsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31060B482C1A7AFD00F8952C /* EnumsPath.swift */; };
 		31060B4B2C1A7B2500F8952C /* StructsNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31060B4A2C1A7B2500F8952C /* StructsNetwork.swift */; };
+		31060B4C2C1B5DBA00F8952C /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A92B1E667C001B36E1 /* NetworkModel.swift */; };
+		31060B4D2C1B5DC500F8952C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A62B1E6602001B36E1 /* Network.swift */; };
+		31060B4E2C1B5DC900F8952C /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A72B1E6605001B36E1 /* WebService.swift */; };
+		31060B4F2C1B5DCE00F8952C /* StructsObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A52B1E65FA001B36E1 /* StructsObjects.swift */; };
 		7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41C2C13951100558B60 /* ObjectsModel.swift */; };
 		7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */; };
 		B67026F52B168801001B36E1 /* NetworkManagerSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */; };
@@ -258,12 +262,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31060B4C2C1B5DBA00F8952C /* NetworkModel.swift in Sources */,
 				7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */,
 				7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */,
 				31060B4B2C1A7B2500F8952C /* StructsNetwork.swift in Sources */,
 				31060B492C1A7AFD00F8952C /* EnumsPath.swift in Sources */,
+				31060B4D2C1B5DC500F8952C /* Network.swift in Sources */,
 				31060B452C1A7AD400F8952C /* Reachability.swift in Sources */,
+				31060B4F2C1B5DCE00F8952C /* StructsObjects.swift in Sources */,
 				31060B472C1A7AE300F8952C /* EnumsGeneric.swift in Sources */,
+				31060B4E2C1B5DC900F8952C /* WebService.swift in Sources */,
 				B67026F52B168801001B36E1 /* NetworkManagerSDK.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

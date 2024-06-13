@@ -14,7 +14,11 @@ public class WebService {
     /// Notificación de estatus de llamada a servicio (start / finish)
     public var callbackServices: ((ServicesPlugInResponse) -> Void)?
     private var environment: Environment
-    private var appVersion: String
+    var headers = [
+        Headers(nombre: K.ordServicio, valor: K.ordServicioValue),
+        Headers(nombre: K.origen, valor: K.origenValue),
+        Headers(nombre: K.origin, valor: K.origenValue)
+    ]
     
     /// Inicializador
     /// - Parameters:
@@ -22,7 +26,7 @@ public class WebService {
     ///   - appVersion: Versión de compilcación de la app
     public init(environment: Environment = .pr, appVersion: String) {
         self.environment = environment
-        self.appVersion = appVersion
+        self.headers.append(Headers(nombre: K.app, valor: appVersion))
     }
     
     // MARK: - ⚠️ Métodos genericos ::::::::::::::::
@@ -32,14 +36,8 @@ public class WebService {
     ///   - callback: ObjResponse (⎷ response) / ErrorResponseGral (⌀ error)
     public func loadConfiguration(printResponse: Bool, callback: @escaping CallbackResponseLoadSetting){
         self.callbackServices?(ServicesPlugInResponse(.start))
-        let headers = [
-            Headers(nombre: K.ordServicio, valor: K.ordServicioValue),
-            Headers(nombre: K.origen, valor: K.origenValue),
-            Headers(nombre: K.origin, valor: K.origenValue),
-            Headers(nombre: K.app, valor: self.appVersion)
-        ]
         
-        let service = Servicio(nombre: "CDN", headers: true, method: HTTPMethod.get.rawValue, auto: nil, valores: headers, url: ProductService.Endpoint.CDN(environment: self.environment).url)
+        let service = Servicio(nombre: "CDN", headers: true, method: HTTPMethod.get.rawValue, auto: nil, valores: self.headers, url: ProductService.Endpoint.CDN(environment: self.environment).url)
         Network.methodGet(servicio: service, params: ["rnd": Date().timeIntervalSinceReferenceDate.description], printResponse) { response, failure in
             if let result = response, let data = result.data, result.success{
                 do{
