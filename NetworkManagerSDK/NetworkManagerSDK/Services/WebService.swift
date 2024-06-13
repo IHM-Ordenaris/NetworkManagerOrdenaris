@@ -52,12 +52,14 @@ public class WebService {
                     }
                     if Network.setConfigurationFile(name: K.pListName, targets){
                         callback(true, nil)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                     }else{
                         let error = ErrorResponse()
                         error.statusCode = -2
                         error.responseCode = -2
                         error.errorMessage = CustomError.noFile.errorDescription
                         callback(false, error)
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     }
                 }catch{
                     let error = ErrorResponse()
@@ -65,9 +67,11 @@ public class WebService {
                     error.responseCode = -2
                     error.errorMessage = CustomError.noData.errorDescription
                     callback(false, error)
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 }
             }else if let error = failure{
                 callback(false, error)
+                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             }
         }
     }
@@ -76,7 +80,7 @@ public class WebService {
     /// - Parameters:
     ///   - target: Servicio a consultar
     ///   - callback: ServiceClass (⎷ response "Catálogo de Classes") / ErrorResponseGral (⌀ error)
-    public func fetchData(target: ServiceName, callback: @escaping CallbackResponseTarget) {
+    public func fetchData(target: ServiceName, callback: @escaping CallbackResponseTarget) {    
         self.callbackServices?(ServicesPlugInResponse(.start))
         guard let service = Network.fetchConfigurationFile(name: K.pListName, key: target) else {
             let error = ErrorResponse()
@@ -84,15 +88,20 @@ public class WebService {
             error.responseCode = -3
             error.errorMessage = CustomError.noFile.errorDescription
             callback(nil, error)
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             return
         }
         
         switch target{
         case .version:
             callback(.version(service), nil)
-        case .version:
-            callback(.widget(General(structura: String(), type: String())), nil)
+        case .widget:
+            break
+        case .captchaIos(let ver):
+            break
         }
+        
+        self.callbackServices?(ServicesPlugInResponse(.finish))
     }
     
 }

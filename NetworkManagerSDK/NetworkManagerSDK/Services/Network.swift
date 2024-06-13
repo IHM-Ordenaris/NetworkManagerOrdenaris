@@ -179,7 +179,7 @@ internal struct Network {
             let decoder = PropertyListDecoder()
             do{
                 let target = try decoder.decode(Dictionary<String, Servicio>.self, from: data)
-                return target[key.rawValue]
+                return target[key.getKey]
             }catch{
                 return nil
             }

@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31060B452C1A7AD400F8952C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31060B432C1A7AD400F8952C /* Reachability.swift */; };
+		31060B472C1A7AE300F8952C /* EnumsGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31060B462C1A7AE300F8952C /* EnumsGeneric.swift */; };
+		31060B492C1A7AFD00F8952C /* EnumsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31060B482C1A7AFD00F8952C /* EnumsPath.swift */; };
+		31060B4B2C1A7B2500F8952C /* StructsNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31060B4A2C1A7B2500F8952C /* StructsNetwork.swift */; };
 		7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41C2C13951100558B60 /* ObjectsModel.swift */; };
 		7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */; };
 		B67026F52B168801001B36E1 /* NetworkManagerSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */; };
 		B67026FB2B168801001B36E1 /* NetworkManagerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */; };
 		B67027012B168801001B36E1 /* NetworkManagerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B67026F32B168801001B36E1 /* NetworkManagerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B67027BD2B225417001B36E1 /* EnumsGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027BC2B225417001B36E1 /* EnumsGeneric.swift */; };
-		B67027C02B22542C001B36E1 /* NameServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027BF2B22542C001B36E1 /* NameServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31060B432C1A7AD400F8952C /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		31060B462C1A7AE300F8952C /* EnumsGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumsGeneric.swift; sourceTree = "<group>"; };
+		31060B482C1A7AFD00F8952C /* EnumsPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumsPath.swift; sourceTree = "<group>"; };
+		31060B4A2C1A7B2500F8952C /* StructsNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructsNetwork.swift; sourceTree = "<group>"; };
 		7AE6D41C2C13951100558B60 /* ObjectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsModel.swift; sourceTree = "<group>"; };
 		7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsBodyParams.swift; sourceTree = "<group>"; };
 		B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkManagerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,8 +43,6 @@
 		B67027A62B1E6602001B36E1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		B67027A72B1E6605001B36E1 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		B67027A92B1E667C001B36E1 /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
-		B67027BC2B225417001B36E1 /* EnumsGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumsGeneric.swift; sourceTree = "<group>"; };
-		B67027BF2B22542C001B36E1 /* NameServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31060B442C1A7AD400F8952C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				31060B432C1A7AD400F8952C /* Reachability.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		B67026E62B168801001B36E1 = {
 			isa = PBXGroup;
 			children = (
@@ -80,10 +92,11 @@
 		B67026F22B168801001B36E1 /* NetworkManagerSDK */ = {
 			isa = PBXGroup;
 			children = (
+				31060B442C1A7AD400F8952C /* Utils */,
 				B67027BB2B225417001B36E1 /* Enums */,
 				B67027A42B1E6599001B36E1 /* Models */,
-				B67027BE2B22542C001B36E1 /* Strings */,
 				B67027A32B1E658F001B36E1 /* Services */,
+				B67027BE2B22542C001B36E1 /* Strings */,
 				B67027A22B1E6579001B36E1 /* StructsObjects */,
 				B67026F32B168801001B36E1 /* NetworkManagerSDK.h */,
 				B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */,
@@ -94,9 +107,11 @@
 		B67027A22B1E6579001B36E1 /* StructsObjects */ = {
 			isa = PBXGroup;
 			children = (
+				31060B4A2C1A7B2500F8952C /* StructsNetwork.swift */,
 				B67027A52B1E65FA001B36E1 /* StructsObjects.swift */,
 			);
-			path = StructsObjects;
+			name = StructsObjects;
+			path = Structs;
 			sourceTree = "<group>";
 		};
 		B67027A32B1E658F001B36E1 /* Services */ = {
@@ -121,7 +136,8 @@
 		B67027BB2B225417001B36E1 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				B67027BC2B225417001B36E1 /* EnumsGeneric.swift */,
+				31060B462C1A7AE300F8952C /* EnumsGeneric.swift */,
+				31060B482C1A7AFD00F8952C /* EnumsPath.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -129,7 +145,6 @@
 		B67027BE2B22542C001B36E1 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				B67027BF2B22542C001B36E1 /* NameServices.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -245,8 +260,10 @@
 			files = (
 				7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */,
 				7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */,
-				B67027C02B22542C001B36E1 /* NameServices.swift in Sources */,
-				B67027BD2B225417001B36E1 /* EnumsGeneric.swift in Sources */,
+				31060B4B2C1A7B2500F8952C /* StructsNetwork.swift in Sources */,
+				31060B492C1A7AFD00F8952C /* EnumsPath.swift in Sources */,
+				31060B452C1A7AD400F8952C /* Reachability.swift in Sources */,
+				31060B472C1A7AE300F8952C /* EnumsGeneric.swift in Sources */,
 				B67026F52B168801001B36E1 /* NetworkManagerSDK.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
