@@ -69,7 +69,7 @@ internal enum CustomError {
     case noConnection, noData, noFile, noUrl
 }
 
-extension CustomError{
+extension CustomError {
     var errorDescription: String? {
         switch self {
         case .noData: return "No existe información"

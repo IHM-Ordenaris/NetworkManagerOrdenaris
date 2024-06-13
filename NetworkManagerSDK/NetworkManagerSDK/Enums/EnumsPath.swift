@@ -8,7 +8,7 @@
 import Foundation
 
 /// Lista de servicios a consultar
-public enum ServiceName{
+public enum ServiceName {
     case version
     case widget
     case captchaIos(version: String)
@@ -23,7 +23,7 @@ public enum ServiceName{
 }
 
 
-public enum ServiceClass{
-    case version(Servicio)
-    case widget(General)
+public enum ServiceClass {
+    case version([Headers]?)
+    case widget(WidgetService?)
 }

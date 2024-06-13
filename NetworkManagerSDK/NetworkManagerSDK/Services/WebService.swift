@@ -22,7 +22,7 @@ public class WebService {
     
     /// Inicializador
     /// - Parameters:
-    ///   - environment: Parametro del entorno a consultar
+    ///   - environment: Parametro del entorno a consultar (Por default, la propiedad será a Producción)
     ///   - appVersion: Versión de compilcación de la app
     public init(environment: Environment = .pr, appVersion: String) {
         self.environment = environment
@@ -34,13 +34,12 @@ public class WebService {
     /// - Parameters:
     ///   - printResponse: Bandera para imprimir log de la petición
     ///   - callback: ObjResponse (⎷ response) / ErrorResponseGral (⌀ error)
-    public func loadConfiguration(printResponse: Bool, callback: @escaping CallbackResponseLoadSetting){
+    public func loadConfiguration(printResponse: Bool, callback: @escaping CallbackResponseLoadSetting) {
         self.callbackServices?(ServicesPlugInResponse(.start))
-        
         let service = Servicio(nombre: "CDN", headers: true, method: HTTPMethod.get.rawValue, auto: nil, valores: self.headers, url: ProductService.Endpoint.CDN(environment: self.environment).url)
         Network.methodGet(servicio: service, params: ["rnd": Date().timeIntervalSinceReferenceDate.description], printResponse) { response, failure in
-            if let result = response, let data = result.data, result.success{
-                do{
+            if let result = response, let data = result.data, result.success {
+                do {
                     let services = try JSONDecoder().decode([MainServicio].self, from: data)
                     var targets: Dictionary<String, Servicio> = Dictionary<String, Servicio>()
                     for target in services{
@@ -48,28 +47,28 @@ public class WebService {
                             targets[$0.nombre] = $0
                         }
                     }
-                    if Network.setConfigurationFile(name: K.pListName, targets){
-                        callback(true, nil)
+                    if Network.setConfigurationFile(name: K.pListName, targets) {
                         self.callbackServices?(ServicesPlugInResponse(.finish))
-                    }else{
+                        callback(true, nil)
+                    }else {
                         let error = ErrorResponse()
                         error.statusCode = -2
                         error.responseCode = -2
                         error.errorMessage = CustomError.noFile.errorDescription
-                        callback(false, error)
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(false, error)
                     }
-                }catch{
+                }catch {
                     let error = ErrorResponse()
                     error.statusCode = -2
                     error.responseCode = -2
                     error.errorMessage = CustomError.noData.errorDescription
-                    callback(false, error)
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(false, error)
                 }
-            }else if let error = failure{
-                callback(false, error)
+            }else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                callback(false, error)
             }
         }
     }
@@ -77,24 +76,25 @@ public class WebService {
     /// Función para solicitar una petición de una API
     /// - Parameters:
     ///   - target: Servicio a consultar
+    ///   - printResponse: Bandera para imprimir log de la petición
     ///   - callback: ServiceClass (⎷ response "Catálogo de Classes") / ErrorResponseGral (⌀ error)
-    public func fetchData(target: ServiceName, callback: @escaping CallbackResponseTarget) {    
+    public func fetchData(target: ServiceName, printResponse: Bool, callback: @escaping CallbackResponseTarget) {
         self.callbackServices?(ServicesPlugInResponse(.start))
         guard let service = Network.fetchConfigurationFile(name: K.pListName, key: target) else {
             let error = ErrorResponse()
             error.statusCode = -3
             error.responseCode = -3
             error.errorMessage = CustomError.noFile.errorDescription
-            callback(nil, error)
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(nil, error)
             return
         }
         
-        switch target{
+        switch target {
         case .version:
-            callback(.version(service), nil)
+            callback(.version(service.valores), nil)
         case .widget:
-            break
+            self.callServiceWidget(service, printResponse, callback)
         case .captchaIos(let ver):
             break
         }
@@ -102,5 +102,26 @@ public class WebService {
         self.callbackServices?(ServicesPlugInResponse(.finish))
     }
     
+    private func callServiceWidget(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget){
+        Network.methodGet(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let widgetService = try JSONDecoder().decode(WidgetService.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.widget(widgetService), nil)
+                }catch {
+                    let error = ErrorResponse()
+                    error.statusCode = -2
+                    error.responseCode = -2
+                    error.errorMessage = CustomError.noData.errorDescription
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(nil, error)
+                }
+            }else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                callback(nil, error)
+            }
+        }
+    }
 }
     

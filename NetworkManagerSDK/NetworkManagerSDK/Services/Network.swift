@@ -16,7 +16,7 @@ internal struct Network {
     ///   - params: Diccionario de paràmetros
     ///   - printResponse: Bandera para imprimir log de la petición
     ///   - completion: CustomResponseObject (case response) / ErrorResponse (case failure)
-    static func methodGet(servicio: Servicio, params: Dictionary<String, Any>?, _ printResponse: Bool, completion: @escaping CallbackCustomResponse) {
+    static func methodGet(servicio: Servicio, params: Dictionary<String, Any>?, _ printResponse: Bool, _ completion: @escaping CallbackCustomResponse) {
         guard Reachability.isConnectedToNetwork() else {
             let error = ErrorResponse()
             error.statusCode = -1
@@ -57,7 +57,7 @@ internal struct Network {
         var request = URLRequest(url: url)
         request.httpMethod = servicio.method
         
-        if let headers = servicio.valores, let isHeaders = servicio.headers, isHeaders{
+        if let headers = servicio.valores, let isHeaders = servicio.headers, isHeaders {
             for newheader in headers {
                 request.setValue(newheader.valor, forHTTPHeaderField: newheader.nombre)
             }
@@ -157,11 +157,11 @@ internal struct Network {
             return false
         }
         let encoder = PropertyListEncoder()
-        do{
+        do {
             let data = try encoder.encode(targets)
             try data.write(to: url)
             return true
-        }catch{
+        }catch {
             print(error.localizedDescription)
             return false
         }
@@ -175,15 +175,15 @@ internal struct Network {
         guard let url = URL(string: ProductService.Endpoint.file(name).url) else {
             return nil
         }
-        if let data = try? Data(contentsOf: url){
+        if let data = try? Data(contentsOf: url) {
             let decoder = PropertyListDecoder()
-            do{
+            do {
                 let target = try decoder.decode(Dictionary<String, Servicio>.self, from: data)
                 return target[key.getKey]
-            }catch{
+            }catch {
                 return nil
             }
-        }else{
+        }else {
             return nil
         }
     }

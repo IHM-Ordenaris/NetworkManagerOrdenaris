@@ -15,22 +15,17 @@ public struct MainServicio: Codable{
 }
 
 public struct Servicio: Codable {
-    let nombre: String
-    let headers: Bool?
-    let method: String?
-    let auto: Bool?
-    let valores: [Headers]?
-    let url: String?
+    internal let nombre: String
+    internal let headers: Bool?
+    internal let method: String?
+    internal let auto: Bool?
+    public let valores: [Headers]?
+    internal let url: String?
 }
 
 public struct Headers: Codable {
-    let nombre: String
-    let valor: String
-}
-
-public struct General {
-    let structura: Codable
-    let type: Any
+    public let nombre: String
+    public let valor: String
 }
 
 // MARK: - :::: Objetos response SUCCESS ::::
