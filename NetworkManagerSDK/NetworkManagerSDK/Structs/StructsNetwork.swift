@@ -35,4 +35,5 @@ internal struct K {
     static let origenValue = "ios.mibait.com"
     static let app = "app-version"
     static let pListName = "CDN"
+    static let uuidPaymentiOS = "b50cc2f484e111ee87cf0242ac120002"
 }

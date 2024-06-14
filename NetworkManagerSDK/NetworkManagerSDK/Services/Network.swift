@@ -9,14 +9,14 @@ import Foundation
 
 /// Estructura con métodos DELETE,  GET,  POST y PUT para llamadas a servicios
 internal struct Network {
-    // MARK: - Petición GET
-    /// Función genérica para peticion de servicios con método "GET"
+    // MARK: - Petición Networking
+    /// Función genérica para peticion de servicios en general
     /// - Parameters:
     ///   - servicio: Objeto tipo Servicio
     ///   - params: Diccionario de parámetros
     ///   - printResponse: Bandera para imprimir log de la petición
     ///   - completion: CustomResponseObject (case response) / ErrorResponse (case failure)
-    static func methodGet(servicio: Servicio, params: Any?, _ printResponse: Bool, _ completion: @escaping CallbackCustomResponse) {
+    static func callNetworking(servicio: Servicio, params: Any?, _ printResponse: Bool, _ completion: @escaping CallbackCustomResponse) {
         guard Reachability.isConnectedToNetwork() else {
             let error = ErrorResponse()
             error.statusCode = -1

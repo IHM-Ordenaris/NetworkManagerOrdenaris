@@ -19,8 +19,8 @@ public struct Servicio: Codable {
     internal let headers: Bool?
     internal let method: String?
     internal let auto: Bool?
-    public let valores: [Headers]?
-    internal let url: String?
+    public var valores: [Headers]?
+    internal var url: String?
 }
 
 public struct Headers: Codable {

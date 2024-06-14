@@ -9,22 +9,42 @@ import Foundation
 
 /// Lista de servicios a consultar
 public enum ServiceName {
-    case version
+    case pagoSeguro
     case widget
-    case suscripcionPush(token: String, identificador: String?)
+    case captchaIos
+    case perfilGaleria
+    case perfilCamara
+    case escaneo
+    case version
+    case listaRecurrentes(phoneNumber: String)
+    case cancelarRecurrente
+    case suscripcionPush(token: String, phoneNumber: String?)
     
     var getKey: String {
         switch self {
-        case .version: return "version"
+        case .pagoSeguro: return "pagoSeguro"
         case .widget: return "widget"
+        case .captchaIos: return "captchaIos"
+        case .perfilGaleria: return "perfilGaleria"
+        case .perfilCamara: return "perfilCamara"
+        case .escaneo: return "escaneo"
+        case .version: return "version"
+        case .listaRecurrentes: return "listaRecurrentes"
+        case .cancelarRecurrente: return "cancelarRecurrente"
         case .suscripcionPush: return "suscripcionPush"
         }
     }
 }
 
-
 public enum ServiceClass {
+    case pagoSeguro(PagoSeguroResponse?)
+    case widget(WidgetServiceResponse?)
+    case captchaIos(CaptchaResponse?)
+    case perfilGaleria([Headers]?)
+    case perfilCamara([Headers]?)
+    case escaneo([Headers]?)
     case version([Headers]?)
-    case widget(WidgetService?)
+    case listaRecurrentes(RecurrenciasActivasResponse?)
+    case cancelarRecurrente
     case suscripcionPush(Bool)
 }
