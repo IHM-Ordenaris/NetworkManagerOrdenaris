@@ -17,8 +17,10 @@ public enum ServiceName {
     case escaneo
     case version
     case listaRecurrentes(phoneNumber: String)
-    case cancelarRecurrente
+    case cancelarRecurrente(phoneNumber: String, uuid: String)
     case suscripcionPush(token: String, phoneNumber: String?)
+    case desuscripcionPush(client: InformacionClientePush)
+    case ofertasInternacionales
     
     var getKey: String {
         switch self {
@@ -32,6 +34,8 @@ public enum ServiceName {
         case .listaRecurrentes: return "listaRecurrentes"
         case .cancelarRecurrente: return "cancelarRecurrente"
         case .suscripcionPush: return "suscripcionPush"
+        case .desuscripcionPush: return "desuscripcionPush"
+        case .ofertasInternacionales: return "ofertasInternacionales"
         }
     }
 }
@@ -45,6 +49,8 @@ public enum ServiceClass {
     case escaneo([Headers]?)
     case version([Headers]?)
     case listaRecurrentes(RecurrenciasActivasResponse?)
-    case cancelarRecurrente
+    case cancelarRecurrente(DefaulResponse?)
     case suscripcionPush(Bool)
+    case desuscripcionPush(Bool)
+    case ofertasInternacionales(RecargaInternacionalResponse?)
 }

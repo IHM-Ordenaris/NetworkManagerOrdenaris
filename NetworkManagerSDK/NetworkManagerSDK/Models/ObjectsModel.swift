@@ -9,7 +9,7 @@ import Foundation
 
 public typealias CallbackResponseTarget = (_ response: ServiceClass?, _ error: ErrorResponse?) -> ()
 // MARK: - ⚠️ typealias & Objects GET ::::::::::::::::
-//TODO: Modelo del servicio de respuesta Widget
+//TODO: Modelo del servicio Widget
 ///Atributos de response
 public struct WidgetServiceResponse: Decodable {
     public let version: String?
@@ -34,8 +34,39 @@ public struct StoreService: Decodable {
     public let button: String?
 }
 
+//TODO: Modelo del servicio Recarga Internacional
+///Atributos de response
+public struct RecargaInternacionalResponse: Decodable {
+    public let ofertas: [Oferta]?
+    public let busqueda: [BusquedaInternacional]?
+}
+
+public struct Oferta: Decodable {
+    public let disfruta: String?
+    public let duracion: String?
+    public let registro: String?
+    public let estado: Int?
+    public let imagen: String?
+    public let incluye: String?
+    public let nombre: String?
+    public let offeringid: String?
+    public let pesos: Float?
+    public let tipo: Int?
+    public let vigencia: String?
+}
+
+public struct BusquedaInternacional: Decodable {
+    public let origen: String?
+    public let destinos: [DestinosInternacionales]?
+}
+
+public struct DestinosInternacionales: Decodable {
+    public let nombre: String?
+    public let oferta: String?
+}
+
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
-//TODO: Modelo del servicio de requerimiento Pago Seguro
+//TODO: Modelo del servicio Pago Seguro
 ///Atributos de request
 internal struct PagoSeguroRequest: Encodable {
     let uuid: String
@@ -48,7 +79,7 @@ public struct PagoSeguroResponse: Decodable {
     public let llavero: String?
 }
 
-//TODO: Modelo del servicio de requerimiento Captcha
+//TODO: Modelo del servicio de Captcha
 ///Atributos de response
 public struct CaptchaResponse: Decodable {
     public let success: Bool?
@@ -65,7 +96,7 @@ public struct Captcha: Decodable {
     //public let accion: String?
 }
 
-//TODO: Modelo del servicio de requerimiento Recurrencias
+//TODO: Modelo del servicio de Lista y Cancelar Recurrencias
 ///Atributos de request
 internal struct RecurrenciasActivasRequest: Encodable {
     let identificador: String
@@ -90,28 +121,42 @@ public struct RecurrenciaObj: Decodable {
     public let referencia5: String?
 }
 
+public struct DefaulResponse: Decodable {
+    public let code: Int?
+    public let success: Bool?
+    public let mensaje: String?
+    public let fechaDesbloqueo: String?
+}
 
-internal struct SubscripcionPushRequest: Encodable {
-    let app: App
-    let informacion: InformacionClientePush
+//TODO: Modelo del servicio de Subscribir y Cancelar Recurrencias
+///Atributos de request
+public struct SubscripcionPushRequest: Encodable {
+    internal let app: App = App(nombre: "Bait")
+    public let informacion: InformacionClientePush
 }
 
 internal struct App: Encodable {
-    let nombre: String
+     let nombre: String
 }
 
-internal struct InformacionClientePush: Encodable {
-    let token: String
-    let plataforma: Int
-    let identificador: String?
-    let grupos: [String]
-    let listaTemas: [Temas]?
+public struct InformacionClientePush: Encodable {
+    public let token: String
+    public let plataforma: Int = 3
+    public let identificador: String?
+    public let grupos: [String] = ["ios"]
+    public let listaTemas: [Temas]?
+    
+    public init(token: String, identificador: String?, listaTemas: [Temas]?) {
+        self.token = token
+        self.identificador = identificador
+        self.listaTemas = listaTemas
+    }
 }
 
-internal struct Temas: Encodable {
-    let nombre: String?
-    let identificador: String?
-    let fechaExpiracion: String?
+public struct Temas: Encodable {
+    public let nombre: String?
+    public let identificador: String?
+    public let fechaExpiracion: String?
 }
 
 // MARK: - ⚠️ typealias & Objects PUT ::::::::::::::::
