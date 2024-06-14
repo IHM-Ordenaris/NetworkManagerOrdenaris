@@ -66,7 +66,7 @@ internal class ProductService {
 
 /// Catalogo de errores que puedes existir en la consulta de los servicios 
 internal enum CustomError {
-    case noConnection, noData, noFile, noUrl
+    case noConnection, noData, noFile, noUrl, noBody
 }
 
 extension CustomError {
@@ -76,6 +76,7 @@ extension CustomError {
         case .noConnection: return "No hay conexión a internet"
         case .noFile: return "No existe el archivo plist"
         case .noUrl: return "No existe la Url"
+        case .noBody: return "Los datos a enviar son incorrectos"
         }
     }
 }

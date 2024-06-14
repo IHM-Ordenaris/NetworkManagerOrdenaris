@@ -13,10 +13,10 @@ internal struct Network {
     /// Función genérica para peticion de servicios con método "GET"
     /// - Parameters:
     ///   - servicio: Objeto tipo Servicio
-    ///   - params: Diccionario de paràmetros
+    ///   - params: Diccionario de parámetros
     ///   - printResponse: Bandera para imprimir log de la petición
     ///   - completion: CustomResponseObject (case response) / ErrorResponse (case failure)
-    static func methodGet(servicio: Servicio, params: Dictionary<String, Any>?, _ printResponse: Bool, _ completion: @escaping CallbackCustomResponse) {
+    static func methodGet(servicio: Servicio, params: Any?, _ printResponse: Bool, _ completion: @escaping CallbackCustomResponse) {
         guard Reachability.isConnectedToNetwork() else {
             let error = ErrorResponse()
             error.statusCode = -1
@@ -35,17 +35,18 @@ internal struct Network {
             return
         }
         
+        var body: Data?
         if let body = params as? Dictionary<String, String>{
             var queryItems: [URLQueryItem] = []
             body.forEach {
                 queryItems.append(URLQueryItem(name: $0.key, value: $0.value))
             }
             urlComps.queryItems = queryItems
-//            let jsonData = try? JSONSerialization.data(withJSONObject: body)
-//            request.httpBody = jsonData
+        }else if let data = params as? Data{
+            body = data
         }
         
-        guard var url = urlComps.url else {
+        guard let url = urlComps.url else {
             let error = ErrorResponse()
             error.statusCode = 0
             error.responseCode = 0
@@ -56,6 +57,11 @@ internal struct Network {
         
         var request = URLRequest(url: url)
         request.httpMethod = servicio.method
+        request.httpBody = body
+        
+        if servicio.method == "POST"{
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
         
         if let headers = servicio.valores, let isHeaders = servicio.headers, isHeaders {
             for newheader in headers {

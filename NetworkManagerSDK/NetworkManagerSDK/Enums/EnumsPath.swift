@@ -11,13 +11,13 @@ import Foundation
 public enum ServiceName {
     case version
     case widget
-    case captchaIos(version: String)
+    case suscripcionPush(token: String, identificador: String?)
     
     var getKey: String {
         switch self {
         case .version: return "version"
         case .widget: return "widget"
-        case .captchaIos: return "captchaIos"
+        case .suscripcionPush: return "suscripcionPush"
         }
     }
 }
@@ -26,4 +26,5 @@ public enum ServiceName {
 public enum ServiceClass {
     case version([Headers]?)
     case widget(WidgetService?)
+    case suscripcionPush(Bool)
 }

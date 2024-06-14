@@ -95,11 +95,9 @@ public class WebService {
             callback(.version(service.valores), nil)
         case .widget:
             self.callServiceWidget(service, printResponse, callback)
-        case .captchaIos(let ver):
-            break
+        case let .suscripcionPush(token, identificador):
+            self.callServicePush(service, token, identificador, printResponse, callback)
         }
-        
-        self.callbackServices?(ServicesPlugInResponse(.finish))
     }
     
     private func callServiceWidget(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget){
@@ -121,6 +119,40 @@ public class WebService {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 callback(nil, error)
             }
+        }
+    }
+    
+    private func callServicePush(_ service: Servicio, _ token: String, _ identificador: String?, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget){
+        let body = SubscripcionPush(app: App(nombre: "Bait"), informacion: InformacionClientePush(token: token, plataforma: 3, identificador: nil, grupos: ["ios"], listaTemas: nil))
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.methodGet(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(Dictionary<String, Bool>.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.suscripcionPush(success["success"] ?? false), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = -2
+                        error.responseCode = -2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.suscripcionPush(false), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.suscripcionPush(false), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = -2
+            error.responseCode = -2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.suscripcionPush(false), error)
         }
     }
 }
