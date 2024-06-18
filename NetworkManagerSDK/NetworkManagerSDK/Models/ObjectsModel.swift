@@ -98,8 +98,12 @@ public struct Captcha: Decodable {
 
 //TODO: Modelo del servicio de Lista y Cancelar Recurrencias
 ///Atributos de request
-internal struct RecurrenciasActivasRequest: Encodable {
-    let identificador: String
+public struct RecurrenciasActivasRequest: Encodable {
+    internal let identificador: String
+    
+    public init(identificador: String) {
+        self.identificador = identificador
+    }
 }
 
 ///Atributos de response
@@ -140,11 +144,11 @@ internal struct App: Encodable {
 }
 
 public struct InformacionClientePush: Encodable {
-    public let token: String
-    public let plataforma: Int = 3
-    public let identificador: String?
-    public let grupos: [String] = ["ios"]
-    public let listaTemas: [Temas]?
+    internal let token: String
+    internal let plataforma: Int = 3
+    internal let identificador: String?
+    internal let grupos: [String] = ["ios"]
+    internal let listaTemas: [Temas]?
     
     public init(token: String, identificador: String?, listaTemas: [Temas]?) {
         self.token = token
@@ -154,9 +158,119 @@ public struct InformacionClientePush: Encodable {
 }
 
 public struct Temas: Encodable {
+    internal let nombre: String?
+    internal let identificador: String?
+    internal let fechaExpiracion: String?
+}
+
+//TODO: Modelo del servicio de eliminación
+///Atributos de request
+public struct EliminacionRequest: Encodable {
+    internal let access: String
+    internal let pass: String
+    
+    public init(access: String, pass: String) {
+        self.access = access
+        self.pass = pass
+    }
+}
+
+//TODO: Modelo del servicio de LogIn
+///Atributos de request
+public struct AccesoRequest: Encodable {
+    internal let operacion: String = "login"
+    internal let numero: String
+    internal let pass: String
+    
+    public init(numero: String, pass: String) {
+        self.numero = numero
+        self.pass = pass
+    }
+}
+
+///Atributos de response
+public struct UsuarioResponse: Decodable {
+    public let access: String?
+    public let numero: String?
+    public let foto: String?
+    public let success: Bool?
+    public let permiso: Int?
     public let nombre: String?
-    public let identificador: String?
-    public let fechaExpiracion: String?
+    public let email: String?
+    public let mensaje: String?
+    public let ssoLogin: Bool?
+    public let isBait: Bool?
+    public let isSsoInvite: Bool?
+}
+
+//TODO: Modelo del servicio de Update Perfil
+///Atributos de request
+public struct PerfilRequest: Encodable {
+    internal let access: String
+    internal let operacion: String = "actualizacionv2"
+    internal let nombre: String
+    internal let email: String
+    internal let permiso: Int
+    internal let foto: String
+    
+    public init(access: String, nombre: String, email: String, permiso: Int, foto: String) {
+        self.access = access
+        self.nombre = nombre
+        self.email = email
+        self.permiso = permiso
+        self.foto = foto
+    }
+}
+
+public struct PasswordRequest: Encodable {
+    internal let access: String
+    internal let operacion: String = "actualizacionv2"
+    internal let actual_pass: String?
+    internal let nueva_pass: String?
+    
+    public init(access: String, actual_pass: String, nueva_pass: String) {
+        self.access = access
+        self.actual_pass = actual_pass
+        self.nueva_pass = nueva_pass
+    }
+}
+
+//TODO: Modelo del servicio de Recuperar Password
+///Atributos de request
+public struct ResetPasswordRequest: Encodable {
+    internal let operacion: String = "restablecer_passv2"
+    internal let pass: String
+    internal let numero: String
+    internal let uuid: String
+    
+    public init(numero: String, pass: String, uuid:String) {
+        self.pass = pass
+        self.numero = numero
+        self.uuid = uuid
+    }
+}
+
+//TODO: Modelo del servicio de Crear Cuenta
+///Atributos de request
+public struct CompletarRegistro: Encodable {
+    internal let operacion: String = "registro_datos"
+    internal let numero: String
+    internal let nombre: String
+    internal let email: String
+    internal let permiso: Int
+    internal let pass: String
+    internal let foto: String
+    internal let uuid: String
+    
+    public init(numero: String, nombre: String, email: String, permiso: Int, pass: String, foto: String, uuid: String) {
+        self.numero = numero
+        self.nombre = nombre
+        self.email = email
+        self.permiso = permiso
+        self.pass = pass
+        self.foto = foto
+        self.uuid = uuid
+    }
 }
 
 // MARK: - ⚠️ typealias & Objects PUT ::::::::::::::::

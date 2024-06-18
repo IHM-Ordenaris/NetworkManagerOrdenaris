@@ -63,7 +63,7 @@ internal struct Network {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
-        if let headers = servicio.valores, let isHeaders = servicio.headers, isHeaders {
+        if let headers = servicio.valores {
             for newheader in headers {
                 request.setValue(newheader.valor, forHTTPHeaderField: newheader.nombre)
             }

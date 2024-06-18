@@ -91,8 +91,10 @@ public class WebService {
             return
         }
         
-        if let _ = service.valores{
+        if let valores = service.valores, let isHeaders = service.headers, isHeaders, !valores.isEmpty{
             service.valores!.append(contentsOf: self.headers)
+        }else{
+            service.valores = self.headers
         }
         
         switch target {
@@ -110,254 +112,28 @@ public class WebService {
             callback(.escaneo(service.valores), nil)
         case .version:
             callback(.version(service.valores), nil)
-        case .listaRecurrentes(let phoneNumber):
-            self.callServiceRecurrencias(&service, phoneNumber, printResponse, callback)
+        case .listaRecurrentes(let params):
+            self.callServiceRecurrencias(&service, params, printResponse, callback)
         case let .cancelarRecurrente(phoneNumber, uuid):
             self.callServiceCancelarRecurrencias(&service, phoneNumber, uuid, printResponse, callback)
-        case let .suscripcionPush(token, phoneNumber):
-            self.callServicePush(service, token, phoneNumber, printResponse, callback)
-        case .desuscripcionPush(let info):
-            self.callServiceCancelPush(service, with: info, printResponse: printResponse, callback)
+        case .suscripcionPush(let params):
+            self.callServicePush(service, params, printResponse: printResponse, callback)
+        case .desuscripcionPush(let params):
+            self.callServiceCancelPush(service, params, printResponse: printResponse, callback)
         case .ofertasInternacionales:
             self.callServiceOfertas(service, printResponse, callback)
-        }
-    }
-    
-    private func callServicePaySafe(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        let body = PagoSeguroRequest(uuid: K.uuidPaymentiOS)
-        do{
-            let encoder = JSONEncoder()
-            let bodyData = try encoder.encode(body)
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let paymentSafe = try JSONDecoder().decode(PagoSeguroResponse.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.pagoSeguro(paymentSafe), nil)
-                    }catch {
-                        let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
-                        error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.pagoSeguro(nil), error)
-                    }
-                }else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.pagoSeguro(nil), error)
-                }
-            }
-        }catch {
-            let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
-            error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.pagoSeguro(nil), error)
-        }
-    }
-    
-    private func callServiceWidget(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
-            if let result = response, let data = result.data, result.success {
-                do {
-                    let widgetService = try JSONDecoder().decode(WidgetServiceResponse.self, from: data)
-                    self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.widget(widgetService), nil)
-                }catch {
-                    let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
-                    error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.widget(nil), error)
-                }
-            }else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                callback(.widget(nil), error)
-            }
-        }
-    }
-    
-    private func callServiceCaptcha(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
-            if let result = response, let data = result.data, result.success {
-                do {
-                    let captcha = try JSONDecoder().decode(CaptchaResponse.self, from: data)
-                    self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.captchaIos(captcha), nil)
-                }catch {
-                    let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
-                    error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.captchaIos(nil), error)
-                }
-            }else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                callback(.captchaIos(nil), error)
-            }
-        }
-    }
-    
-    private func callServiceRecurrencias(_ service: inout Servicio, _ phoneNumber: String ,_ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        let body = RecurrenciasActivasRequest(identificador: phoneNumber)
-        service.url = service.url?.replacingOccurrences(of: "#canal#", with: K.uuidPaymentiOS)
-        do{
-            let encoder = JSONEncoder()
-            let bodyData = try encoder.encode(body)
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let recurrencias = try JSONDecoder().decode(RecurrenciasActivasResponse.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.listaRecurrentes(recurrencias), nil)
-                    }catch {
-                        let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
-                        error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.listaRecurrentes(nil), error)
-                    }
-                }else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.listaRecurrentes(nil), error)
-                }
-            }
-        }catch {
-            let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
-            error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.listaRecurrentes(nil), error)
-        }
-    }
-    
-    private func callServiceCancelarRecurrencias(_ service: inout Servicio, _ phoneNumber: String , _ uuid: String, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        let body = RecurrenciasActivasRequest(identificador: phoneNumber)
-        service.url = service.url?.replacingOccurrences(of: "#recurrencia#", with: uuid)
-        do{
-            let encoder = JSONEncoder()
-            let bodyData = try encoder.encode(body)
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let cancelarRecurrencia = try JSONDecoder().decode(DefaulResponse.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.cancelarRecurrente(cancelarRecurrencia), nil)
-                    }catch {
-                        let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
-                        error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.cancelarRecurrente(nil), error)
-                    }
-                }else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.cancelarRecurrente(nil), error)
-                }
-            }
-        }catch {
-            let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
-            error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.cancelarRecurrente(nil), error)
-        }
-    }
-    
-    private func callServicePush(_ service: Servicio, _ token: String, _ identificador: String?, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        let body = SubscripcionPushRequest(informacion: InformacionClientePush(token: token, identificador: nil, listaTemas: nil))
-        do{
-            let encoder = JSONEncoder()
-            let bodyData = try encoder.encode(body)
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let success = try JSONDecoder().decode(Dictionary<String, Bool>.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.suscripcionPush(success["success"] ?? false), nil)
-                    }catch {
-                        let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
-                        error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.suscripcionPush(false), error)
-                    }
-                }else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.suscripcionPush(false), error)
-                }
-            }
-        }catch {
-            let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
-            error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.suscripcionPush(false), error)
-        }
-    }
-    
-    private func callServiceCancelPush(_ service: Servicio, with info: InformacionClientePush, printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        let body = SubscripcionPushRequest(informacion: info)
-        do{
-            let encoder = JSONEncoder()
-            let bodyData = try encoder.encode(body)
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let success = try JSONDecoder().decode(Dictionary<String, Bool>.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.desuscripcionPush(success["success"] ?? false), nil)
-                    }catch {
-                        let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
-                        error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.desuscripcionPush(false), error)
-                    }
-                }else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.desuscripcionPush(false), error)
-                }
-            }
-        }catch {
-            let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
-            error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.desuscripcionPush(false), error)
-        }
-    }
-    
-    private func callServiceOfertas(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
-            if let result = response, let data = result.data, result.success {
-                do {
-                    let recargaInternacional = try JSONDecoder().decode(RecargaInternacionalResponse.self, from: data)
-                    self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.ofertasInternacionales(recargaInternacional), nil)
-                }catch {
-                    let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
-                    error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.ofertasInternacionales(nil), error)
-                }
-            }else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                callback(.ofertasInternacionales(nil), error)
-            }
+        case .eliminacion(let params):
+            self.callServiceDeleteAccount(service, params, printResponse, callback)
+        case .acceso(let params):
+            self.callServiceUserData(service, params, printResponse, callback)
+        case .cambiarPerfil(let params):
+            self.callServiceUserData(service, params, printResponse, callback)
+        case .cambiarPass(let params):
+            self.callServiceUserData(service, params, printResponse, callback)
+        case .reestablecerPassword(let params):
+            self.callServiceUserData(service, params, printResponse, callback)
+        case .registrarCuenta(let params):
+            self.callServiceUserData(service, params, printResponse, callback)
         }
     }
 }

@@ -16,11 +16,17 @@ public enum ServiceName {
     case perfilCamara
     case escaneo
     case version
-    case listaRecurrentes(phoneNumber: String)
-    case cancelarRecurrente(phoneNumber: String, uuid: String)
-    case suscripcionPush(token: String, phoneNumber: String?)
-    case desuscripcionPush(client: InformacionClientePush)
+    case listaRecurrentes(params: RecurrenciasActivasRequest)
+    case cancelarRecurrente(params: RecurrenciasActivasRequest, uuid: String)
+    case suscripcionPush(params: InformacionClientePush)
+    case desuscripcionPush(params: InformacionClientePush)
     case ofertasInternacionales
+    case eliminacion(params: EliminacionRequest)
+    case acceso(params: AccesoRequest)
+    case cambiarPerfil(params: PerfilRequest)
+    case cambiarPass(params: PasswordRequest)
+    case reestablecerPassword(params: ResetPasswordRequest)
+    case registrarCuenta(params: ResetPasswordRequest)
     
     var getKey: String {
         switch self {
@@ -36,6 +42,12 @@ public enum ServiceName {
         case .suscripcionPush: return "suscripcionPush"
         case .desuscripcionPush: return "desuscripcionPush"
         case .ofertasInternacionales: return "ofertasInternacionales"
+        case .eliminacion: return "eliminacion"
+        case .acceso: return "acceso"
+        case .cambiarPerfil: return "cambiarPerfil"
+        case .cambiarPass: return "cambiarPerfil"
+        case .reestablecerPassword: return "reestablecerPassword"
+        case .registrarCuenta(let params): return "registrarCuenta"
         }
     }
 }
@@ -53,4 +65,6 @@ public enum ServiceClass {
     case suscripcionPush(Bool)
     case desuscripcionPush(Bool)
     case ofertasInternacionales(RecargaInternacionalResponse?)
+    case eliminacion(DefaulResponse?)
+    case datosUsuario(UsuarioResponse?)
 }
