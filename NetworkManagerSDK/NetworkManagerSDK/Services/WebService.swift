@@ -134,6 +134,22 @@ public class WebService {
             self.callServiceUserData(service, params, printResponse, callback)
         case .registrarCuenta(let params):
             self.callServiceUserData(service, params, printResponse, callback)
+        case .solicitudPIN(let params):
+            self.callServiceSendOTP(service, params, printResponse, callback)
+        case .verificarPIN(let params):
+            self.callServiceValidateOTP(service, params, printResponse, callback)
+        case .consumo(let params):
+            self.callServiceMobileHostpot(service, params, printResponse, callback)
+        case .ofertas, .ofertasSams:
+            self.callServiceOffer(service, printResponse, callback)
+        case .validar(let imei):
+            self.callServiceValidate(&service, imei: imei, printResponse, callback)
+        case .solicitudPortabilidad(let params):
+            self.callServicePortability(service, params, printResponse: printResponse, callback)
+        case .redencionTicket(let params):
+            self.callServiceTicket(service, params, printResponse, callback)
+        case .cerrarSesion(let params):
+            self.callServiceLogOut(service, params, printResponse, callback)
         }
     }
 }

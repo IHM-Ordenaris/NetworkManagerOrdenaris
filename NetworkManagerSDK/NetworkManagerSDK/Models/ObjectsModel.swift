@@ -65,6 +65,34 @@ public struct DestinosInternacionales: Decodable {
     public let oferta: String?
 }
 
+//TODO: Modelo del servicio Ofertas
+///Atributos de response
+public struct OffersResponse: Decodable {
+    public let success: Bool?
+    public let lista: [Oferta]?
+}
+
+//TODO: Modelo del servicio Portabilidad
+///Atributos de response
+public struct ImeiResponse: Decodable {
+    public let device: Device?
+    public let imei: Imei?
+    public let error: String?
+}
+
+public struct Device: Decodable {
+    public let band28: String?
+    public let brand: String?
+    public let model: String?
+    public let volteCapable: String?
+}
+
+public struct Imei: Decodable {
+    public let blocked: String?
+    public let homologated: String?
+    public let imei: String?
+}
+
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
 //TODO: Modelo del servicio Pago Seguro
 ///Atributos de request
@@ -99,7 +127,7 @@ public struct Captcha: Decodable {
 //TODO: Modelo del servicio de Lista y Cancelar Recurrencias
 ///Atributos de request
 public struct RecurrenciasActivasRequest: Encodable {
-    internal let identificador: String
+    private let identificador: String
     
     public init(identificador: String) {
         self.identificador = identificador
@@ -134,8 +162,8 @@ public struct DefaulResponse: Decodable {
 
 //TODO: Modelo del servicio de Subscribir y Cancelar Recurrencias
 ///Atributos de request
-public struct SubscripcionPushRequest: Encodable {
-    internal let app: App = App(nombre: "Bait")
+internal struct SubscripcionPushRequest: Encodable {
+    private let app: App = App(nombre: "Bait")
     public let informacion: InformacionClientePush
 }
 
@@ -144,11 +172,11 @@ internal struct App: Encodable {
 }
 
 public struct InformacionClientePush: Encodable {
-    internal let token: String
-    internal let plataforma: Int = 3
-    internal let identificador: String?
-    internal let grupos: [String] = ["ios"]
-    internal let listaTemas: [Temas]?
+    private let token: String
+    private let plataforma: Int = 3
+    private let identificador: String?
+    private let grupos: [String] = ["ios"]
+    private let listaTemas: [Temas]?
     
     public init(token: String, identificador: String?, listaTemas: [Temas]?) {
         self.token = token
@@ -158,16 +186,16 @@ public struct InformacionClientePush: Encodable {
 }
 
 public struct Temas: Encodable {
-    internal let nombre: String?
-    internal let identificador: String?
-    internal let fechaExpiracion: String?
+    private let nombre: String?
+    private let identificador: String?
+    private let fechaExpiracion: String?
 }
 
 //TODO: Modelo del servicio de eliminación
 ///Atributos de request
 public struct EliminacionRequest: Encodable {
-    internal let access: String
-    internal let pass: String
+    private let access: String
+    private let pass: String
     
     public init(access: String, pass: String) {
         self.access = access
@@ -178,9 +206,9 @@ public struct EliminacionRequest: Encodable {
 //TODO: Modelo del servicio de LogIn
 ///Atributos de request
 public struct AccesoRequest: Encodable {
-    internal let operacion: String = "login"
-    internal let numero: String
-    internal let pass: String
+    private let operacion: String = "login"
+    private let numero: String
+    private let pass: String
     
     public init(numero: String, pass: String) {
         self.numero = numero
@@ -206,12 +234,12 @@ public struct UsuarioResponse: Decodable {
 //TODO: Modelo del servicio de Update Perfil
 ///Atributos de request
 public struct PerfilRequest: Encodable {
-    internal let access: String
-    internal let operacion: String = "actualizacionv2"
-    internal let nombre: String
-    internal let email: String
-    internal let permiso: Int
-    internal let foto: String
+    private let access: String
+    private let operacion: String = "actualizacionv2"
+    private let nombre: String
+    private let email: String
+    private let permiso: Int
+    private let foto: String
     
     public init(access: String, nombre: String, email: String, permiso: Int, foto: String) {
         self.access = access
@@ -223,10 +251,10 @@ public struct PerfilRequest: Encodable {
 }
 
 public struct PasswordRequest: Encodable {
-    internal let access: String
-    internal let operacion: String = "actualizacionv2"
-    internal let actual_pass: String?
-    internal let nueva_pass: String?
+    private let access: String
+    private let operacion: String = "actualizacionv2"
+    private let actual_pass: String?
+    private let nueva_pass: String?
     
     public init(access: String, actual_pass: String, nueva_pass: String) {
         self.access = access
@@ -238,10 +266,10 @@ public struct PasswordRequest: Encodable {
 //TODO: Modelo del servicio de Recuperar Password
 ///Atributos de request
 public struct ResetPasswordRequest: Encodable {
-    internal let operacion: String = "restablecer_passv2"
-    internal let pass: String
-    internal let numero: String
-    internal let uuid: String
+    private let operacion: String = "restablecer_passv2"
+    private let pass: String
+    private let numero: String
+    private let uuid: String
     
     public init(numero: String, pass: String, uuid:String) {
         self.pass = pass
@@ -253,14 +281,14 @@ public struct ResetPasswordRequest: Encodable {
 //TODO: Modelo del servicio de Crear Cuenta
 ///Atributos de request
 public struct CompletarRegistro: Encodable {
-    internal let operacion: String = "registro_datos"
-    internal let numero: String
-    internal let nombre: String
-    internal let email: String
-    internal let permiso: Int
-    internal let pass: String
-    internal let foto: String
-    internal let uuid: String
+    private let operacion: String = "registro_datos"
+    private let numero: String
+    private let nombre: String
+    private let email: String
+    private let permiso: Int
+    private let pass: String
+    private let foto: String
+    private let uuid: String
     
     public init(numero: String, nombre: String, email: String, permiso: Int, pass: String, foto: String, uuid: String) {
         self.numero = numero
@@ -270,6 +298,152 @@ public struct CompletarRegistro: Encodable {
         self.pass = pass
         self.foto = foto
         self.uuid = uuid
+    }
+}
+
+//TODO: Modelo del servicio de OTP
+///Atributos de request
+public struct OTPRequest: Encodable {
+    private let operacion: String
+    private let numero: String
+    
+    public init(numero: String, operacion: OTPService) {
+        self.operacion = operacion.rawValue
+        self.numero = numero
+    }
+}
+
+public struct ValidateOtpRequest: Encodable {
+    private let operacion: String = "validar_pin"
+    private let numero: String
+    private let pin: String
+    
+    public init(numero: String, pin: String) {
+        self.numero = numero
+        self.pin = pin
+    }
+}
+
+///Atributos de response
+public struct OTPResponse: Decodable{
+    public let code: Int?
+    public let success: Bool?
+    public let mensaje: String?
+    public let uuid: String?
+    public let redireccion: Bool?
+}
+
+//TODO: Modelo del servicio de Consumo
+///Atributos de request
+public struct MobileHotspotRequest: Encodable {
+    private let access: String
+    
+    public init(access: String) {
+        self.access = access
+    }
+}
+
+///Atributos de response
+public struct MobileHotspotResponse: Decodable {
+    public let consumo: [MobileHotspotData]?
+    public let success: Bool?
+    public let proxima_recarga: String?
+    public let offeringsIds: [MobileHotspotOffers]?
+    public let comparteDatos: Bool?
+    public let esIlimitado: Bool?
+    public let fechaConsumo: Date?
+}
+
+public struct MobileHotspotData: Decodable {
+    public let mb_usados: Float?
+    public let mb_totales: Float?
+    public let mb_disponibles: Float?
+    public let min_disponibles: Float?
+    public let min_usados: Float?
+    public let sms_disponibles: Float?
+    public let sms_usados: Float?
+    public let nombre: String?
+    public let tipo: Int?
+}
+
+public struct MobileHotspotOffers: Decodable {
+    public let expireDate: String?
+    public let offeringId: String?
+}
+
+//TODO: Modelo del servicio de Portabilidad
+///Atributos de request
+internal struct PortabilidadRequest: Encodable {
+    let portabilidad: PortabilidadElementsRequest
+}
+
+public struct PortabilidadElementsRequest: Encodable {
+    private let compania: String
+    private let numeroActual: String
+    private let imei: String
+    private let nip: String
+    private let numeroBait: String
+    private let nombre: String
+    private let apellidos: String
+    private let adicional: String
+    private let email: String
+    private let iccid: String
+    private let auto: Int = 1
+    
+    public init(compania: String, numActual: String, imei: String, nip: String, numBait: String, nombre: String, apellidos: String, adicional: String, email: String, iccid: String) {
+        self.compania = compania
+        self.numeroActual = numActual
+        self.imei = imei
+        self.nip = nip
+        self.numeroBait = numBait
+        self.nombre = nombre
+        self.apellidos = apellidos
+        self.adicional = adicional
+        self.email = email
+        self.iccid = iccid
+    }
+}
+
+///Atributos de response
+public struct PortabilityResponse: Decodable {
+    public let estado: Bool?
+    public let numero: String?
+    public let folio: String?
+    public let mensaje: String?
+}
+
+//TODO: Modelo del servicio de Redencion Ticket
+///Atributos de request
+public struct RedencionTicketRequest: Encodable {
+    private let access: String
+    private let numero_ticket: String
+    private let comercio: String
+    private let total: String
+    private let base64: String
+    
+    public init( access: String, numero_ticket: String, comercio: String, total: String, base64: String) {
+        self.access = access
+        self.numero_ticket = numero_ticket
+        self.comercio = comercio
+        self.total = total
+        self.base64 = base64
+    }
+}
+
+///Atributos de response
+public struct RedencionTicketResponse: Decodable {
+    public let success: Bool?
+    public let mensaje: String?
+}
+
+//TODO: Modelo del servicio de Cerrar Sesión
+///Atributos de request
+public struct LogOutRequest: Encodable {
+    internal let operacion: String = "logout"
+    internal let access: String
+    
+    public init(access: String) {
+        self.access = access
     }
 }
 

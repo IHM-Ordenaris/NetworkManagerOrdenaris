@@ -80,3 +80,8 @@ extension CustomError {
         }
     }
 }
+
+public enum OTPService: String {
+    case otpRegister = "pin_webv2"
+    case otpPassword = "recuperacionv2"
+}

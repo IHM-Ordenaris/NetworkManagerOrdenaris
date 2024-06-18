@@ -27,6 +27,15 @@ public enum ServiceName {
     case cambiarPass(params: PasswordRequest)
     case reestablecerPassword(params: ResetPasswordRequest)
     case registrarCuenta(params: ResetPasswordRequest)
+    case solicitudPIN(params: OTPRequest)
+    case verificarPIN(params: ValidateOtpRequest)
+    case consumo(params: MobileHotspotRequest)
+    case ofertas
+    case ofertasSams
+    case validar(imei: String)
+    case solicitudPortabilidad(params: PortabilidadElementsRequest)
+    case redencionTicket(params: RedencionTicketRequest)
+    case cerrarSesion(params: LogOutRequest)
     
     var getKey: String {
         switch self {
@@ -47,7 +56,16 @@ public enum ServiceName {
         case .cambiarPerfil: return "cambiarPerfil"
         case .cambiarPass: return "cambiarPerfil"
         case .reestablecerPassword: return "reestablecerPassword"
-        case .registrarCuenta(let params): return "registrarCuenta"
+        case .registrarCuenta: return "registrarCuenta"
+        case .solicitudPIN: return "solicitudPIN"
+        case .verificarPIN: return "verificarPIN"
+        case .consumo: return "consumo3"
+        case .ofertas: return "ofertas"
+        case .ofertasSams: return "ofertasSams"
+        case .validar: return "validarImei"
+        case .solicitudPortabilidad: return "solicitudPortabilidad"
+        case .redencionTicket: return "redencionTicket"
+        case .cerrarSesion: return "cerrarSesion"
         }
     }
 }
@@ -67,4 +85,12 @@ public enum ServiceClass {
     case ofertasInternacionales(RecargaInternacionalResponse?)
     case eliminacion(DefaulResponse?)
     case datosUsuario(UsuarioResponse?)
+    case solicitudPIN(DefaulResponse?)
+    case verificarPIN(OTPResponse?)
+    case consumo(MobileHotspotResponse?)
+    case ofertas(OffersResponse?)
+    case validarImei(ImeiResponse?)
+    case solicitudPortabilidad(PortabilityResponse?)
+    case redencionTicket(RedencionTicketResponse?)
+    case cerrarSesion(DefaulResponse?)
 }

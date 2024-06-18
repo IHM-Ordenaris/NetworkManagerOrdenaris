@@ -309,4 +309,248 @@ extension WebService{
             callback(.datosUsuario(nil), error)
         }
     }
+    
+    internal func callServiceSendOTP(_ service: Servicio, _ body: OTPRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(DefaulResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.solicitudPIN(success), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = -2
+                        error.responseCode = -2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.solicitudPIN(nil), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.solicitudPIN(nil), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = -2
+            error.responseCode = -2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.solicitudPIN(nil), error)
+        }
+    }
+    
+    internal func callServiceValidateOTP(_ service: Servicio, _ body: ValidateOtpRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(OTPResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.verificarPIN(success), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = -2
+                        error.responseCode = -2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.verificarPIN(nil), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.verificarPIN(nil), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = -2
+            error.responseCode = -2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.verificarPIN(nil), error)
+        }
+    }
+    
+    internal func callServiceMobileHostpot(_ service: Servicio, _ body: MobileHotspotRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(MobileHotspotResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.consumo(success), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = -2
+                        error.responseCode = -2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.consumo(nil), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.consumo(nil), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = -2
+            error.responseCode = -2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.consumo(nil), error)
+        }
+    }
+    
+    internal func callServiceOffer(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let widgetService = try JSONDecoder().decode(OffersResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.ofertas(widgetService), nil)
+                }catch {
+                    let error = ErrorResponse()
+                    error.statusCode = -2
+                    error.responseCode = -2
+                    error.errorMessage = CustomError.noData.errorDescription
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.ofertas(nil), error)
+                }
+            }else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                callback(.ofertas(nil), error)
+            }
+        }
+    }
+    
+    internal func callServiceValidate(_ service: inout Servicio, imei:String, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        service.url = service.url?.appending(imei)
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let imeiService = try JSONDecoder().decode(ImeiResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.validarImei(imeiService), nil)
+                }catch {
+                    let error = ErrorResponse()
+                    error.statusCode = -2
+                    error.responseCode = -2
+                    error.errorMessage = CustomError.noData.errorDescription
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.validarImei(nil), error)
+                }
+            }else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                callback(.validarImei(nil), error)
+            }
+        }
+    }
+    
+    internal func callServicePortability(_ service: Servicio, _ info: PortabilidadElementsRequest, printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        let body = PortabilidadRequest(portabilidad: info)
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let portabilityService = try JSONDecoder().decode(PortabilityResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.solicitudPortabilidad(portabilityService), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = -2
+                        error.responseCode = -2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.solicitudPortabilidad(nil), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.solicitudPortabilidad(nil), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = -2
+            error.responseCode = -2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.solicitudPortabilidad(nil), error)
+        }
+    }
+    
+    internal func callServiceTicket(_ service: Servicio, _ body: RedencionTicketRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let ticketService = try JSONDecoder().decode(RedencionTicketResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.redencionTicket(ticketService), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = -2
+                        error.responseCode = -2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.redencionTicket(nil), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.redencionTicket(nil), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = -2
+            error.responseCode = -2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.redencionTicket(nil), error)
+        }
+    }
+    
+    internal func callServiceLogOut(_ service: Servicio, _ body: LogOutRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(DefaulResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.cerrarSesion(success), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = -2
+                        error.responseCode = -2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.cerrarSesion(nil), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.cerrarSesion(nil), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = -2
+            error.responseCode = -2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.eliminacion(nil), error)
+        }
+    }
 }
