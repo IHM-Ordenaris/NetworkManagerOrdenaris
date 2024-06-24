@@ -15,8 +15,8 @@ public class WebService {
     public var callbackServices: ((ServicesPlugInResponse) -> Void)?
     private var environment: Environment
     var headers = [
-        Headers(nombre: K.origen, valor: K.origenValue),
-        Headers(nombre: K.origin, valor: K.origenValue)
+        Headers(nombre: Cons.origen, valor: Cons.origenValue),
+        Headers(nombre: Cons.origin, valor: Cons.origenValue)
     ]
     
     /// Inicializador
@@ -25,7 +25,7 @@ public class WebService {
     ///   - appVersion: Versión de compilcación de la app
     public init(environment: Environment = .pr, appVersion: String) {
         self.environment = environment
-        self.headers.append(Headers(nombre: K.app, valor: appVersion))
+        self.headers.append(Headers(nombre: Cons.app, valor: appVersion))
     }
     
     // MARK: - ⚠️ Métodos genericos ::::::::::::::::
@@ -36,7 +36,7 @@ public class WebService {
     public func loadConfiguration(printResponse: Bool = false, callback: @escaping CallbackResponseLoadSetting) {
         self.callbackServices?(ServicesPlugInResponse(.start))
         var headersCopy = self.headers
-        headersCopy.append(Headers(nombre: K.ordServicio, valor: K.ordServicioValue))
+        headersCopy.append(Headers(nombre: Cons.ordServicio, valor: Cons.ordServicioValue))
         let service = Servicio(nombre: "CDN", headers: true, method: HTTPMethod.get.rawValue, auto: nil, valores: headersCopy, url: ProductService.Endpoint.CDN(environment: self.environment).url)
         Network.callNetworking(servicio: service, params: ["rnd": Date().timeIntervalSinceReferenceDate.description], printResponse) { response, failure in
             if let result = response, let data = result.data, result.success {
@@ -48,21 +48,21 @@ public class WebService {
                             targets[$0.nombre] = $0
                         }
                     }
-                    if Network.setConfigurationFile(name: K.pListName, targets) {
+                    if Network.setConfigurationFile(name: Cons.pListName, targets) {
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(true, nil)
                     }else {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noFile.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(false, error)
                     }
                 }catch {
                     let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(false, error)
@@ -81,7 +81,7 @@ public class WebService {
     ///   - callback: ServiceClass (⎷ response "Catálogo de Classes") / ErrorResponseGral (⌀ error)
     public func fetchData(target: ServiceName, printResponse: Bool = false, callback: @escaping CallbackResponseTarget) {
         self.callbackServices?(ServicesPlugInResponse(.start))
-        guard var service = Network.fetchConfigurationFile(name: K.pListName, key: target) else {
+        guard var service = Network.fetchConfigurationFile(name: Cons.pListName, key: target) else {
             let error = ErrorResponse()
             error.statusCode = -3
             error.responseCode = -3
@@ -111,7 +111,7 @@ public class WebService {
         case .escaneo:
             callback(.escaneo(service.valores), nil)
         case .version:
-            callback(.version(service.valores), nil)
+            callback(.version(service), nil)
         case .listaRecurrentes(let params):
             self.callServiceRecurrencias(&service, params, printResponse, callback)
         case let .cancelarRecurrente(phoneNumber, uuid):

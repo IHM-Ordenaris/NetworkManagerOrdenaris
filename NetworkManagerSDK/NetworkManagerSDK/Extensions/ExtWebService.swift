@@ -9,7 +9,7 @@ import Foundation
 
 extension WebService{
     internal func callServicePaySafe(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        let body = PagoSeguroRequest(uuid: K.uuidPaymentiOS)
+        let body = PagoSeguroRequest(uuid: Cons.uuidPaymentiOS)
         do{
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
@@ -21,8 +21,8 @@ extension WebService{
                         callback(.pagoSeguro(paymentSafe), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.pagoSeguro(nil), error)
@@ -34,8 +34,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.pagoSeguro(nil), error)
@@ -51,8 +51,8 @@ extension WebService{
                     callback(.widget(widgetService), nil)
                 }catch {
                     let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.widget(nil), error)
@@ -73,8 +73,8 @@ extension WebService{
                     callback(.captchaIos(captcha), nil)
                 }catch {
                     let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.captchaIos(nil), error)
@@ -87,7 +87,7 @@ extension WebService{
     }
     
     internal func callServiceRecurrencias(_ service: inout Servicio, _ body: RecurrenciasActivasRequest ,_ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        service.url = service.url?.replacingOccurrences(of: "#canal#", with: K.uuidPaymentiOS)
+        service.url = service.url?.replacingOccurrences(of: "#canal#", with: Cons.uuidPaymentiOS)
         do{
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
@@ -99,8 +99,8 @@ extension WebService{
                         callback(.listaRecurrentes(recurrencias), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.listaRecurrentes(nil), error)
@@ -112,8 +112,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.listaRecurrentes(nil), error)
@@ -133,8 +133,8 @@ extension WebService{
                         callback(.cancelarRecurrente(cancelarRecurrencia), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.cancelarRecurrente(nil), error)
@@ -146,8 +146,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.cancelarRecurrente(nil), error)
@@ -167,8 +167,8 @@ extension WebService{
                         callback(.suscripcionPush(success["success"] ?? false), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.suscripcionPush(false), error)
@@ -180,8 +180,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.suscripcionPush(false), error)
@@ -201,8 +201,8 @@ extension WebService{
                         callback(.desuscripcionPush(success["success"] ?? false), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.desuscripcionPush(false), error)
@@ -214,8 +214,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.desuscripcionPush(false), error)
@@ -231,8 +231,8 @@ extension WebService{
                     callback(.ofertasInternacionales(recargaInternacional), nil)
                 }catch {
                     let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.ofertasInternacionales(nil), error)
@@ -256,8 +256,8 @@ extension WebService{
                         callback(.eliminacion(success), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.eliminacion(nil), error)
@@ -269,8 +269,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.eliminacion(nil), error)
@@ -289,8 +289,8 @@ extension WebService{
                         callback(.datosUsuario(userData), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.datosUsuario(nil), error)
@@ -302,8 +302,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.datosUsuario(nil), error)
@@ -322,8 +322,8 @@ extension WebService{
                         callback(.solicitudPIN(success), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.solicitudPIN(nil), error)
@@ -335,8 +335,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.solicitudPIN(nil), error)
@@ -355,8 +355,8 @@ extension WebService{
                         callback(.verificarPIN(success), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.verificarPIN(nil), error)
@@ -368,8 +368,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.verificarPIN(nil), error)
@@ -388,8 +388,8 @@ extension WebService{
                         callback(.consumo(success), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.consumo(nil), error)
@@ -401,8 +401,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.consumo(nil), error)
@@ -418,8 +418,8 @@ extension WebService{
                     callback(.ofertas(widgetService), nil)
                 }catch {
                     let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.ofertas(nil), error)
@@ -441,8 +441,8 @@ extension WebService{
                     callback(.validarImei(imeiService), nil)
                 }catch {
                     let error = ErrorResponse()
-                    error.statusCode = -2
-                    error.responseCode = -2
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.validarImei(nil), error)
@@ -467,8 +467,8 @@ extension WebService{
                         callback(.solicitudPortabilidad(portabilityService), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.solicitudPortabilidad(nil), error)
@@ -480,8 +480,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.solicitudPortabilidad(nil), error)
@@ -500,8 +500,8 @@ extension WebService{
                         callback(.redencionTicket(ticketService), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.redencionTicket(nil), error)
@@ -513,8 +513,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.redencionTicket(nil), error)
@@ -533,8 +533,8 @@ extension WebService{
                         callback(.cerrarSesion(success), nil)
                     }catch {
                         let error = ErrorResponse()
-                        error.statusCode = -2
-                        error.responseCode = -2
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.cerrarSesion(nil), error)
@@ -546,8 +546,8 @@ extension WebService{
             }
         }catch {
             let error = ErrorResponse()
-            error.statusCode = -2
-            error.responseCode = -2
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
             callback(.eliminacion(nil), error)

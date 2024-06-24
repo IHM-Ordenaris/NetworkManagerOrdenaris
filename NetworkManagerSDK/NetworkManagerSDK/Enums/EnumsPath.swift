@@ -77,7 +77,7 @@ public enum ServiceClass {
     case perfilGaleria([Headers]?)
     case perfilCamara([Headers]?)
     case escaneo([Headers]?)
-    case version([Headers]?)
+    case version(Servicio?)
     case listaRecurrentes(RecurrenciasActivasResponse?)
     case cancelarRecurrente(DefaulResponse?)
     case suscripcionPush(Bool)

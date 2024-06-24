@@ -1,5 +1,5 @@
 //
-//  StructsNetwork.swift
+//  StructsNetworConsswift
 //  NetworkManagerSDK
 //
 //  Created by Desarrollador iOS on 10/06/24.
@@ -27,7 +27,7 @@ internal struct HTTPMethod: RawRepresentable, Equatable, Hashable {
 }
 
 //TODO: Constantes
-internal struct K {
+internal struct Cons {
     static let ordServicio = "ordServicio"
     static let ordServicioValue = "57bfb26735aa4ec3a1baafa864006d7d"
     static let origen = "Origen"
@@ -36,4 +36,5 @@ internal struct K {
     static let app = "app-version"
     static let pListName = "CDN"
     static let uuidPaymentiOS = "b50cc2f484e111ee87cf0242ac120002"
+    static let error2 = -2
 }

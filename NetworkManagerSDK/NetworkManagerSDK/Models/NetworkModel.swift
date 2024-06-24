@@ -16,7 +16,7 @@ public struct MainServicio: Codable{
 
 public struct Servicio: Codable {
     internal let nombre: String
-    internal let headers: Bool?
+    public let headers: Bool?
     internal let method: String?
     internal let auto: Bool?
     public var valores: [Headers]?
