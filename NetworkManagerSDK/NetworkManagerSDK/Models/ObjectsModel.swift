@@ -447,6 +447,23 @@ public struct LogOutRequest: Encodable {
     }
 }
 
+//TODO: Modelo del servicio de Validar Número Bait
+///Atributos de request
+internal struct ValidateBaitRequest: Encodable {
+    let tipo: Int = 1
+    let dn: String?
+    let iccid: String?
+    let accion: String
+}
+
+///Atributos de response
+public struct ValidateBaitResponse: Decodable {
+    public let success: Bool?
+    public let mensaje: String?
+    public let status: Int?
+    public let dn: String?
+}
+
 // MARK: - ⚠️ typealias & Objects PUT ::::::::::::::::
 
 // MARK: - ⚠️ typealias & Objects DELETE ::::::::::::::::

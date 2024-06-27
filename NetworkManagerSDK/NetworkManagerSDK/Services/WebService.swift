@@ -102,8 +102,8 @@ public class WebService {
             self.callServicePaySafe(service, printResponse, callback)
         case .widget:
             self.callServiceWidget(service, printResponse, callback)
-        case .captchaIos:
-            self.callServiceCaptcha(service, printResponse, callback)
+        case let .validarBait(number, action):
+            self.callServiceValidateBait(service, number, action, printResponse, callback)
         case .perfilGaleria:
             callback(.perfilGaleria(service.valores), nil)
         case .perfilCamara:

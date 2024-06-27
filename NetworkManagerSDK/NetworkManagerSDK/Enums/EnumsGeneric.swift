@@ -6,13 +6,13 @@
 //
 
 import Foundation
-// Enumeraciòn para estatus de servicio
+// Enumeración para estatus de servicio
 public enum StatusService: Int {
     case start = 1
     case finish = 2
 }
 
-// Enumeraciòn para estatus de servicio
+// Enumeración para estatus de servicio
 public enum ResponseService {
     case request
     case success
@@ -23,6 +23,14 @@ public enum ResponseService {
 public enum Environment {
     case qa
     case pr
+}
+
+/// Lista de propiedades para seleccionar en la valicadación del número Bait
+public enum ActionBait: String {
+    case login = "bait_login"
+    case signup = "bait_registro"
+    case recharge = "bait_recarga"
+    case portability = "bait_portabilidad"
 }
 
 /// Clases con propiedades y funciones para obtener la urls de consultar

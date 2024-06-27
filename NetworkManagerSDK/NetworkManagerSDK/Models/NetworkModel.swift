@@ -51,8 +51,8 @@ public class ErrorResponse: Codable, Error {
     }
     
     init() {
-        statusCode = 0
-        responseCode = 0
+        statusCode = Cons.error0
+        responseCode = Cons.error0
         errorMessage = ""
     }
 }
@@ -69,7 +69,7 @@ public class ErrorGeneralResponse: Codable {
         success = false
         errors = []
         messages = []
-        responseCode = 0
+        responseCode = Cons.error0
         message = ""
     }
 }

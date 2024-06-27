@@ -64,25 +64,75 @@ extension WebService{
         }
     }
     
-    internal func callServiceCaptcha(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+    internal func callServiceValidateBait(_ service: Servicio, _ number: String, _ action: ActionBait, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
             if let result = response, let data = result.data, result.success {
                 do {
                     let captcha = try JSONDecoder().decode(CaptchaResponse.self, from: data)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.captchaIos(captcha), nil)
+                    if let url = captcha.informacion?.url, let form = captcha.informacion?.form {
+                        var headers = service.valores
+                        headers?.append(Headers(nombre: Cons.ordForm, valor: form))
+                        self.callServiceValidate(url, number, action, value: headers!, printResponse, callback)
+                    }else{
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error0
+                        error.responseCode = Cons.error0
+                        error.errorMessage = CustomError.noUrl.errorDescription
+                    }
                 }catch {
                     let error = ErrorResponse()
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.captchaIos(nil), error)
+                    callback(.validarBait(nil), error)
                 }
             }else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                callback(.captchaIos(nil), error)
+                callback(.validarBait(nil), error)
             }
+        }
+    }
+    
+    private func callServiceValidate(_ url: String, _ number: String, _ action: ActionBait, value headers: [Headers], _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        var body : ValidateBaitRequest!
+        switch action{
+        case .portability:
+            body = ValidateBaitRequest(dn: nil, iccid: number, accion: action.rawValue)
+        default:
+            body = ValidateBaitRequest(dn: number, iccid: nil, accion: action.rawValue)
+        }
+        do{
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            let service = Servicio(nombre: "Bait", headers: nil, method: HTTPMethod.post.rawValue, auto: nil, valores: headers, url: url)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let validateResponse = try JSONDecoder().decode(ValidateBaitResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.validarBait(validateResponse), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.validarBait(nil), error)
+                    }
+                }else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.validarBait(nil), error)
+                }
+            }
+        }catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.validarBait(nil), error)
         }
     }
     

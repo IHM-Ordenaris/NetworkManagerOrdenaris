@@ -37,4 +37,6 @@ internal struct Cons {
     static let pListName = "CDN"
     static let uuidPaymentiOS = "b50cc2f484e111ee87cf0242ac120002"
     static let error2 = -2
+    static let error0 = 0
+    static let ordForm = "ordForm"
 }

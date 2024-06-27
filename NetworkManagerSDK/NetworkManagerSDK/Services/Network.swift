@@ -28,8 +28,8 @@ internal struct Network {
         
         guard let urlString = servicio.url, var urlComps = URLComponents(string: urlString) else {
             let error = ErrorResponse()
-            error.statusCode = 0
-            error.responseCode = 0
+            error.statusCode = Cons.error0
+            error.responseCode = Cons.error0
             error.errorMessage = CustomError.noUrl.errorDescription
             completion(nil, error)
             return
@@ -48,8 +48,8 @@ internal struct Network {
         
         guard let url = urlComps.url else {
             let error = ErrorResponse()
-            error.statusCode = 0
-            error.responseCode = 0
+            error.statusCode = Cons.error0
+            error.responseCode = Cons.error0
             error.errorMessage = CustomError.noUrl.errorDescription
             completion(nil, error)
             return
@@ -114,7 +114,7 @@ internal struct Network {
                 return
             }
             
-            print("✅ Responde el servicio GET \(servicio.nombre)")
+            print("✅ Responde el servicio \(servicio.method ?? "") \(servicio.nombre)")
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 DispatchQueue.main.async {

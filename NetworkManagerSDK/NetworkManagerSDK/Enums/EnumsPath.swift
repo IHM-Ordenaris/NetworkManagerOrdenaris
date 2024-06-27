@@ -11,7 +11,7 @@ import Foundation
 public enum ServiceName {
     case pagoSeguro
     case widget
-    case captchaIos
+    case validarBait(numero: String, accion: ActionBait)
     case perfilGaleria
     case perfilCamara
     case escaneo
@@ -41,7 +41,7 @@ public enum ServiceName {
         switch self {
         case .pagoSeguro: return "pagoSeguro"
         case .widget: return "widget"
-        case .captchaIos: return "captchaIos"
+        case .validarBait: return "captchaIos"
         case .perfilGaleria: return "perfilGaleria"
         case .perfilCamara: return "perfilCamara"
         case .escaneo: return "escaneo"
@@ -73,7 +73,7 @@ public enum ServiceName {
 public enum ServiceClass {
     case pagoSeguro(PagoSeguroResponse?)
     case widget(WidgetServiceResponse?)
-    case captchaIos(CaptchaResponse?)
+    case validarBait(ValidateBaitResponse?)
     case perfilGaleria([Headers]?)
     case perfilCamara([Headers]?)
     case escaneo([Headers]?)
