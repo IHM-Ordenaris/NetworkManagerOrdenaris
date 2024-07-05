@@ -34,7 +34,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B67026F92B168801001B36E1"
+               BlueprintIdentifier = "3108E1052C2B4D2800027A89"
                BuildableName = "NetworkManagerSDKTests.xctest"
                BlueprintName = "NetworkManagerSDKTests"
                ReferencedContainer = "container:NetworkManagerSDK.xcodeproj">

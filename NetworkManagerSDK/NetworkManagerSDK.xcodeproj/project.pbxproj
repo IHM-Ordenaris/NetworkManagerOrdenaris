@@ -15,16 +15,17 @@
 		31060B4D2C1B5DC500F8952C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A62B1E6602001B36E1 /* Network.swift */; };
 		31060B4E2C1B5DC900F8952C /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A72B1E6605001B36E1 /* WebService.swift */; };
 		31060B4F2C1B5DCE00F8952C /* StructsObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A52B1E65FA001B36E1 /* StructsObjects.swift */; };
+		3108E1092C2B4D2900027A89 /* NetworkManagerSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3108E1082C2B4D2900027A89 /* NetworkManagerSDKTests.swift */; };
+		3108E10A2C2B4D2900027A89 /* NetworkManagerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */; platformFilter = ios; };
 		31EED2D32C20A7A2006EE293 /* ExtWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EED2D22C20A7A2006EE293 /* ExtWebService.swift */; };
 		7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41C2C13951100558B60 /* ObjectsModel.swift */; };
 		7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */; };
 		B67026F52B168801001B36E1 /* NetworkManagerSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */; };
-		B67026FB2B168801001B36E1 /* NetworkManagerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */; };
 		B67027012B168801001B36E1 /* NetworkManagerSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B67026F32B168801001B36E1 /* NetworkManagerSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B67026FC2B168801001B36E1 /* PBXContainerItemProxy */ = {
+		3108E10B2C2B4D2900027A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B67026E72B168801001B36E1 /* Project object */;
 			proxyType = 1;
@@ -38,13 +39,14 @@
 		31060B462C1A7AE300F8952C /* EnumsGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumsGeneric.swift; sourceTree = "<group>"; };
 		31060B482C1A7AFD00F8952C /* EnumsPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumsPath.swift; sourceTree = "<group>"; };
 		31060B4A2C1A7B2500F8952C /* StructsNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructsNetwork.swift; sourceTree = "<group>"; };
+		3108E1062C2B4D2800027A89 /* NetworkManagerSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkManagerSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3108E1082C2B4D2900027A89 /* NetworkManagerSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerSDKTests.swift; sourceTree = "<group>"; };
 		31EED2D22C20A7A2006EE293 /* ExtWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtWebService.swift; sourceTree = "<group>"; };
 		7AE6D41C2C13951100558B60 /* ObjectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsModel.swift; sourceTree = "<group>"; };
 		7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsBodyParams.swift; sourceTree = "<group>"; };
 		B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkManagerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67026F32B168801001B36E1 /* NetworkManagerSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManagerSDK.h; sourceTree = "<group>"; };
 		B67026F42B168801001B36E1 /* NetworkManagerSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = NetworkManagerSDK.docc; sourceTree = "<group>"; };
-		B67026FA2B168801001B36E1 /* NetworkManagerSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkManagerSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67027A52B1E65FA001B36E1 /* StructsObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructsObjects.swift; sourceTree = "<group>"; };
 		B67027A62B1E6602001B36E1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		B67027A72B1E6605001B36E1 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -52,18 +54,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3108E1032C2B4D2800027A89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3108E10A2C2B4D2900027A89 /* NetworkManagerSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B67026ED2B168801001B36E1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B67026F72B168801001B36E1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B67026FB2B168801001B36E1 /* NetworkManagerSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +80,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		3108E1072C2B4D2900027A89 /* NetworkManagerSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				3108E1082C2B4D2900027A89 /* NetworkManagerSDKTests.swift */,
+			);
+			path = NetworkManagerSDKTests;
+			sourceTree = "<group>";
+		};
 		31EED2D12C20A787006EE293 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				B67026F22B168801001B36E1 /* NetworkManagerSDK */,
+				3108E1072C2B4D2900027A89 /* NetworkManagerSDKTests */,
 				B67026F12B168801001B36E1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */,
-				B67026FA2B168801001B36E1 /* NetworkManagerSDKTests.xctest */,
+				3108E1062C2B4D2800027A89 /* NetworkManagerSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,6 +189,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3108E1052C2B4D2800027A89 /* NetworkManagerSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3108E10D2C2B4D2900027A89 /* Build configuration list for PBXNativeTarget "NetworkManagerSDKTests" */;
+			buildPhases = (
+				3108E1022C2B4D2800027A89 /* Sources */,
+				3108E1032C2B4D2800027A89 /* Frameworks */,
+				3108E1042C2B4D2800027A89 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3108E10C2C2B4D2900027A89 /* PBXTargetDependency */,
+			);
+			name = NetworkManagerSDKTests;
+			productName = NetworkManagerSDKTests;
+			productReference = 3108E1062C2B4D2800027A89 /* NetworkManagerSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B67026EF2B168801001B36E1 /* NetworkManagerSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B67027042B168801001B36E1 /* Build configuration list for PBXNativeTarget "NetworkManagerSDK" */;
@@ -196,24 +225,6 @@
 			productReference = B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B67026F92B168801001B36E1 /* NetworkManagerSDKTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B67027072B168801001B36E1 /* Build configuration list for PBXNativeTarget "NetworkManagerSDKTests" */;
-			buildPhases = (
-				B67026F62B168801001B36E1 /* Sources */,
-				B67026F72B168801001B36E1 /* Frameworks */,
-				B67026F82B168801001B36E1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B67026FD2B168801001B36E1 /* PBXTargetDependency */,
-			);
-			name = NetworkManagerSDKTests;
-			productName = NetworkManagerSDKTests;
-			productReference = B67026FA2B168801001B36E1 /* NetworkManagerSDKTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -221,13 +232,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					B67026EF2B168801001B36E1 = {
-						CreatedOnToolsVersion = 14.3.1;
+					3108E1052C2B4D2800027A89 = {
+						CreatedOnToolsVersion = 15.4;
 					};
-					B67026F92B168801001B36E1 = {
+					B67026EF2B168801001B36E1 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
@@ -246,20 +257,20 @@
 			projectRoot = "";
 			targets = (
 				B67026EF2B168801001B36E1 /* NetworkManagerSDK */,
-				B67026F92B168801001B36E1 /* NetworkManagerSDKTests */,
+				3108E1052C2B4D2800027A89 /* NetworkManagerSDKTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B67026EE2B168801001B36E1 /* Resources */ = {
+		3108E1042C2B4D2800027A89 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B67026F82B168801001B36E1 /* Resources */ = {
+		B67026EE2B168801001B36E1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -269,6 +280,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3108E1022C2B4D2800027A89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3108E1092C2B4D2900027A89 /* NetworkManagerSDKTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B67026EC2B168801001B36E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,24 +307,62 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B67026F62B168801001B36E1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B67026FD2B168801001B36E1 /* PBXTargetDependency */ = {
+		3108E10C2C2B4D2900027A89 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = B67026EF2B168801001B36E1 /* NetworkManagerSDK */;
-			targetProxy = B67026FC2B168801001B36E1 /* PBXContainerItemProxy */;
+			targetProxy = 3108E10B2C2B4D2900027A89 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		3108E10E2C2B4D2900027A89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ordenaris.sdk.NetworkManagerSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3108E10F2C2B4D2900027A89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ordenaris.sdk.NetworkManagerSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		B67027022B168801001B36E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -495,49 +552,18 @@
 			};
 			name = Release;
 		};
-		B67027082B168801001B36E1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.citi.NetworkManagerSDKTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		B67027092B168801001B36E1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.citi.NetworkManagerSDKTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3108E10D2C2B4D2900027A89 /* Build configuration list for PBXNativeTarget "NetworkManagerSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3108E10E2C2B4D2900027A89 /* Debug */,
+				3108E10F2C2B4D2900027A89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B67026EA2B168801001B36E1 /* Build configuration list for PBXProject "NetworkManagerSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -552,15 +578,6 @@
 			buildConfigurations = (
 				B67027052B168801001B36E1 /* Debug */,
 				B67027062B168801001B36E1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B67027072B168801001B36E1 /* Build configuration list for PBXNativeTarget "NetworkManagerSDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B67027082B168801001B36E1 /* Debug */,
-				B67027092B168801001B36E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

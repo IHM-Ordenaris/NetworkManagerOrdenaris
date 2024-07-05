@@ -2,7 +2,7 @@
 //  EnumsPath.swift
 //  NetworkManagerSDK
 //
-//  Created by Desarrollador iOS on 10/06/24.
+//  Created by Javier Picazo Hernandez on 10/06/24.
 //
 
 import Foundation
@@ -27,8 +27,8 @@ public enum ServiceName {
     case cambiarPass(params: PasswordRequest)
     case reestablecerPassword(params: ResetPasswordRequest)
     case registrarCuenta(params: ResetPasswordRequest)
-    case solicitudPIN(params: OTPRequest)
-    case verificarPIN(params: ValidateOtpRequest)
+    case solicitudOtp(params: OTPRequest)
+    case verificarOtp(params: ValidateOtpRequest)
     case consumo(params: MobileHotspotRequest)
     case ofertas
     case ofertasSams
@@ -57,8 +57,8 @@ public enum ServiceName {
         case .cambiarPass: return "cambiarPerfil"
         case .reestablecerPassword: return "reestablecerPassword"
         case .registrarCuenta: return "registrarCuenta"
-        case .solicitudPIN: return "solicitudPIN"
-        case .verificarPIN: return "verificarPIN"
+        case .solicitudOtp: return "solicitudPIN"
+        case .verificarOtp: return "verificarPIN"
         case .consumo: return "consumo3"
         case .ofertas: return "ofertas"
         case .ofertasSams: return "ofertasSams"
@@ -79,18 +79,18 @@ public enum ServiceClass {
     case escaneo([Headers]?)
     case version(Servicio?)
     case listaRecurrentes(RecurrenciasActivasResponse?)
-    case cancelarRecurrente(DefaulResponse?)
+    case cancelarRecurrente(DefaultResponse?)
     case suscripcionPush(Bool)
     case desuscripcionPush(Bool)
     case ofertasInternacionales(RecargaInternacionalResponse?)
-    case eliminacion(DefaulResponse?)
+    case eliminacion(DefaultResponse?)
     case datosUsuario(UsuarioResponse?)
-    case solicitudPIN(DefaulResponse?)
-    case verificarPIN(OTPResponse?)
+    case solicitudOtp(DefaultResponse?)
+    case verificarOtp(OTPResponse?)
     case consumo(MobileHotspotResponse?)
     case ofertas(OffersResponse?)
     case validarImei(ImeiResponse?)
     case solicitudPortabilidad(PortabilityResponse?)
     case redencionTicket(RedencionTicketResponse?)
-    case cerrarSesion(DefaulResponse?)
+    case cerrarSesion(DefaultResponse?)
 }

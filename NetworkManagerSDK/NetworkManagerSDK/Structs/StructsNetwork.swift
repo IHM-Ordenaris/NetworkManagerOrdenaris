@@ -2,7 +2,7 @@
 //  StructsNetworConsswift
 //  NetworkManagerSDK
 //
-//  Created by Desarrollador iOS on 10/06/24.
+//  Created by Javier Picazo Hernandez on 10/06/24.
 //
 
 import Foundation

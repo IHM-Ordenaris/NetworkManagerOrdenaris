@@ -134,9 +134,9 @@ public class WebService {
             self.callServiceUserData(service, params, printResponse, callback)
         case .registrarCuenta(let params):
             self.callServiceUserData(service, params, printResponse, callback)
-        case .solicitudPIN(let params):
+        case .solicitudOtp(let params):
             self.callServiceSendOTP(service, params, printResponse, callback)
-        case .verificarPIN(let params):
+        case .verificarOtp(let params):
             self.callServiceValidateOTP(service, params, printResponse, callback)
         case .consumo(let params):
             self.callServiceMobileHostpot(service, params, printResponse, callback)

@@ -2,7 +2,7 @@
 //  ExtWebService.swift
 //  NetworkManagerSDK
 //
-//  Created by Desarrollador iOS on 17/06/24.
+//  Created by Javier Picazo Hernandez on 17/06/24.
 //
 
 import Foundation
@@ -178,7 +178,7 @@ extension WebService{
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
-                        let cancelarRecurrencia = try JSONDecoder().decode(DefaulResponse.self, from: data)
+                        let cancelarRecurrencia = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.cancelarRecurrente(cancelarRecurrencia), nil)
                     }catch {
@@ -301,7 +301,7 @@ extension WebService{
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
-                        let success = try JSONDecoder().decode(DefaulResponse.self, from: data)
+                        let success = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.eliminacion(success), nil)
                     }catch {
@@ -367,20 +367,20 @@ extension WebService{
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
-                        let success = try JSONDecoder().decode(DefaulResponse.self, from: data)
+                        let success = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.solicitudPIN(success), nil)
+                        callback(.solicitudOtp(success), nil)
                     }catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.solicitudPIN(nil), error)
+                        callback(.solicitudOtp(nil), error)
                     }
                 }else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.solicitudPIN(nil), error)
+                    callback(.solicitudOtp(nil), error)
                 }
             }
         }catch {
@@ -389,7 +389,7 @@ extension WebService{
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.solicitudPIN(nil), error)
+            callback(.solicitudOtp(nil), error)
         }
     }
     
@@ -402,18 +402,18 @@ extension WebService{
                     do {
                         let success = try JSONDecoder().decode(OTPResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.verificarPIN(success), nil)
+                        callback(.verificarOtp(success), nil)
                     }catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.verificarPIN(nil), error)
+                        callback(.verificarOtp(nil), error)
                     }
                 }else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.verificarPIN(nil), error)
+                    callback(.verificarOtp(nil), error)
                 }
             }
         }catch {
@@ -422,7 +422,7 @@ extension WebService{
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.verificarPIN(nil), error)
+            callback(.verificarOtp(nil), error)
         }
     }
     
@@ -578,7 +578,7 @@ extension WebService{
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
-                        let success = try JSONDecoder().decode(DefaulResponse.self, from: data)
+                        let success = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.cerrarSesion(success), nil)
                     }catch {

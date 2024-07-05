@@ -153,7 +153,7 @@ public struct RecurrenciaObj: Decodable {
     public let referencia5: String?
 }
 
-public struct DefaulResponse: Decodable {
+public struct DefaultResponse: Decodable {
     public let code: Int?
     public let success: Bool?
     public let mensaje: String?
