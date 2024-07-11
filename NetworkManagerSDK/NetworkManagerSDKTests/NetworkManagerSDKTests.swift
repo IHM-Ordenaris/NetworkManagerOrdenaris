@@ -53,8 +53,21 @@ final class NetworkManagerSDKTests: XCTestCase {
     
     func testPinBlocked(){
         self.sut.fetchData(target: .solicitudOtp(params: OTPRequest(numero: "5655867467", operacion: .otpRegister))) { response, error in
-            if case .solicitudPIN(let objc) = response {
+            if case .solicitudOtp(let objc) = response {
                 print(objc?.fechaDesbloqueo)
+                print(objc?.success)
+                XCTAssertFalse(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testFetchNumber() {
+        self.sut.fetchData(target: .validarBait(numero: "8952140062592895663", accion: .portability)) { response, error in
+            if case .validarBait(let objc) = response {
+                print(objc)
                 print(objc?.success)
                 XCTAssertFalse(objc?.success ?? false)
                 self.expectetion.fulfill()

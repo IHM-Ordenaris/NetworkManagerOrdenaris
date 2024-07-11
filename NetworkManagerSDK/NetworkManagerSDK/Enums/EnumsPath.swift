@@ -26,7 +26,7 @@ public enum ServiceName {
     case cambiarPerfil(params: PerfilRequest)
     case cambiarPass(params: PasswordRequest)
     case reestablecerPassword(params: ResetPasswordRequest)
-    case registrarCuenta(params: ResetPasswordRequest)
+    case registrarCuenta(params: CompletarRegistro)
     case solicitudOtp(params: OTPRequest)
     case verificarOtp(params: ValidateOtpRequest)
     case consumo(params: MobileHotspotRequest)
