@@ -32,6 +32,7 @@ public enum ServiceName {
     case consumo(params: MobileHotspotRequest)
     case ofertas
     case ofertasSams
+    case asociados
     case validar(imei: String)
     case solicitudPortabilidad(params: PortabilidadElementsRequest)
     case redencionTicket(params: RedencionTicketRequest)
@@ -62,6 +63,7 @@ public enum ServiceName {
         case .consumo: return "consumo3"
         case .ofertas: return "ofertas"
         case .ofertasSams: return "ofertasSams"
+        case .asociados: return "ofertas-asociados"
         case .validar: return "validarImei"
         case .solicitudPortabilidad: return "solicitudPortabilidad"
         case .redencionTicket: return "redencionTicket"

@@ -140,7 +140,7 @@ public class WebService {
             self.callServiceValidateOTP(service, params, printResponse, callback)
         case .consumo(let params):
             self.callServiceMobileHostpot(service, params, printResponse, callback)
-        case .ofertas, .ofertasSams:
+        case .ofertas, .ofertasSams, .asociados:
             self.callServiceOffer(service, printResponse, callback)
         case .validar(let imei):
             self.callServiceValidate(&service, imei: imei, printResponse, callback)

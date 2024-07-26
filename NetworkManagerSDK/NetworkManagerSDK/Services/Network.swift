@@ -104,6 +104,12 @@ internal struct Network {
                         objResponse.data = data
                         let resp = response as! HTTPURLResponse
                         err.statusCode = resp.statusCode
+                        do {
+                            let defaultModel = try JSONDecoder().decode(DefaultResponse.self, from: data)
+                            err.errorMessage = defaultModel.mensaje
+                        } catch {
+                            err.errorMessage = "Lo sentimos, este servicio no está disponible."
+                        }
                         completion(objResponse, err)
                     } else {
                         print("unable to parse response as string")
@@ -167,7 +173,7 @@ internal struct Network {
             let data = try encoder.encode(targets)
             try data.write(to: url)
             return true
-        }catch {
+        } catch {
             print(error.localizedDescription)
             return false
         }
@@ -186,10 +192,10 @@ internal struct Network {
             do {
                 let target = try decoder.decode(Dictionary<String, Servicio>.self, from: data)
                 return target[key.getKey]
-            }catch {
+            } catch {
                 return nil
             }
-        }else {
+        } else {
             return nil
         }
     }

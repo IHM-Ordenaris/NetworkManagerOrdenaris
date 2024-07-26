@@ -77,6 +77,32 @@ final class NetworkManagerSDKTests: XCTestCase {
         self.wait(for: [self.expectetion], timeout: 5)
     }
     
+    func testFetchRecurrencyReload() {
+        self.sut.fetchData(target: .listaRecurrentes(params: RecurrenciasActivasRequest(identificador: "5655889516"))) { response, error in
+            if case .listaRecurrentes(let objc) = response {
+                print(objc)
+                print(objc?.lista?.count)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testFetchSupplies() {
+        self.sut.fetchData(target: .asociados) { response, error in
+            if case .ofertas(let objc) = response {
+                print(objc)
+                print(objc?.lista?.count)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
     override func tearDown() {
         self.sut = nil
         self.expectetion = nil

@@ -19,7 +19,7 @@ extension WebService{
                         let paymentSafe = try JSONDecoder().decode(PagoSeguroResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.pagoSeguro(paymentSafe), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -27,12 +27,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.pagoSeguro(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.pagoSeguro(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -49,7 +49,7 @@ extension WebService{
                     let widgetService = try JSONDecoder().decode(WidgetServiceResponse.self, from: data)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.widget(widgetService), nil)
-                }catch {
+                } catch {
                     let error = ErrorResponse()
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
@@ -57,7 +57,7 @@ extension WebService{
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.widget(nil), error)
                 }
-            }else if let error = failure {
+            } else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 callback(.widget(nil), error)
             }
@@ -74,13 +74,13 @@ extension WebService{
                         var headers = service.valores
                         headers?.append(Headers(nombre: Cons.ordForm, valor: form))
                         self.callServiceValidate(url, number, action, value: headers!, printResponse, callback)
-                    }else{
+                    } else {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error0
                         error.responseCode = Cons.error0
                         error.errorMessage = CustomError.noUrl.errorDescription
                     }
-                }catch {
+                } catch {
                     let error = ErrorResponse()
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
@@ -88,7 +88,7 @@ extension WebService{
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.validarBait(nil), error)
                 }
-            }else if let error = failure {
+            } else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 callback(.validarBait(nil), error)
             }
@@ -113,7 +113,7 @@ extension WebService{
                         let validateResponse = try JSONDecoder().decode(ValidateBaitResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.validarBait(validateResponse), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -121,12 +121,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.validarBait(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.validarBait(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -147,7 +147,7 @@ extension WebService{
                         let recurrencias = try JSONDecoder().decode(RecurrenciasActivasResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.listaRecurrentes(recurrencias), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -155,12 +155,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.listaRecurrentes(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.listaRecurrentes(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -181,7 +181,7 @@ extension WebService{
                         let cancelarRecurrencia = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.cancelarRecurrente(cancelarRecurrencia), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -189,12 +189,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.cancelarRecurrente(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.cancelarRecurrente(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -215,7 +215,7 @@ extension WebService{
                         let success = try JSONDecoder().decode(Dictionary<String, Bool>.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.suscripcionPush(success["success"] ?? false), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -223,12 +223,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.suscripcionPush(false), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.suscripcionPush(false), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -249,7 +249,7 @@ extension WebService{
                         let success = try JSONDecoder().decode(Dictionary<String, Bool>.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.desuscripcionPush(success["success"] ?? false), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -257,12 +257,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.desuscripcionPush(false), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.desuscripcionPush(false), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -279,7 +279,7 @@ extension WebService{
                     let recargaInternacional = try JSONDecoder().decode(RecargaInternacionalResponse.self, from: data)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.ofertasInternacionales(recargaInternacional), nil)
-                }catch {
+                } catch {
                     let error = ErrorResponse()
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
@@ -287,7 +287,7 @@ extension WebService{
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.ofertasInternacionales(nil), error)
                 }
-            }else if let error = failure {
+            } else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 callback(.ofertasInternacionales(nil), error)
             }
@@ -304,7 +304,7 @@ extension WebService{
                         let success = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.eliminacion(success), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -312,12 +312,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.eliminacion(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.eliminacion(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -337,7 +337,7 @@ extension WebService{
                         let userData = try JSONDecoder().decode(UsuarioResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.datosUsuario(userData), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -345,12 +345,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.datosUsuario(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.datosUsuario(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -370,7 +370,7 @@ extension WebService{
                         let success = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.solicitudOtp(success), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -378,12 +378,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.solicitudOtp(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.solicitudOtp(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -403,7 +403,7 @@ extension WebService{
                         let success = try JSONDecoder().decode(OTPResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.verificarOtp(success), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -411,12 +411,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.verificarOtp(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.verificarOtp(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -436,7 +436,7 @@ extension WebService{
                         let success = try JSONDecoder().decode(MobileHotspotResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.consumo(success), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -444,12 +444,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.consumo(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.consumo(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -466,7 +466,7 @@ extension WebService{
                     let widgetService = try JSONDecoder().decode(OffersResponse.self, from: data)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.ofertas(widgetService), nil)
-                }catch {
+                } catch {
                     let error = ErrorResponse()
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
@@ -474,7 +474,7 @@ extension WebService{
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.ofertas(nil), error)
                 }
-            }else if let error = failure {
+            } else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 callback(.ofertas(nil), error)
             }
@@ -489,7 +489,7 @@ extension WebService{
                     let imeiService = try JSONDecoder().decode(ImeiResponse.self, from: data)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.validarImei(imeiService), nil)
-                }catch {
+                } catch {
                     let error = ErrorResponse()
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
@@ -497,7 +497,7 @@ extension WebService{
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.validarImei(nil), error)
                 }
-            }else if let error = failure {
+            } else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                 callback(.validarImei(nil), error)
             }
@@ -515,7 +515,7 @@ extension WebService{
                         let portabilityService = try JSONDecoder().decode(PortabilityResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.solicitudPortabilidad(portabilityService), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -523,12 +523,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.solicitudPortabilidad(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.solicitudPortabilidad(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -548,7 +548,7 @@ extension WebService{
                         let ticketService = try JSONDecoder().decode(RedencionTicketResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.redencionTicket(ticketService), nil)
-                    }catch {
+                    } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
@@ -556,12 +556,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.redencionTicket(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.redencionTicket(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
@@ -589,12 +589,12 @@ extension WebService{
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                         callback(.cerrarSesion(nil), error)
                     }
-                }else if let error = failure {
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.cerrarSesion(nil), error)
                 }
             }
-        }catch {
+        } catch {
             let error = ErrorResponse()
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
