@@ -10,7 +10,7 @@ import Foundation
 extension WebService{
     internal func callServicePaySafe(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         let body = PagoSeguroRequest(uuid: Cons.uuidPaymentiOS)
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -97,13 +97,13 @@ extension WebService{
     
     private func callServiceValidate(_ url: String, _ number: String, _ action: ActionBait, value headers: [Headers], _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         var body : ValidateBaitRequest!
-        switch action{
+        switch action {
         case .portability:
             body = ValidateBaitRequest(dn: nil, iccid: number, accion: action.rawValue)
         default:
             body = ValidateBaitRequest(dn: number, iccid: nil, accion: action.rawValue)
         }
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             let service = Servicio(nombre: "Bait", headers: nil, method: HTTPMethod.post.rawValue, auto: nil, valores: headers, url: url)
@@ -138,7 +138,7 @@ extension WebService{
     
     internal func callServiceRecurrencias(_ service: inout Servicio, _ body: RecurrenciasActivasRequest ,_ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         service.url = service.url?.replacingOccurrences(of: "#canal#", with: Cons.uuidPaymentiOS)
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -172,7 +172,7 @@ extension WebService{
     
     internal func callServiceCancelarRecurrencias(_ service: inout Servicio, _ body: RecurrenciasActivasRequest , _ uuid: String, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         service.url = service.url?.replacingOccurrences(of: "#recurrencia#", with: uuid)
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -204,9 +204,9 @@ extension WebService{
         }
     }
     
-    internal func callServicePush(_ service: Servicio, _ info: InformacionClientePush, printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+    internal func callServicePush(_ service: Servicio, _ info: InformacionClientePush, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         let body = SubscripcionPushRequest(informacion: info)
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -238,9 +238,9 @@ extension WebService{
         }
     }
     
-    internal func callServiceCancelPush(_ service: Servicio, _ info: InformacionClientePush, printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+    internal func callServiceCancelPush(_ service: Servicio, _ info: InformacionClientePush, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         let body = SubscripcionPushRequest(informacion: info)
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -295,7 +295,7 @@ extension WebService{
     }
     
     internal func callServiceDeleteAccount(_ service: Servicio, _ body: EliminacionRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -328,7 +328,7 @@ extension WebService{
     }
     
     internal func callServiceUserData<T>(_ service: Servicio, _ body: T, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) where T: Encodable {
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -361,7 +361,7 @@ extension WebService{
     }
     
     internal func callServiceSendOTP(_ service: Servicio, _ body: OTPRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -394,7 +394,7 @@ extension WebService{
     }
     
     internal func callServiceValidateOTP(_ service: Servicio, _ body: ValidateOtpRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -427,7 +427,7 @@ extension WebService{
     }
     
     internal func callServiceMobileHostpot(_ service: Servicio, _ body: MobileHotspotRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -481,32 +481,42 @@ extension WebService{
         }
     }
     
-    internal func callServiceValidate(_ service: inout Servicio, imei:String, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        service.url = service.url?.appending(imei)
-        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
-            if let result = response, let data = result.data, result.success {
-                do {
-                    let imeiService = try JSONDecoder().decode(ImeiResponse.self, from: data)
-                    self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.validarImei(imeiService), nil)
-                } catch {
-                    let error = ErrorResponse()
-                    error.statusCode = Cons.error2
-                    error.responseCode = Cons.error2
-                    error.errorMessage = CustomError.noData.errorDescription
+    internal func callServiceValidate(_ service: Servicio, _ body: ImeiRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let imeiService = try JSONDecoder().decode(ImeiResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.validarImei(imeiService), nil)
+                    } catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.validarImei(nil), error)
+                    }
+                } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
                     callback(.validarImei(nil), error)
                 }
-            } else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                callback(.validarImei(nil), error)
             }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.validarImei(nil), error)
         }
     }
     
-    internal func callServicePortability(_ service: Servicio, _ info: PortabilidadElementsRequest, printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        let body = PortabilidadRequest(portabilidad: info)
-        do{
+    internal func callServicePortability(_ service: Servicio, _ body: PortabilidadElementsRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        let body = PortabilidadRequest(portabilidad: body)
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -539,7 +549,7 @@ extension WebService{
     }
     
     internal func callServiceTicket(_ service: Servicio, _ body: RedencionTicketRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
@@ -572,7 +582,7 @@ extension WebService{
     }
     
     internal func callServiceLogOut(_ service: Servicio, _ body: LogOutRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        do{
+        do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
             Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in

@@ -73,24 +73,26 @@ public struct OffersResponse: Decodable {
 }
 
 //TODO: Modelo del servicio Portabilidad
+///Atributos de request
+public struct ImeiRequest: Encodable {
+    private let IMEI: String
+    
+    public init(imei: String) {
+        self.IMEI = imei
+    }
+}
+
 ///Atributos de response
 public struct ImeiResponse: Decodable {
-    public let device: Device?
-    public let imei: Imei?
-    public let error: String?
+    public let success: Bool?
+    public let mensaje: String?
+    public let data: ImeiData?
 }
 
-public struct Device: Decodable {
-    public let band28: String?
-    public let brand: String?
-    public let model: String?
-    public let volteCapable: String?
-}
-
-public struct Imei: Decodable {
+public struct ImeiData: Decodable {
     public let blocked: String?
     public let homologated: String?
-    public let imei: String?
+    public let soportaESIM: String?
 }
 
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::

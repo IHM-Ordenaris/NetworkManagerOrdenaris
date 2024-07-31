@@ -117,9 +117,9 @@ public class WebService {
         case let .cancelarRecurrente(phoneNumber, uuid):
             self.callServiceCancelarRecurrencias(&service, phoneNumber, uuid, printResponse, callback)
         case .suscripcionPush(let params):
-            self.callServicePush(service, params, printResponse: printResponse, callback)
+            self.callServicePush(service, params, printResponse, callback)
         case .desuscripcionPush(let params):
-            self.callServiceCancelPush(service, params, printResponse: printResponse, callback)
+            self.callServiceCancelPush(service, params, printResponse, callback)
         case .ofertasInternacionales:
             self.callServiceOfertas(service, printResponse, callback)
         case .eliminacion(let params):
@@ -142,10 +142,10 @@ public class WebService {
             self.callServiceMobileHostpot(service, params, printResponse, callback)
         case .ofertas, .ofertasSams, .asociados:
             self.callServiceOffer(service, printResponse, callback)
-        case .validar(let imei):
-            self.callServiceValidate(&service, imei: imei, printResponse, callback)
+        case .validarImei(let imei):
+            self.callServiceValidate(service, imei, printResponse, callback)
         case .solicitudPortabilidad(let params):
-            self.callServicePortability(service, params, printResponse: printResponse, callback)
+            self.callServicePortability(service, params, printResponse, callback)
         case .redencionTicket(let params):
             self.callServiceTicket(service, params, printResponse, callback)
         case .cerrarSesion(let params):

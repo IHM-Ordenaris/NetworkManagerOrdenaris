@@ -41,9 +41,10 @@ final class NetworkManagerSDKTests: XCTestCase {
     }
     
     func testImei() {
-        self.sut.fetchData(target: .validar(imei: "351073871526101")) { response, error in
+        self.sut.fetchData(target: .validarImei(params: ImeiRequest(imei: "35465091643806"))) { response, error in
             if case .validarImei(let objc) = response {
-                XCTAssertEqual(objc?.imei?.homologated, "HOMOLOGADOS O VOLTE")
+                print(objc)
+                XCTAssertEqual(objc?.data?.homologated, "HOMOLOGADOS O VOLTE")
                 self.expectetion.fulfill()
             }
         }
