@@ -66,7 +66,7 @@ final class NetworkManagerSDKTests: XCTestCase {
     }
     
     func testFetchNumber() {
-        self.sut.fetchData(target: .validarBait(numero: "8952140062592895663", accion: .portability)) { response, error in
+        self.sut.fetchData(target: .validarBait(numero: "8952020018171683669", accion: .portability)) { response, error in
             if case .validarBait(let objc) = response {
                 print(objc)
                 print(objc?.success)

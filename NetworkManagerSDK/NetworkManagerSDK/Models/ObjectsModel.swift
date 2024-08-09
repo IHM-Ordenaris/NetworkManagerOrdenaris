@@ -50,7 +50,7 @@ public struct Oferta: Decodable {
     public let incluye: String?
     public let nombre: String?
     public let offeringid: String?
-    public let pesos: Float?
+    public let pesos: Double?
     public let tipo: Int?
     public let vigencia: String?
 }
@@ -60,7 +60,7 @@ public struct BusquedaInternacional: Decodable {
     public let destinos: [DestinosInternacionales]?
 }
 
-public struct DestinosInternacionales: Decodable {
+public struct DestinosInternacionales: Decodable, Hashable {
     public let nombre: String?
     public let oferta: String?
 }
