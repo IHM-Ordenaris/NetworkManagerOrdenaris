@@ -13,22 +13,10 @@ final class NetworkManagerSDKTests: XCTestCase {
     var expectetion: XCTestExpectation!
 
     override func setUp() {
-        self.sut = WebService(environment: .qa, appVersion: "2.0.10")
+        self.sut = WebService(environment: .pr, appVersion: "2.0.11")
         self.expectetion = self.expectation(description: "Signup Web Service Response Expectetion")
     }
     
-    func testValidateBait() {
-        self.sut.fetchData(target: .validarBait(numero: "7713733729", accion: .login)) { response, error in
-            if case .validarBait(let obc) = response {
-                print(obc)
-                XCTAssertEqual(obc?.status, 0)
-                self.expectetion.fulfill()
-            }
-        }
-        
-        self.wait(for: [self.expectetion], timeout: 5)
-    }
-
     func testLoadConfig() {
         self.sut.loadConfiguration { response, error in
             if let resp = response{
@@ -38,6 +26,41 @@ final class NetworkManagerSDKTests: XCTestCase {
         }
         
         self.wait(for: [self.expectetion], timeout: 2)
+    }
+    
+    func testLogin() {
+        self.sut.fetchData(target: .acceso(params: AccesoRequest(numero: "8143793060", pass: "Test.123"))) { response, error in
+            if case .datosUsuario(let obc) = response {
+                print(obc?.access)
+                XCTAssertTrue(obc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testValidateBait() {
+        self.sut.fetchData(target: .validarBait(numero: "5546638605", accion: .login)) { response, error in
+            if case .validarBait(let obc) = response {
+                print(obc)
+                XCTAssertEqual(obc?.status, 0)
+                self.expectetion.fulfill()
+            }
+        }
+        
+        self.wait(for: [self.expectetion], timeout: 10)
+    }
+    
+    func testSendOTP() {
+        self.sut.fetchData(target: .solicitudOtp(params: OTPRequest(numero: "8143853049", operacion: .otpRegister)), printResponse: true) { response, error in
+            if case .solicitudOtp(let obc) = response{
+                print(obc)
+                XCTAssertTrue(obc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
     }
     
     func testImei() {
@@ -96,6 +119,25 @@ final class NetworkManagerSDKTests: XCTestCase {
             if case .ofertas(let objc) = response {
                 print(objc)
                 print(objc?.lista?.count)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testConsumo() {
+        self.sut.fetchData(target: .consumo(params: MobileHotspotRequest(access: "ASI/w3T974yE9L+OSkWQTrtWZTdAyLJN"))) { response, error in
+            if case .consumo(let objc) = response {
+                let inter = objc?.consumo?.first{
+                    $0.nombre == "datosUsoInternacional"
+                }
+                print(inter)
+                let mb = Double(inter!.mb_totales!) / 1024
+                let divisor = pow(10.0, Double(2))
+                let x = (mb * divisor).rounded()
+                print(x / divisor)
                 XCTAssertTrue(objc?.success ?? false)
                 self.expectetion.fulfill()
             }

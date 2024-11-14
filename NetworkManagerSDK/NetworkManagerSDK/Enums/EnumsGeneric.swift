@@ -58,7 +58,7 @@ internal class ProductService {
         var path: String {
             switch self {
             case .CDN:
-                return "/api/core/servicio/resources/app/cdn2"
+                return "/api/core/servicio/resources/app/v3/get-cdn"
             case .file(let name): return "\(name.lowercased()).plist"
             }
         }
