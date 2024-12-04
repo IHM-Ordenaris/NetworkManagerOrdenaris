@@ -31,6 +31,7 @@ public enum ActionBait: String {
     case signup = "bait_registro"
     case recharge = "bait_recarga"
     case portability = "bait_portabilidad"
+    case reset = "bait_recuperacion"
 }
 
 /// Clases con propiedades y funciones para obtener la urls de consultar
@@ -58,7 +59,7 @@ internal class ProductService {
         var path: String {
             switch self {
             case .CDN:
-                return "/api/core/servicio/resources/app/v3/get-cdn"
+                return "/api/core/servicio/resources/app/v10/get-cdn"
             case .file(let name): return "\(name.lowercased()).plist"
             }
         }
