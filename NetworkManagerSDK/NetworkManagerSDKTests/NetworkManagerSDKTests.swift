@@ -13,7 +13,7 @@ final class NetworkManagerSDKTests: XCTestCase {
     var expectetion: XCTestExpectation!
 
     override func setUp() {
-        self.sut = WebService(environment: .pr, appVersion: "2.0.11")
+        self.sut = WebService(environment: .qa, appVersion: "2.0.11")
         self.expectetion = self.expectation(description: "Signup Web Service Response Expectetion")
     }
     
@@ -29,9 +29,9 @@ final class NetworkManagerSDKTests: XCTestCase {
     }
     
     func testLogin() {
-        self.sut.fetchData(target: .acceso(params: AccesoRequest(numero: "8143793060", pass: "Test.123"))) { response, error in
+        self.sut.fetchData(target: .acceso(params: AccesoRequest(numero: "5646671491", pass: "Qwerty1*"))) { response, error in
             if case .datosUsuario(let obc) = response {
-                print(obc?.access)
+                print(obc)
                 XCTAssertTrue(obc?.success ?? false)
                 self.expectetion.fulfill()
             }
@@ -41,7 +41,7 @@ final class NetworkManagerSDKTests: XCTestCase {
     }
     
     func testValidateBait() {
-        self.sut.fetchData(target: .validarBait(numero: "5546638605", accion: .login)) { response, error in
+        self.sut.fetchData(target: .validarBait(numero: "5646671491", accion: .login)) { response, error in
             if case .validarBait(let obc) = response {
                 print(obc)
                 XCTAssertEqual(obc?.status, 0)
@@ -143,6 +143,39 @@ final class NetworkManagerSDKTests: XCTestCase {
             }
         }
         
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testUpdateDataProfile() {
+        self.sut.fetchData(target: .cambiarPerfil(params: PerfilRequest(access: "AOIlioyz5TVdhisiULOrulmQBEvocJ1P", nombre: "Pruebas iOS Rules", email: "ios_example@mail.com", permiso: 1, foto: ""))) { response, error in
+            if case .datosUsuario(let objc) = response {
+                print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testRegisterRequestChangeSim() {
+        self.sut.fetchData(target: .solicitudReemplazoSim(params: ReplaceSimRequest(dn: "5646671491", iccid: "8952140063007187175", email: "qwerty@qwerty.com", reason: .lostOrStolen))) { response, error in
+            if case .solicitudReemplazoSim(let objc) = response {
+                print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testServicesAreaCodeChange() {
+        self.sut.fetchData(target: .listaCodigoArea) { response, error in
+            if case .listaCodigoArea(let objc) = response {
+                print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
         self.wait(for: [self.expectetion], timeout: 5)
     }
     

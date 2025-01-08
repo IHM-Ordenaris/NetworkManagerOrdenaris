@@ -63,16 +63,16 @@ internal struct Network {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
-        if let headers = servicio.valores {
+        if let headers = servicio.headers {
             for newheader in headers {
-                request.setValue(newheader.valor, forHTTPHeaderField: newheader.nombre)
+                request.setValue(newheader.value, forHTTPHeaderField: newheader.name)
             }
         }
 //        request.httpShouldHandleCookies = false
         request.cachePolicy = .reloadIgnoringLocalCacheData
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
-                print("❌ Error en servicio \(servicio.nombre)")
+                print("❌ Error en servicio \(servicio.name)")
                 let err: ErrorResponse = ErrorResponse()
                 switch error {
                 case .some(let error as NSError) where error.code == NSURLErrorNotConnectedToInternet: // showOffline
@@ -96,17 +96,18 @@ internal struct Network {
             guard let responseG = response as? HTTPURLResponse, 200 ... 299  ~= responseG.statusCode else {
                 DispatchQueue.main.async {
                     let err = ErrorResponse()
-                    print("❌ Error en servicio \(servicio.nombre)")
+                    print("❌ Error en servicio \(servicio.name)")
                     if let responseString = String(data: data, encoding: .utf8) {
                         print("::::::::: RESPONSE - String :::::::::\n \(responseString)")
                         var objResponse = CustomResponseObject()
                         objResponse.success = false
                         objResponse.data = data
+                        objResponse.headers = nil
                         let resp = response as! HTTPURLResponse
                         err.statusCode = resp.statusCode
                         do {
                             let defaultModel = try JSONDecoder().decode(DefaultResponse.self, from: data)
-                            err.errorMessage = defaultModel.mensaje
+                            err.errorMessage = defaultModel.mensaje ?? defaultModel.message
                         } catch {
                             err.errorMessage = "Lo sentimos, este servicio no está disponible."
                         }
@@ -120,7 +121,7 @@ internal struct Network {
                 return
             }
             
-            print("✅ Responde el servicio \(servicio.method ?? "") \(servicio.nombre)")
+            print("✅ Responde el servicio \(servicio.method ?? "") \(servicio.name)")
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 DispatchQueue.main.async {
@@ -130,6 +131,8 @@ internal struct Network {
                     var objResponse = CustomResponseObject()
                     objResponse.success = true
                     objResponse.data = data
+                    objResponse.headers = responseG.allHeaderFields
+                    
                     completion(objResponse, nil)
                 }
             } else {

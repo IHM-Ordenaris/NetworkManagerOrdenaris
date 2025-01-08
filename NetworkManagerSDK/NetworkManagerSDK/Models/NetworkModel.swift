@@ -10,22 +10,20 @@ import Foundation
 // MARK: - :::: Objetos REQUEST ::::
 public typealias CallbackResponseLoadSetting = (_ response: Bool?, _ error: ErrorResponse?) -> ()
 public struct MainServicio: Codable{
-    let nombre: String
-    let servicios: [Servicio]
+    let name: String
+    let services: [Servicio]
 }
 
 public struct Servicio: Codable {
-    internal let nombre: String
-    public let headers: Bool?
+    internal let name: String
     internal let method: String?
-    internal let auto: Bool?
-    public var valores: [Headers]?
+    public var headers: [Headers]?
     internal var url: String?
 }
 
 public struct Headers: Codable {
-    public let nombre: String
-    public let valor: String
+    public let name: String
+    public let value: String
 }
 
 // MARK: - :::: Objetos response SUCCESS ::::
@@ -35,6 +33,7 @@ internal struct CustomResponseObject {
     var success: Bool = false
     var data: Data?
     var responseStr: String?
+    var headers: [AnyHashable : Any]?
 }
 
 // MARK: - :::: Objetos response ERROR ::::

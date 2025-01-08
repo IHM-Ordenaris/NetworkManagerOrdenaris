@@ -65,37 +65,6 @@ extension WebService{
     }
     
     internal func callServiceValidateBait(_ service: Servicio, _ number: String, _ action: ActionBait, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
-            if let result = response, let data = result.data, result.success {
-                do {
-                    let captcha = try JSONDecoder().decode(CaptchaResponse.self, from: data)
-                    self.callbackServices?(ServicesPlugInResponse(.finish))
-                    if let url = captcha.informacion?.url, let form = captcha.informacion?.form {
-                        var headers = service.valores
-                        headers?.append(Headers(nombre: Cons.ordForm, valor: form))
-                        self.callServiceValidate(url, number, action, value: headers!, printResponse, callback)
-                    } else {
-                        let error = ErrorResponse()
-                        error.statusCode = Cons.error0
-                        error.responseCode = Cons.error0
-                        error.errorMessage = CustomError.noUrl.errorDescription
-                    }
-                } catch {
-                    let error = ErrorResponse()
-                    error.statusCode = Cons.error2
-                    error.responseCode = Cons.error2
-                    error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.validarBait(nil), error)
-                }
-            } else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                callback(.validarBait(nil), error)
-            }
-        }
-    }
-    
-    private func callServiceValidate(_ url: String, _ number: String, _ action: ActionBait, value headers: [Headers], _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         var body : ValidateBaitRequest!
         switch action {
         case .portability:
@@ -106,8 +75,14 @@ extension WebService{
         do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
-            let service = Servicio(nombre: "Bait", headers: nil, method: HTTPMethod.post.rawValue, auto: nil, valores: headers, url: url)
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+            var serviceUpdate = service
+            if let indexFormHeader = serviceUpdate.headers?.firstIndex(where: {
+                $0.name == Cons.ordForm
+            }) {
+                serviceUpdate.headers?.remove(at: indexFormHeader)
+                serviceUpdate.headers?.append(Headers(name: Cons.ordForm, value: Cons.ordFormValue))
+            }
+            Network.callNetworking(servicio: serviceUpdate, params: bodyData, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
                         let validateResponse = try JSONDecoder().decode(ValidateBaitResponse.self, from: data)
@@ -610,7 +585,142 @@ extension WebService{
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.eliminacion(nil), error)
+            callback(.cerrarSesion(nil), error)
+        }
+    }
+    
+    internal func callServiceReplaceSim(_ service: Servicio, _ body: ReplaceSimRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(ReplaceSimResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.solicitudReemplazoSim(success), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.solicitudReemplazoSim(nil), error)
+                    }
+                } else if let error = failure {
+                    if let statusCode = error.statusCode, 400...499 ~= statusCode {
+                        callback(.solicitudReemplazoSim(nil), error)
+                    } else {
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.solicitudReemplazoSim(nil), error)
+                    }
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.solicitudReemplazoSim(nil), error)
+        }
+    }
+    
+    internal func callServiceSendOtpReplaceSim(_ service: Servicio, _ body: SendSimOtpRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(ReplaceSimResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.enviarOtpReemplazoSim(body: success, headers: result.headers), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
+                    }
+                } else if let error = failure {
+                    if let statusCode = error.statusCode, 400...499 ~= statusCode {
+                        callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
+                    } else {
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
+                    }
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
+        }
+    }
+    
+    internal func callServiceValidateOtpReplaceSim(_ service: Servicio, _ body: ValidateSimOtpRequest, uuidHeader: String, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            var contentService = service
+            contentService.headers?.append(Headers(name: Cons.uuidHeader, value: uuidHeader))
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(ReplaceSimResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.validarOtpReemplazoSim(success), nil)
+                    }catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.validarOtpReemplazoSim(nil), error)
+                    }
+                } else if let error = failure {
+                    if let statusCode = error.statusCode, 400...499 ~= statusCode {
+                        callback(.validarOtpReemplazoSim(nil), error)
+                    } else {
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.validarOtpReemplazoSim(nil), error)
+                    }
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.validarOtpReemplazoSim(nil), error)
+        }
+    }
+    
+    internal func callServiceCodeAreaList(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let areaCodes = try JSONDecoder().decode(AreaCodeResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.listaCodigoArea(areaCodes), nil)
+                } catch {
+                    let error = ErrorResponse()
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
+                    error.errorMessage = CustomError.noData.errorDescription
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.listaCodigoArea(nil), error)
+                }
+            } else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                callback(.listaCodigoArea(nil), error)
+            }
         }
     }
 }

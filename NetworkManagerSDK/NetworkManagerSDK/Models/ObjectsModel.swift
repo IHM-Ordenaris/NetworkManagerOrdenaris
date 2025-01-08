@@ -95,6 +95,27 @@ public struct ImeiData: Decodable {
     public let soportaESIM: String?
 }
 
+//TODO: Modelo del servicio Lista Códigos de Área
+///Atributos de response
+public struct AreaCodeResponse: Decodable {
+    public let success: Bool?
+    public let lista: [State]?
+}
+
+public struct State: Decodable {
+    public let esatdo: String?
+    public let municipios: [City]?
+}
+
+public struct City: Decodable {
+    public let municipio: String?
+    public let nirs: [AreaCode]?
+}
+
+public struct AreaCode: Decodable {
+    public let numero: String?
+}
+
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
 //TODO: Modelo del servicio Pago Seguro
 ///Atributos de request
@@ -107,23 +128,6 @@ public struct PagoSeguroResponse: Decodable {
     public let success: Bool?
     public let ordCliente: String?
     public let llavero: String?
-}
-
-//TODO: Modelo del servicio de Captcha
-///Atributos de response
-public struct CaptchaResponse: Decodable {
-    public let success: Bool?
-    public let informacion: Captcha?
-}
-
-public struct Captcha: Decodable {
-    public let url: String?
-    public let publico: String?
-    public let form: String?
-    public let activo: Bool?
-    //public let token: String?
-    //public let servicio: String?
-    //public let accion: String?
 }
 
 //TODO: Modelo del servicio de Lista y Cancelar Recurrencias
@@ -159,6 +163,7 @@ public struct DefaultResponse: Decodable {
     public let code: Int?
     public let success: Bool?
     public let mensaje: String?
+    public let message: String?
     public let fechaDesbloqueo: String?
 }
 
@@ -228,9 +233,6 @@ public struct UsuarioResponse: Decodable {
     public let nombre: String?
     public let email: String?
     public let mensaje: String?
-    public let ssoLogin: Bool?
-    public let isBait: Bool?
-    public let isSsoInvite: Bool?
 }
 
 //TODO: Modelo del servicio de Update Perfil
@@ -423,7 +425,7 @@ public struct RedencionTicketRequest: Encodable {
     private let total: String
     private let base64: String
     
-    public init( access: String, numero_ticket: String, comercio: String, total: String, base64: String) {
+    public init(access: String, numero_ticket: String, comercio: String, total: String, base64: String) {
         self.access = access
         self.numero_ticket = numero_ticket
         self.comercio = comercio
@@ -466,6 +468,42 @@ public struct ValidateBaitResponse: Decodable {
     public let dn: String?
 }
 
-// MARK: - ⚠️ typealias & Objects PUT ::::::::::::::::
+//TODO: Modelo del servicio de Reemplazo de SIM
+///Atributos de request
+public struct ReplaceSimRequest: Encodable {
+    private let dn: String
+    private let iccid: String
+    private let email: String
+    private let reason: Int
+    
+    init(dn: String, iccid: String, email: String, reason: RemplaceSimBait) {
+        self.dn = dn
+        self.iccid = iccid
+        self.email = email
+        self.reason = reason.rawValue
+    }
+}
+
+///Atributos de response
+public struct ReplaceSimResponse: Decodable {
+    public let success: Bool?
+    public let message: String?
+    public let uuid: String?
+}
+
+//TODO: Modelo del servicio de Reemplazo de SIM - Envio de OTP
+///Atributos de request
+public struct SendSimOtpRequest: Encodable {
+    public let dn: String
+}
+
+//TODO: Modelo del servicio de Reemplazo de SIM - Validar OTP
+///Atributos de request
+public struct ValidateSimOtpRequest: Encodable {
+    public let dn: String
+    public let code: String
+}
+
+// MARK: - ⚠️ typealias & Objects PUT/PATCH ::::::::::::::::
 
 // MARK: - ⚠️ typealias & Objects DELETE ::::::::::::::::

@@ -39,4 +39,6 @@ internal struct Cons {
     static let error2 = -2
     static let error0 = 0
     static let ordForm = "ordForm"
+    static let ordFormValue = "19aaf7e82b0d11eea85000155d0a1e12"
+    static let uuidHeader = "x-ord-crsf"
 }

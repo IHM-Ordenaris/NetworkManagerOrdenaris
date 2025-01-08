@@ -15,8 +15,8 @@ public class WebService {
     public var callbackServices: ((ServicesPlugInResponse) -> Void)?
     private var environment: Environment
     var headers = [
-        Headers(nombre: Cons.origen, valor: Cons.origenValue),
-        Headers(nombre: Cons.origin, valor: Cons.origenValue)
+        Headers(name: Cons.origen, value: Cons.origenValue),
+        Headers(name: Cons.origin, value: Cons.origenValue)
     ]
     
     /// Inicializador
@@ -25,7 +25,7 @@ public class WebService {
     ///   - appVersion: Versión de compilcación de la app
     public init(environment: Environment = .pr, appVersion: String) {
         self.environment = environment
-        self.headers.append(Headers(nombre: Cons.app, valor: appVersion))
+        self.headers.append(Headers(name: Cons.app, value: appVersion))
     }
     
     // MARK: - ⚠️ Métodos genericos ::::::::::::::::
@@ -36,16 +36,16 @@ public class WebService {
     public func loadConfiguration(printResponse: Bool = false, callback: @escaping CallbackResponseLoadSetting) {
         self.callbackServices?(ServicesPlugInResponse(.start))
         var headersCopy = self.headers
-        headersCopy.append(Headers(nombre: Cons.ordServicio, valor: Cons.ordServicioValue))
-        let service = Servicio(nombre: "CDN", headers: true, method: HTTPMethod.get.rawValue, auto: nil, valores: headersCopy, url: ProductService.Endpoint.CDN(environment: self.environment).url)
+        headersCopy.append(Headers(name: Cons.ordServicio, value: Cons.ordServicioValue))
+        let service = Servicio(name: "CDN", method: HTTPMethod.get.rawValue, headers: headersCopy, url: ProductService.Endpoint.CDN(environment: self.environment).url)
         Network.callNetworking(servicio: service, params: ["rnd": Date().timeIntervalSinceReferenceDate.description], printResponse) { response, failure in
             if let result = response, let data = result.data, result.success {
                 do {
                     let services = try JSONDecoder().decode([MainServicio].self, from: data)
                     var targets: Dictionary<String, Servicio> = Dictionary<String, Servicio>()
                     for target in services{
-                        target.servicios.forEach {
-                            targets[$0.nombre] = $0
+                        target.services.forEach {
+                            targets[$0.name] = $0
                         }
                     }
                     if Network.setConfigurationFile(name: Cons.pListName, targets) {
@@ -91,10 +91,10 @@ public class WebService {
             return
         }
         
-        if let valores = service.valores, let isHeaders = service.headers, isHeaders, !valores.isEmpty{
-            service.valores!.append(contentsOf: self.headers)
+        if let headers = service.headers, !headers.isEmpty{
+            service.headers!.append(contentsOf: self.headers)
         }else{
-            service.valores = self.headers
+            service.headers = self.headers
         }
         
         switch target {
@@ -105,11 +105,11 @@ public class WebService {
         case let .validarBait(number, action):
             self.callServiceValidateBait(service, number, action, printResponse, callback)
         case .perfilGaleria:
-            callback(.perfilGaleria(service.valores), nil)
+            callback(.perfilGaleria(service.headers), nil)
         case .perfilCamara:
-            callback(.perfilCamara(service.valores), nil)
+            callback(.perfilCamara(service.headers), nil)
         case .escaneo:
-            callback(.escaneo(service.valores), nil)
+            callback(.escaneo(service.headers), nil)
         case .version:
             callback(.version(service), nil)
         case .listaRecurrentes(let params):
@@ -150,6 +150,14 @@ public class WebService {
             self.callServiceTicket(service, params, printResponse, callback)
         case .cerrarSesion(let params):
             self.callServiceLogOut(service, params, printResponse, callback)
+        case .solicitudReemplazoSim(let params):
+            self.callServiceReplaceSim(service, params, printResponse, callback)
+        case .enviarOtpReemplazoSim(let params):
+            self.callServiceSendOtpReplaceSim(service, params, printResponse, callback)
+        case let .validarOtpReemplazoSim(params, uuid):
+            self.callServiceValidateOtpReplaceSim(service, params, uuidHeader: uuid, printResponse, callback)
+        case .listaCodigoArea:
+            self.callServiceCodeAreaList(service, printResponse, callback)
         }
     }
 }

@@ -32,6 +32,13 @@ public enum ActionBait: String {
     case recharge = "bait_recarga"
     case portability = "bait_portabilidad"
     case reset = "bait_recuperacion"
+    case nir = "bait_nir"
+}
+
+/// Lista de propiedades con los motivos para solicitar un reemplazo de SIM
+public enum RemplaceSimBait: Int {
+    case portability = 1
+    case lostOrStolen = 2
 }
 
 /// Clases con propiedades y funciones para obtener la urls de consultar
@@ -59,7 +66,7 @@ internal class ProductService {
         var path: String {
             switch self {
             case .CDN:
-                return "/api/core/servicio/resources/app/v10/get-cdn"
+                return "/api/core/servicio/resources/app/v20/get-cdn"
             case .file(let name): return "\(name.lowercased()).plist"
             }
         }
@@ -93,4 +100,5 @@ extension CustomError {
 public enum OTPService: String {
     case otpRegister = "pin_webv2"
     case otpPassword = "recuperacionv2"
+    case otpNir = "validar_pin"
 }

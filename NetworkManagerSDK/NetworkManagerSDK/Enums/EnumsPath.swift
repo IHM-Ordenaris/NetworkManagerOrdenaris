@@ -37,37 +37,45 @@ public enum ServiceName {
     case solicitudPortabilidad(params: PortabilidadElementsRequest)
     case redencionTicket(params: RedencionTicketRequest)
     case cerrarSesion(params: LogOutRequest)
+    case solicitudReemplazoSim(params: ReplaceSimRequest)
+    case enviarOtpReemplazoSim(params: SendSimOtpRequest)
+    case validarOtpReemplazoSim(params: ValidateSimOtpRequest, uuidOtp: String)
+    case listaCodigoArea
     
     var getKey: String {
         switch self {
-        case .pagoSeguro: return "pagoSeguro"
+        case .pagoSeguro: return "securePayment"
         case .widget: return "widget"
-        case .validarBait: return "captchaIos"
-        case .perfilGaleria: return "perfilGaleria"
-        case .perfilCamara: return "perfilCamara"
-        case .escaneo: return "escaneo"
-        case .version: return "version"
-        case .listaRecurrentes: return "listaRecurrentes"
-        case .cancelarRecurrente: return "cancelarRecurrente"
-        case .suscripcionPush: return "suscripcionPush"
-        case .desuscripcionPush: return "desuscripcionPush"
-        case .ofertasInternacionales: return "ofertasInternacionales"
-        case .eliminacion: return "eliminacion"
-        case .acceso: return "acceso"
-        case .cambiarPerfil: return "cambiarPerfil"
-        case .cambiarPass: return "cambiarPerfil"
-        case .reestablecerPassword: return "reestablecerPassword"
-        case .registrarCuenta: return "registrarCuenta"
-        case .solicitudOtp: return "solicitudPIN"
-        case .verificarOtp: return "verificarPIN"
-        case .consumo: return "consumo3"
-        case .ofertas: return "ofertas"
-        case .ofertasSams: return "ofertasSams"
-        case .asociados: return "ofertas-asociados"
-        case .validarImei: return "validacion-imei"
-        case .solicitudPortabilidad: return "solicitudPortabilidad"
-        case .redencionTicket: return "redencionTicket"
-        case .cerrarSesion: return "cerrarSesion"
+        case .validarBait: return "validateProfile"
+        case .perfilGaleria: return "permissionGallery"
+        case .perfilCamara: return "permissionCamera"
+        case .escaneo: return "permissionCamera"
+        case .version: return "version-ios"
+        case .listaRecurrentes: return "listRecurrences"
+        case .cancelarRecurrente: return "cancelRecurrence"
+        case .suscripcionPush: return "pushSubscription"
+        case .desuscripcionPush: return "pushUnsuscribe"
+        case .ofertasInternacionales: return "internationalOffers"
+        case .eliminacion: return "deleteAccount"
+        case .acceso: return "login"
+        case .cambiarPerfil: return "updateAccount"
+        case .cambiarPass: return "updateAccount"
+        case .reestablecerPassword: return "recoveryPassword"
+        case .registrarCuenta: return "signup"
+        case .solicitudOtp: return "requestPIN"
+        case .verificarOtp: return "verifyPIN"
+        case .consumo: return "consumption"
+        case .ofertas: return "offers"
+        case .ofertasSams: return "packagesOffers"
+        case .asociados: return "partnerOffers"
+        case .validarImei: return "imeiValidations"
+        case .solicitudPortabilidad: return "portability"
+        case .redencionTicket: return "redeemTicket"
+        case .cerrarSesion: return "logout"
+        case .solicitudReemplazoSim: return "registerRequest"
+        case .enviarOtpReemplazoSim: return "sendOTP"
+        case .validarOtpReemplazoSim: return "validateOTP"
+        case .listaCodigoArea: return "listCodes"
         }
     }
 }
@@ -95,4 +103,8 @@ public enum ServiceClass {
     case solicitudPortabilidad(PortabilityResponse?)
     case redencionTicket(RedencionTicketResponse?)
     case cerrarSesion(DefaultResponse?)
+    case solicitudReemplazoSim(ReplaceSimResponse?)
+    case enviarOtpReemplazoSim(body: ReplaceSimResponse?, headers: [AnyHashable: Any]?)
+    case validarOtpReemplazoSim(ReplaceSimResponse?)
+    case listaCodigoArea(AreaCodeResponse?)
 }
