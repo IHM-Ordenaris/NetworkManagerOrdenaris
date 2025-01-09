@@ -317,8 +317,9 @@ public struct OTPRequest: Encodable {
     }
 }
 
+///Atributos de request Validar OTP
 public struct ValidateOtpRequest: Encodable {
-    private let operacion: String = "validar_pin"
+    private let operacion: String = OTPService.otpValidate.rawValue
     private let numero: String
     private let pin: String
     
@@ -491,17 +492,33 @@ public struct ReplaceSimResponse: Decodable {
     public let uuid: String?
 }
 
-//TODO: Modelo del servicio de Reemplazo de SIM - Envio de OTP
-///Atributos de request
+//TODO: Modelo del servicio de Reemplazo de SIM
+///Atributos de request  - Envio de OTP
 public struct SendSimOtpRequest: Encodable {
     public let dn: String
 }
 
-//TODO: Modelo del servicio de Reemplazo de SIM - Validar OTP
-///Atributos de request
+///Atributos de request - Validar OTP
 public struct ValidateSimOtpRequest: Encodable {
     public let dn: String
     public let code: String
+}
+
+//TODO: Modelo del servicio de cambio de código de área
+///Atributos de request
+public struct UpdateNirRequest: Encodable {
+    public let nir: String
+    public let numero: String
+    internal let operacion: String = "confirmacion_nir"
+    internal let origen: String = "ios"
+    public let uuid: String
+}
+
+///Atributos de response
+public struct UpdateNirResponse: Decodable {
+    public let success: Bool?
+    public let detalle: String?
+    public let idusuario: Int?
 }
 
 // MARK: - ⚠️ typealias & Objects PUT/PATCH ::::::::::::::::

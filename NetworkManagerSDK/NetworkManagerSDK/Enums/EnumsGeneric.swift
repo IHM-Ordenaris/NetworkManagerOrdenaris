@@ -100,5 +100,6 @@ extension CustomError {
 public enum OTPService: String {
     case otpRegister = "pin_webv2"
     case otpPassword = "recuperacionv2"
-    case otpNir = "validar_pin"
+    case otpRequestNir = "generar_pin"
+    case otpValidate = "validar_pin"
 }

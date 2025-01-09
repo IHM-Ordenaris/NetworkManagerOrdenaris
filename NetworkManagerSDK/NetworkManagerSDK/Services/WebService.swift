@@ -158,6 +158,12 @@ public class WebService {
             self.callServiceValidateOtpReplaceSim(service, params, uuidHeader: uuid, printResponse, callback)
         case .listaCodigoArea:
             self.callServiceCodeAreaList(service, printResponse, callback)
+        case .enviarOtpNir(let params):
+            self.callServiceSendOtpNir(service, params, printResponse, callback)
+        case .validarOtpNir(let params):
+            self.callServiceValidateOTPNir(service, params, printResponse, callback)
+        case .cambiarNir(let params):
+            self.callServiceUpdateNir(service, params, printResponse, callback)
         }
     }
 }

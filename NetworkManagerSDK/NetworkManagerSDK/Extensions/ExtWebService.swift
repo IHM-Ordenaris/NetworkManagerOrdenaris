@@ -723,4 +723,103 @@ extension WebService{
             }
         }
     }
+    
+    internal func callServiceSendOtpNir(_ service: Servicio, _ body: OTPRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(DefaultResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.enviartOtpNir(success), nil)
+                    } catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.enviartOtpNir(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.enviartOtpNir(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.enviartOtpNir(nil), error)
+        }
+    }
+    
+    internal func callServiceValidateOTPNir(_ service: Servicio, _ body: ValidateOtpRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(OTPResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.validarOtpNir(success), nil)
+                    } catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.validarOtpNir(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.validarOtpNir(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.validarOtpNir(nil), error)
+        }
+    }
+    
+    internal func callServiceUpdateNir(_ service: Servicio, _ body: UpdateNirRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(UpdateNirResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.cambiarNir(success), nil)
+                    } catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        callback(.cambiarNir(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    callback(.cambiarNir(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            callback(.cambiarNir(nil), error)
+        }
+    }
 }

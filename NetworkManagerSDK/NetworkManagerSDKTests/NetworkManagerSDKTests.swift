@@ -169,8 +169,8 @@ final class NetworkManagerSDKTests: XCTestCase {
     }
     
     func testServicesAreaCodeChange() {
-        self.sut.fetchData(target: .listaCodigoArea) { response, error in
-            if case .listaCodigoArea(let objc) = response {
+        self.sut.fetchData(target: /*.validarOtpNir(params: ValidateOtpRequest(numero: "9372847584", pin: "480355"))*/ .cambiarNir(params: UpdateNirRequest(nir: "663", numero: "9372847584", uuid: "53457a21-0145-4e3d-96b8-5160d06dff36"))) { response, error in
+            if case .cambiarNir(let objc) = response {
                 print(objc)
                 XCTAssertTrue(objc?.success ?? false)
                 self.expectetion.fulfill()

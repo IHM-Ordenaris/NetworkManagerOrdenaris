@@ -41,6 +41,9 @@ public enum ServiceName {
     case enviarOtpReemplazoSim(params: SendSimOtpRequest)
     case validarOtpReemplazoSim(params: ValidateSimOtpRequest, uuidOtp: String)
     case listaCodigoArea
+    case enviarOtpNir(params: OTPRequest)
+    case validarOtpNir(params: ValidateOtpRequest)
+    case cambiarNir(params: UpdateNirRequest)
     
     var getKey: String {
         switch self {
@@ -73,9 +76,12 @@ public enum ServiceName {
         case .redencionTicket: return "redeemTicket"
         case .cerrarSesion: return "logout"
         case .solicitudReemplazoSim: return "registerRequest"
-        case .enviarOtpReemplazoSim: return "sendOTP"
-        case .validarOtpReemplazoSim: return "validateOTP"
+        case .enviarOtpReemplazoSim: return "sendOTP_reeplace"
+        case .validarOtpReemplazoSim: return "validateOTP_reeplace"
         case .listaCodigoArea: return "listCodes"
+        case .enviarOtpNir: return "sendOTP_NIR"
+        case .validarOtpNir: return "validateOTP_NIR"
+        case .cambiarNir: return "updateNIR"
         }
     }
 }
@@ -107,4 +113,7 @@ public enum ServiceClass {
     case enviarOtpReemplazoSim(body: ReplaceSimResponse?, headers: [AnyHashable: Any]?)
     case validarOtpReemplazoSim(ReplaceSimResponse?)
     case listaCodigoArea(AreaCodeResponse?)
+    case enviartOtpNir(DefaultResponse?)
+    case validarOtpNir(OTPResponse?)
+    case cambiarNir(UpdateNirResponse?)
 }
