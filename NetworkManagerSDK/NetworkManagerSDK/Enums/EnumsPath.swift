@@ -113,7 +113,7 @@ public enum ServiceClass {
     case enviarOtpReemplazoSim(body: ReplaceSimResponse?, headers: [AnyHashable: Any]?)
     case validarOtpReemplazoSim(ReplaceSimResponse?)
     case listaCodigoArea(AreaCodeResponse?)
-    case enviartOtpNir(DefaultResponse?)
+    case enviarOtpNir(DefaultResponse?)
     case validarOtpNir(OTPResponse?)
     case cambiarNir(UpdateNirResponse?)
 }

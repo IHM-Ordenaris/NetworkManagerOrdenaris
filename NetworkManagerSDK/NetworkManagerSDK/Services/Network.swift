@@ -84,9 +84,9 @@ internal struct Network {
                     err.errorMessage = error.localizedDescription
                     completion(nil, err)
                 case .some(let error as NSError): // showGenericError
-                    completion(nil, err)
                     err.statusCode = error.code
                     err.errorMessage = error.localizedDescription
+                    completion(nil, err)
                 case .none:
                     completion(nil, nil)
                 }

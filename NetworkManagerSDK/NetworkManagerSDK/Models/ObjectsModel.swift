@@ -196,6 +196,12 @@ public struct Temas: Encodable {
     private let nombre: String?
     private let identificador: String?
     private let fechaExpiracion: String?
+    
+    public init(nombre: String?, identificador: String?, fechaExpiracion: String?) {
+        self.nombre = nombre
+        self.identificador = identificador
+        self.fechaExpiracion = fechaExpiracion
+    }
 }
 
 //TODO: Modelo del servicio de eliminación

@@ -733,18 +733,18 @@ extension WebService{
                     do {
                         let success = try JSONDecoder().decode(DefaultResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.enviartOtpNir(success), nil)
+                        callback(.enviarOtpNir(success), nil)
                     } catch {
                         let error = ErrorResponse()
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
                         self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                        callback(.enviartOtpNir(nil), error)
+                        callback(.enviarOtpNir(nil), error)
                     }
                 } else if let error = failure {
                     self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-                    callback(.enviartOtpNir(nil), error)
+                    callback(.enviarOtpNir(nil), error)
                 }
             }
         } catch {
@@ -753,7 +753,7 @@ extension WebService{
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
             self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
-            callback(.enviartOtpNir(nil), error)
+            callback(.enviarOtpNir(nil), error)
         }
     }
     
