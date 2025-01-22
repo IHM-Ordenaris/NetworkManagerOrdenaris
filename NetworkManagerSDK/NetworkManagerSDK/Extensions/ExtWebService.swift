@@ -24,11 +24,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.pagoSeguro(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.pagoSeguro(nil), error)
                 }
             }
@@ -37,7 +37,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.pagoSeguro(nil), error)
         }
     }
@@ -54,11 +54,11 @@ extension WebService{
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.widget(nil), error)
                 }
             } else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                self.callbackServices?(ServicesPlugInResponse(.finish))
                 callback(.widget(nil), error)
             }
         }
@@ -93,11 +93,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.validarBait(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.validarBait(nil), error)
                 }
             }
@@ -106,7 +106,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.validarBait(nil), error)
         }
     }
@@ -127,11 +127,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.listaRecurrentes(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.listaRecurrentes(nil), error)
                 }
             }
@@ -140,7 +140,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.listaRecurrentes(nil), error)
         }
     }
@@ -161,11 +161,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.cancelarRecurrente(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.cancelarRecurrente(nil), error)
                 }
             }
@@ -174,7 +174,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.cancelarRecurrente(nil), error)
         }
     }
@@ -195,11 +195,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.suscripcionPush(false), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.suscripcionPush(false), error)
                 }
             }
@@ -208,7 +208,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.suscripcionPush(false), error)
         }
     }
@@ -229,11 +229,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.desuscripcionPush(false), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.desuscripcionPush(false), error)
                 }
             }
@@ -242,7 +242,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.desuscripcionPush(false), error)
         }
     }
@@ -259,11 +259,11 @@ extension WebService{
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.ofertasInternacionales(nil), error)
                 }
             } else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                self.callbackServices?(ServicesPlugInResponse(.finish))
                 callback(.ofertasInternacionales(nil), error)
             }
         }
@@ -284,11 +284,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.eliminacion(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.eliminacion(nil), error)
                 }
             }
@@ -297,7 +297,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.eliminacion(nil), error)
         }
     }
@@ -317,11 +317,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.datosUsuario(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.datosUsuario(nil), error)
                 }
             }
@@ -330,7 +330,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.datosUsuario(nil), error)
         }
     }
@@ -350,11 +350,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.solicitudOtp(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.solicitudOtp(nil), error)
                 }
             }
@@ -363,7 +363,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.solicitudOtp(nil), error)
         }
     }
@@ -383,11 +383,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.verificarOtp(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.verificarOtp(nil), error)
                 }
             }
@@ -396,7 +396,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.verificarOtp(nil), error)
         }
     }
@@ -416,11 +416,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.consumo(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.consumo(nil), error)
                 }
             }
@@ -429,7 +429,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.consumo(nil), error)
         }
     }
@@ -446,11 +446,11 @@ extension WebService{
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.ofertas(nil), error)
                 }
             } else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                self.callbackServices?(ServicesPlugInResponse(.finish))
                 callback(.ofertas(nil), error)
             }
         }
@@ -471,11 +471,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.validarImei(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.validarImei(nil), error)
                 }
             }
@@ -484,7 +484,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.validarImei(nil), error)
         }
     }
@@ -505,11 +505,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.solicitudPortabilidad(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.solicitudPortabilidad(nil), error)
                 }
             }
@@ -518,7 +518,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.solicitudPortabilidad(nil), error)
         }
     }
@@ -538,11 +538,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.redencionTicket(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.redencionTicket(nil), error)
                 }
             }
@@ -551,7 +551,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.redencionTicket(nil), error)
         }
     }
@@ -571,11 +571,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.cerrarSesion(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.cerrarSesion(nil), error)
                 }
             }
@@ -584,7 +584,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.cerrarSesion(nil), error)
         }
     }
@@ -604,14 +604,14 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.solicitudReemplazoSim(nil), error)
                     }
                 } else if let error = failure {
                     if let statusCode = error.statusCode, 400...499 ~= statusCode {
                         callback(.solicitudReemplazoSim(nil), error)
                     } else {
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.solicitudReemplazoSim(nil), error)
                     }
                 }
@@ -621,7 +621,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.solicitudReemplazoSim(nil), error)
         }
     }
@@ -641,14 +641,14 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
                     }
                 } else if let error = failure {
                     if let statusCode = error.statusCode, 400...499 ~= statusCode {
                         callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
                     } else {
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
                     }
                 }
@@ -658,7 +658,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.enviarOtpReemplazoSim(body: nil, headers: nil), error)
         }
     }
@@ -680,14 +680,14 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.validarOtpReemplazoSim(nil), error)
                     }
                 } else if let error = failure {
                     if let statusCode = error.statusCode, 400...499 ~= statusCode {
                         callback(.validarOtpReemplazoSim(nil), error)
                     } else {
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.validarOtpReemplazoSim(nil), error)
                     }
                 }
@@ -697,7 +697,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.validarOtpReemplazoSim(nil), error)
         }
     }
@@ -714,11 +714,11 @@ extension WebService{
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.listaCodigoArea(nil), error)
                 }
             } else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                self.callbackServices?(ServicesPlugInResponse(.finish))
                 callback(.listaCodigoArea(nil), error)
             }
         }
@@ -739,11 +739,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.enviarOtpNir(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.enviarOtpNir(nil), error)
                 }
             }
@@ -752,7 +752,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.enviarOtpNir(nil), error)
         }
     }
@@ -772,11 +772,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.validarOtpNir(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.validarOtpNir(nil), error)
                 }
             }
@@ -785,7 +785,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.validarOtpNir(nil), error)
         }
     }
@@ -805,11 +805,11 @@ extension WebService{
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.cambiarNir(nil), error)
                     }
                 } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.cambiarNir(nil), error)
                 }
             }
@@ -818,7 +818,7 @@ extension WebService{
             error.statusCode = Cons.error2
             error.responseCode = Cons.error2
             error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.cambiarNir(nil), error)
         }
     }

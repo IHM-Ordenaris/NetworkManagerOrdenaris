@@ -16,7 +16,7 @@ public enum StatusService: Int {
 public enum ResponseService {
     case request
     case success
-    case error
+    case error(Error)
 }
 
 /// Lista de propiedades para seleccionar el entorno a consultar

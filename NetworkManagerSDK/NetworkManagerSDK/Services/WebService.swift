@@ -56,7 +56,7 @@ public class WebService {
                         error.statusCode = Cons.error2
                         error.responseCode = Cons.error2
                         error.errorMessage = CustomError.noFile.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(false, error)
                     }
                 }catch {
@@ -64,11 +64,11 @@ public class WebService {
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
-                    self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(false, error)
                 }
             }else if let error = failure {
-                self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+                self.callbackServices?(ServicesPlugInResponse(.finish))
                 callback(false, error)
             }
         }
@@ -86,7 +86,7 @@ public class WebService {
             error.statusCode = -3
             error.responseCode = -3
             error.errorMessage = CustomError.noFile.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish, response: .error))
+            self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(nil, error)
             return
         }

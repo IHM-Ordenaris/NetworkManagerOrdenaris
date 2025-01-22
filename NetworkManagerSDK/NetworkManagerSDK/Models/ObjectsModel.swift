@@ -239,6 +239,7 @@ public struct UsuarioResponse: Decodable {
     public let nombre: String?
     public let email: String?
     public let mensaje: String?
+    public let avatar: Int?
 }
 
 //TODO: Modelo del servicio de Update Perfil
@@ -249,14 +250,15 @@ public struct PerfilRequest: Encodable {
     private let nombre: String
     private let email: String
     private let permiso: Int
-    private let foto: String
+    private let foto: String = ""
+    private let avatar: Int
     
-    public init(access: String, nombre: String, email: String, permiso: Int, foto: String) {
+    public init(access: String, nombre: String, email: String, permiso: Int, avatar: Int) {
         self.access = access
         self.nombre = nombre
         self.email = email
         self.permiso = permiso
-        self.foto = foto
+        self.avatar = avatar
     }
 }
 
