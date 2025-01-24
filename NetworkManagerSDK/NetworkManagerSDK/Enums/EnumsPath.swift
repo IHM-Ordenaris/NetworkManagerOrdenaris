@@ -30,6 +30,7 @@ public enum ServiceName {
     case solicitudOtp(params: OTPRequest)
     case verificarOtp(params: ValidateOtpRequest)
     case consumo(params: MobileHotspotRequest)
+    case newConsumo(replaceParams: Dictionary<String, String>)
     case ofertas
     case ofertasSams
     case asociados
@@ -68,6 +69,7 @@ public enum ServiceName {
         case .solicitudOtp: return "requestPIN"
         case .verificarOtp: return "verifyPIN"
         case .consumo: return "consumption"
+        case .newConsumo: return "informationSubscriber"
         case .ofertas: return "offers"
         case .ofertasSams: return "packagesOffers"
         case .asociados: return "partnerOffers"
@@ -104,6 +106,7 @@ public enum ServiceClass {
     case solicitudOtp(DefaultResponse?)
     case verificarOtp(OTPResponse?)
     case consumo(MobileHotspotResponse?)
+    case newConsumo(ConsumptionResponse?)
     case ofertas(OffersResponse?)
     case validarImei(ImeiResponse?)
     case solicitudPortabilidad(PortabilityResponse?)

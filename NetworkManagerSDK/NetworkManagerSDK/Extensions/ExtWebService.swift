@@ -473,6 +473,42 @@ extension WebService{
         }
     }
     
+    internal func callServiceConsumption(_ service: inout Servicio, _ replaceParams: Dictionary<String, String>, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        
+        service.url = service.url?.replacingOccurrences(of: "#type#", with: replaceParams["type"]!)
+        service.url = service.url?.replacingOccurrences(of: "#identifier#", with: replaceParams["identifier"]!)
+        service.url = service.url?.replacingOccurrences(of: "#view#", with: replaceParams["view"]!)
+        
+        do {
+            Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(ConsumptionResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.newConsumo(success), nil)
+                    } catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.newConsumo(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.newConsumo(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish))
+            callback(.newConsumo(nil), error)
+        }
+    }
+    
     internal func callServiceOffer(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
             if let result = response, let data = result.data, result.success {
