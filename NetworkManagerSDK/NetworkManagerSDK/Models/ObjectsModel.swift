@@ -384,6 +384,37 @@ public struct MobileHotspotOffers: Decodable {
     public let offeringId: String?
 }
 
+//TODO: Modelo del servicio de Nuevo Consumo
+///Atributos de response
+public struct ConsumptionResponse: Decodable {
+    public let success: Bool?
+    public let data: [ConsuptionData]?
+}
+
+public struct ConsuptionData: Decodable {
+    public let category: String?
+    public let type: String?
+    public let tethering: Bool?
+    public let unlimited: Bool?
+    public let resume: ConsuptionResume?
+    public let offers_detail: [ConsuptionOffersDetail]?
+}
+
+public struct ConsuptionResume: Decodable {
+    public let total: Double?
+    public let unused: Double?
+    public let expire_date: String?
+}
+
+public struct ConsuptionOffersDetail: Decodable {
+    public let offering_id: String?
+    public let total: Double?
+    public let unused: Double?
+    public let effective_date: String?
+    public let expire_date: String?
+    public let is_package: Bool?
+}
+
 //TODO: Modelo del servicio de Portabilidad
 ///Atributos de request
 internal struct PortabilidadRequest: Encodable {
