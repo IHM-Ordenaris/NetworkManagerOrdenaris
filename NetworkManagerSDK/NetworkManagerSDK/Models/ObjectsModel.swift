@@ -2,7 +2,7 @@
 //  ObjectsModel.swift
 //  NetworkManagerSDK
 //
-//  Created by Ignacio Hernandez Montes on 07/06/24.
+//  Created by Javier Picazo Hernandez on 10/06/24.
 //
 
 import Foundation
@@ -114,6 +114,32 @@ public struct City: Decodable {
 
 public struct AreaCode: Decodable {
     public let numero: String?
+}
+
+//TODO: Modelo del servicio iTunes (appStore)
+///Atributos de request
+public struct InfoAppStoreRequest {
+    internal let bundleId: String
+    internal let country: String?
+    
+    public init(bundleId: String, country: String?) {
+        self.bundleId = bundleId
+        self.country = country
+    }
+}
+
+///Atributos de response
+internal struct InfoAppStoreResponse: Decodable {
+    internal let results: [InfoResult]
+}
+
+internal struct InfoResult: Decodable {
+    internal let version: String
+}
+
+public struct InfoAppBait {
+    public let version: String
+    public let mandatory: Bool
 }
 
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::

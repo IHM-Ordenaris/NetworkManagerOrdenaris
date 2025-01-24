@@ -15,7 +15,7 @@ public enum ServiceName {
     case perfilGaleria
     case perfilCamara
     case escaneo
-    case version
+    case version(params: InfoAppStoreRequest)
     case listaRecurrentes(params: RecurrenciasActivasRequest)
     case cancelarRecurrente(params: RecurrenciasActivasRequest, uuid: String)
     case suscripcionPush(params: InformacionClientePush)
@@ -93,7 +93,7 @@ public enum ServiceClass {
     case perfilGaleria([Headers]?)
     case perfilCamara([Headers]?)
     case escaneo([Headers]?)
-    case version(Servicio?)
+    case version(InfoAppBait?)
     case listaRecurrentes(RecurrenciasActivasResponse?)
     case cancelarRecurrente(DefaultResponse?)
     case suscripcionPush(Bool)

@@ -111,6 +111,45 @@ extension WebService{
         }
     }
     
+    internal func callServiceInfoAppStore(_ service: Servicio, _ body: InfoAppStoreRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        let serviceAppStore =  Servicio(name: "iTunes", method: HTTPMethod.get.rawValue, headers: nil, url: ProductService.Endpoint.appStore.url)
+        do {
+            var bodyData: Dictionary<String, String> = ["bundleId": body.bundleId]
+            if let country = body.country {
+                bodyData["country"] = country
+            }
+            Network.callNetworking(servicio: serviceAppStore, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let appStore = try JSONDecoder().decode(InfoAppStoreResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        let mandatory = service.headers?.first(where: {
+                            $0.name == "mandatory"
+                        })
+                        callback(.version(InfoAppBait(version: appStore.results.first!.version, mandatory: NSString(string: mandatory?.value ?? "false").boolValue)), nil)
+                    } catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.version(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.version(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse()
+            error.statusCode = Cons.error2
+            error.responseCode = Cons.error2
+            error.errorMessage = CustomError.noBody.errorDescription
+            self.callbackServices?(ServicesPlugInResponse(.finish))
+            callback(.version(nil), error)
+        }
+    }
+    
     internal func callServiceRecurrencias(_ service: inout Servicio, _ body: RecurrenciasActivasRequest ,_ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         service.url = service.url?.replacingOccurrences(of: "#canal#", with: Cons.uuidPaymentiOS)
         do {

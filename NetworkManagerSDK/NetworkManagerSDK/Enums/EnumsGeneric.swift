@@ -46,15 +46,21 @@ internal class ProductService {
     enum ApiURL {
         case bait(environment: Environment)
         case db
+        case itunes
         
         var baseURL: String {
             switch self {
             case .bait(let env):
                 switch env{
-                case .pr: return "https://mibait.com"
-                case .qa: return "https://baitqa.ordenaris.com"
+                case .pr: 
+                    "https://mibait.com"
+                case .qa: 
+                    "https://baitqa.ordenaris.com"
                 }
-            case .db: return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.absoluteString ?? ""
+            case .db: 
+                FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.absoluteString ?? ""
+            case .itunes: 
+                "https://itunes.apple.com"
             }
         }
     }
@@ -62,19 +68,27 @@ internal class ProductService {
     enum Endpoint {
         case CDN(environment: Environment)
         case file(_ name: String)
+        case appStore
 
         var path: String {
             switch self {
             case .CDN:
-                return "/api/core/servicio/resources/app/v20/get-cdn"
-            case .file(let name): return "\(name.lowercased()).plist"
+                "/api/core/servicio/resources/app/v20/get-cdn"
+            case .file(let name):
+                "\(name.lowercased()).plist"
+            case .appStore:
+                "/lookup"
             }
         }
 
         var url: String {
             switch self {
-            case .CDN(let env): return "\(ApiURL.bait(environment: env).baseURL)\(path)"
-            case .file: return "\(ApiURL.db.baseURL)\(path)"
+            case .CDN(let env):
+                "\(ApiURL.bait(environment: env).baseURL)\(path)"
+            case .file:
+                "\(ApiURL.db.baseURL)\(path)"
+            case .appStore:
+                "\(ApiURL.itunes.baseURL)\(path)"
             }
         }
     }

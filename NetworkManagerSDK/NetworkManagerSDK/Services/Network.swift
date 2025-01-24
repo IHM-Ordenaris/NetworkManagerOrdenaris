@@ -37,10 +37,10 @@ internal struct Network {
         
         var body: Data?
         if let body = params as? Dictionary<String, String>{
-            var queryItems: [URLQueryItem] = []
-            body.forEach {
-                queryItems.append(URLQueryItem(name: $0.key, value: $0.value))
+            let queryItems: [URLQueryItem] = body.map {
+                URLQueryItem(name: $0.key, value: $0.value)
             }
+            
             urlComps.queryItems = queryItems
         }else if let data = params as? Data{
             body = data

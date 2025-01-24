@@ -110,8 +110,8 @@ public class WebService {
             callback(.perfilCamara(service.headers), nil)
         case .escaneo:
             callback(.escaneo(service.headers), nil)
-        case .version:
-            callback(.version(service), nil)
+        case .version(let params):
+            self.callServiceInfoAppStore(service, params, printResponse, callback)
         case .listaRecurrentes(let params):
             self.callServiceRecurrencias(&service, params, printResponse, callback)
         case let .cancelarRecurrente(phoneNumber, uuid):
