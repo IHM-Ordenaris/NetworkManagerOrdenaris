@@ -143,7 +143,7 @@ public class WebService {
         case .newConsumo(let replaceParams):
             self.callServiceConsumption(&service, replaceParams, printResponse, callback)
         case .ofertas, .ofertasSams, .asociados:
-            self.callServiceOffer(service, printResponse, callback)
+            self.callServiceOffer(key: target, service, printResponse, callback)
         case .validarImei(let imei):
             self.callServiceValidate(service, imei, printResponse, callback)
         case .solicitudPortabilidad(let params):

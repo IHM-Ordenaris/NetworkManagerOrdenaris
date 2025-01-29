@@ -70,6 +70,11 @@ public struct DestinosInternacionales: Decodable, Hashable {
 public struct OffersResponse: Decodable {
     public let success: Bool?
     public let lista: [Oferta]?
+    
+    public init(success: Bool, lista: [Oferta]?) {
+        self.success = success
+        self.lista = lista
+    }
 }
 
 //TODO: Modelo del servicio Portabilidad

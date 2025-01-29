@@ -113,40 +113,31 @@ extension WebService{
     
     internal func callServiceInfoAppStore(_ service: Servicio, _ body: InfoAppStoreRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         let serviceAppStore =  Servicio(name: "iTunes", method: HTTPMethod.get.rawValue, headers: nil, url: ProductService.Endpoint.appStore.url)
-        do {
-            var bodyData: Dictionary<String, String> = ["bundleId": body.bundleId]
-            if let country = body.country {
-                bodyData["country"] = country
-            }
-            Network.callNetworking(servicio: serviceAppStore, params: bodyData, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let appStore = try JSONDecoder().decode(InfoAppStoreResponse.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        let mandatory = service.headers?.first(where: {
-                            $0.name == "mandatory"
-                        })
-                        callback(.version(InfoAppBait(version: appStore.results.first!.version, mandatory: NSString(string: mandatory?.value ?? "false").boolValue)), nil)
-                    } catch {
-                        let error = ErrorResponse()
-                        error.statusCode = Cons.error2
-                        error.responseCode = Cons.error2
-                        error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.version(nil), error)
-                    }
-                } else if let error = failure {
+        var bodyData: Dictionary<String, String> = ["bundleId": body.bundleId]
+        if let country = body.country {
+            bodyData["country"] = country
+        }
+        Network.callNetworking(servicio: serviceAppStore, params: bodyData, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let appStore = try JSONDecoder().decode(InfoAppStoreResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    let mandatory = service.headers?.first(where: {
+                        $0.name == "mandatory"
+                    })
+                    callback(.version(InfoAppBait(version: appStore.results.first!.version, mandatory: NSString(string: mandatory?.value ?? "false").boolValue)), nil)
+                } catch {
+                    let error = ErrorResponse()
+                    error.statusCode = Cons.error2
+                    error.responseCode = Cons.error2
+                    error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish))
                     callback(.version(nil), error)
                 }
+            } else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish))
+                callback(.version(nil), error)
             }
-        } catch {
-            let error = ErrorResponse()
-            error.statusCode = Cons.error2
-            error.responseCode = Cons.error2
-            error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish))
-            callback(.version(nil), error)
         }
     }
     
@@ -479,54 +470,58 @@ extension WebService{
         service.url = service.url?.replacingOccurrences(of: "#identifier#", with: replaceParams["identifier"]!)
         service.url = service.url?.replacingOccurrences(of: "#view#", with: replaceParams["view"]!)
         
-        do {
-            Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let success = try JSONDecoder().decode(ConsumptionResponse.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.newConsumo(success), nil)
-                    } catch {
-                        let error = ErrorResponse()
-                        error.statusCode = Cons.error2
-                        error.responseCode = Cons.error2
-                        error.errorMessage = CustomError.noData.errorDescription
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        callback(.newConsumo(nil), error)
-                    }
-                } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.newConsumo(nil), error)
-                }
-            }
-        } catch {
-            let error = ErrorResponse()
-            error.statusCode = Cons.error2
-            error.responseCode = Cons.error2
-            error.errorMessage = CustomError.noBody.errorDescription
-            self.callbackServices?(ServicesPlugInResponse(.finish))
-            callback(.newConsumo(nil), error)
-        }
-    }
-    
-    internal func callServiceOffer(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
             if let result = response, let data = result.data, result.success {
                 do {
-                    let widgetService = try JSONDecoder().decode(OffersResponse.self, from: data)
+                    let success = try JSONDecoder().decode(ConsumptionResponse.self, from: data)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.ofertas(widgetService), nil)
+                    callback(.newConsumo(success), nil)
                 } catch {
                     let error = ErrorResponse()
                     error.statusCode = Cons.error2
                     error.responseCode = Cons.error2
                     error.errorMessage = CustomError.noData.errorDescription
                     self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.ofertas(nil), error)
+                    callback(.newConsumo(nil), error)
                 }
             } else if let error = failure {
                 self.callbackServices?(ServicesPlugInResponse(.finish))
-                callback(.ofertas(nil), error)
+                callback(.newConsumo(nil), error)
+            }
+        }
+    }
+    
+    internal func callServiceOffer(key: ServiceName,_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        var version: String?
+        
+        if let urlString = service.url, let url = URL(string: urlString), let v = url.valueOf("v") {
+            version = v
+        }
+        
+         if let versionDefaults = UserDefaults.standard.string(forKey: key.getKey), version == versionDefaults {
+            callback(.ofertas(OffersResponse(success: true, lista: nil)), nil)
+        } else {
+            Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let widgetService = try JSONDecoder().decode(OffersResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        if let v = version {
+                            UserDefaults.standard.set(v, forKey: key.getKey)
+                        }
+                        callback(.ofertas(widgetService), nil)
+                    } catch {
+                        let error = ErrorResponse()
+                        error.statusCode = Cons.error2
+                        error.responseCode = Cons.error2
+                        error.errorMessage = CustomError.noData.errorDescription
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.ofertas(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.ofertas(nil), error)
+                }
             }
         }
     }

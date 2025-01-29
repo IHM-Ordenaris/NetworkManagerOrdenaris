@@ -17,6 +17,7 @@
 		31060B4F2C1B5DCE00F8952C /* StructsObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67027A52B1E65FA001B36E1 /* StructsObjects.swift */; };
 		3108E1092C2B4D2900027A89 /* NetworkManagerSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3108E1082C2B4D2900027A89 /* NetworkManagerSDKTests.swift */; };
 		3108E10A2C2B4D2900027A89 /* NetworkManagerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B67026F02B168801001B36E1 /* NetworkManagerSDK.framework */; platformFilter = ios; };
+		319127932D4979E7003A02F2 /* ExtURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319127922D4979E7003A02F2 /* ExtURL.swift */; };
 		31EED2D32C20A7A2006EE293 /* ExtWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EED2D22C20A7A2006EE293 /* ExtWebService.swift */; };
 		7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41C2C13951100558B60 /* ObjectsModel.swift */; };
 		7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */; };
@@ -41,6 +42,7 @@
 		31060B4A2C1A7B2500F8952C /* StructsNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructsNetwork.swift; sourceTree = "<group>"; };
 		3108E1062C2B4D2800027A89 /* NetworkManagerSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkManagerSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3108E1082C2B4D2900027A89 /* NetworkManagerSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerSDKTests.swift; sourceTree = "<group>"; };
+		319127922D4979E7003A02F2 /* ExtURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtURL.swift; sourceTree = "<group>"; };
 		31EED2D22C20A7A2006EE293 /* ExtWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtWebService.swift; sourceTree = "<group>"; };
 		7AE6D41C2C13951100558B60 /* ObjectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsModel.swift; sourceTree = "<group>"; };
 		7AE6D41E2C13951C00558B60 /* ObjectsBodyParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectsBodyParams.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		31EED2D12C20A787006EE293 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				319127922D4979E7003A02F2 /* ExtURL.swift */,
 				31EED2D22C20A7A2006EE293 /* ExtWebService.swift */,
 			);
 			path = Extensions;
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31060B4C2C1B5DBA00F8952C /* NetworkModel.swift in Sources */,
+				319127932D4979E7003A02F2 /* ExtURL.swift in Sources */,
 				7AE6D41D2C13951100558B60 /* ObjectsModel.swift in Sources */,
 				31EED2D32C20A7A2006EE293 /* ExtWebService.swift in Sources */,
 				7AE6D41F2C13951C00558B60 /* ObjectsBodyParams.swift in Sources */,
