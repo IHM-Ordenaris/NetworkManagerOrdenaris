@@ -67,7 +67,7 @@ public struct DestinosInternacionales: Decodable, Hashable {
 
 //TODO: Modelo del servicio Ofertas
 ///Atributos de response
-public struct OffersResponse: Decodable {
+public struct OffersResponse: Decodable, @unchecked Sendable {
     public let success: Bool?
     public let lista: [Oferta]?
     

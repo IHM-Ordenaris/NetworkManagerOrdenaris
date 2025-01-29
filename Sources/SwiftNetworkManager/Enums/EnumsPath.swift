@@ -31,9 +31,9 @@ public enum ServiceName: @unchecked Sendable {
     case verificarOtp(params: ValidateOtpRequest)
     case consumo(params: MobileHotspotRequest)
     case newConsumo(replaceParams: Dictionary<String, String>)
-    case ofertas
-    case ofertasSams
-    case asociados
+    case ofertas(updateForce: Bool = false)
+    case ofertasSams(updateForce: Bool = false)
+    case asociados(updateForce: Bool = false)
     case validarImei(params: ImeiRequest)
     case solicitudPortabilidad(params: PortabilidadElementsRequest)
     case redencionTicket(params: RedencionTicketRequest)

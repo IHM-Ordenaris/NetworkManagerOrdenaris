@@ -134,8 +134,8 @@ public class WebService: @unchecked Sendable {
             self.callServiceMobileHostpot(service, params, printResponse, callback)
         case .newConsumo(let replaceParams):
             self.callServiceConsumption(&service, replaceParams, printResponse, callback)
-        case .ofertas, .ofertasSams, .asociados:
-            self.callServiceOffer(key: target, service, printResponse, callback)
+        case .ofertas(let update), .ofertasSams(let update), .asociados(let update):
+            self.callServiceOffer(key: target, forceUpdate: update, service, printResponse, callback)
         case .validarImei(let imei):
             self.callServiceValidate(service, imei, printResponse, callback)
         case .solicitudPortabilidad(let params):

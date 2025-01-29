@@ -412,9 +412,13 @@ extension WebService{
         }
     }
     
-    internal func callServiceOffer(key: ServiceName,_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+    internal func callServiceOffer(key: ServiceName, forceUpdate: Bool, _ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         if let urlString = service.url, let url = URL(string: urlString), let v = url.valueOf("v") {
             self.version = v
+        }
+        
+        if forceUpdate  {
+            UserDefaults.standard.removeObject(forKey: key.getKey)
         }
         
         if let versionDefaults = UserDefaults.standard.string(forKey: key.getKey), self.version == versionDefaults {
@@ -423,15 +427,15 @@ extension WebService{
             Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
-                        let widgetService = try JSONDecoder().decode(OffersResponse.self, from: data)
+                        let offerResponse = try JSONDecoder().decode(OffersResponse.self, from: data)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         Task {
                             let capturedVersion = self.version
-                            if let v = capturedVersion {
+                            if let v = capturedVersion, !offerResponse.lista!.isEmpty {
                                 UserDefaults.standard.set(v, forKey: key.getKey)
                             }
                         }
-                        callback(.ofertas(widgetService), nil)
+                        callback(.ofertas(offerResponse), nil)
                     } catch {
                         let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
                         self.callbackServices?(ServicesPlugInResponse(.finish))
