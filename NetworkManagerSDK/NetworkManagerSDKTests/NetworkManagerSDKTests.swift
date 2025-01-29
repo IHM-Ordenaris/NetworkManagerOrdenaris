@@ -13,7 +13,7 @@ final class NetworkManagerSDKTests: XCTestCase {
     var expectetion: XCTestExpectation!
 
     override func setUp() {
-        self.sut = WebService(environment: .qa, appVersion: "2.0.11")
+        self.sut = WebService(environment: .qa, appVersion: "3.0.0")
         self.expectetion = self.expectation(description: "Signup Web Service Response Expectetion")
     }
     
@@ -64,7 +64,7 @@ final class NetworkManagerSDKTests: XCTestCase {
     }
     
     func testImei() {
-        self.sut.fetchData(target: .validarImei(params: ImeiRequest(imei: "35465091643806"))) { response, error in
+        self.sut.fetchData(target: .validarImei(params: ImeiRequest(imei: "351073871526101"))) { response, error in
             if case .validarImei(let objc) = response {
                 print(objc)
                 XCTAssertEqual(objc?.data?.homologated, "HOMOLOGADOS O VOLTE")
@@ -147,7 +147,7 @@ final class NetworkManagerSDKTests: XCTestCase {
     }
     
     func testUpdateDataProfile() {
-        self.sut.fetchData(target: .cambiarPerfil(params: PerfilRequest(access: "AOIlioyz5TVdhisiULOrulmQBEvocJ1P", nombre: "Pruebas iOS Rules", email: "ios_example@mail.com", permiso: 1, foto: ""))) { response, error in
+        self.sut.fetchData(target: .cambiarPerfil(params: PerfilRequest(access: "AOIlioyz5TVdhisiULOrulmQBEvocJ1P", nombre: "Pruebas iOS Rules", email: "ios_example@mail.com", permiso: 1, avatar: 0))) { response, error in
             if case .datosUsuario(let objc) = response {
                 print(objc)
                 XCTAssertTrue(objc?.success ?? false)
