@@ -1,6 +1,6 @@
 //
 //  ExtURL.swift
-//  mibait
+//  NetworkManager
 //
 //  Created by Javier Picazo Hernández on 04/06/24.
 //  Copyright © 2024 Innovatia. All rights reserved.

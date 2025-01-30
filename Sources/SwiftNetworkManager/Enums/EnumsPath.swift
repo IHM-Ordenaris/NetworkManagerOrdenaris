@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Lista de servicios a consultar
+/// Listado de servicios a consultar
 public enum ServiceName: @unchecked Sendable {
     case pagoSeguro
     case widget
@@ -88,6 +88,7 @@ public enum ServiceName: @unchecked Sendable {
     }
 }
 
+/// Lista de repuestas
 public enum ServiceClass {
     case pagoSeguro(PagoSeguroResponse?)
     case widget(WidgetServiceResponse?)

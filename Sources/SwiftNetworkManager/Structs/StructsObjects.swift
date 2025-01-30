@@ -2,7 +2,7 @@
 //  StructsObjects.swift
 //  NetworkManagerSDK
 //
-//  Created by Ignacio Hernandez Montes on 07/06/24.
+//  Created by Javier Picazo Hernandez on 10/06/24.
 //
 
 import Foundation
