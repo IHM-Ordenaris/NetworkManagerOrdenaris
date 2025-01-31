@@ -109,7 +109,7 @@ extension WebService{
                     let mandatory = service.headers?.first(where: {
                         $0.name == "mandatory"
                     })
-                    callback(.version(InfoAppBait(version: appStore.results.first!.version, mandatory: NSString(string: mandatory?.value ?? "false").boolValue)), nil)
+                    callback(.version(InfoAppBait(version: appStore.results.first?.version, mandatory: NSString(string: mandatory?.value ?? "false").boolValue)), nil)
                 } catch {
                     let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
                     self.callbackServices?(ServicesPlugInResponse(.finish))

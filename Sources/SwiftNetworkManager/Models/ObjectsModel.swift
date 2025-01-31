@@ -143,7 +143,7 @@ internal struct InfoResult: Decodable {
 }
 
 public struct InfoAppBait {
-    public let version: String
+    public let version: String?
     public let mandatory: Bool
 }
 
