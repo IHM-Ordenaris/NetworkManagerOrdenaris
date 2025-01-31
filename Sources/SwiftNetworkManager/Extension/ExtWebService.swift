@@ -413,37 +413,40 @@ extension WebService{
     }
     
     internal func callServiceOffer(key: ServiceName, forceUpdate: Bool, _ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        let manager = VersionManager()
         if let urlString = service.url, let url = URL(string: urlString), let v = url.valueOf("v") {
-            self.version = v
+            Task {
+                await manager.setVersion(v)
+            }
         }
         
         if forceUpdate  {
             UserDefaults.standard.removeObject(forKey: key.getKey)
         }
         
-        if let versionDefaults = UserDefaults.standard.string(forKey: key.getKey), self.version == versionDefaults {
-            callback(.ofertas(OffersResponse(success: true, lista: nil)), nil)
-        } else {
-            Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
-                if let result = response, let data = result.data, result.success {
-                    do {
-                        let offerResponse = try JSONDecoder().decode(OffersResponse.self, from: data)
-                        self.callbackServices?(ServicesPlugInResponse(.finish))
-                        Task {
-                            let capturedVersion = self.version
-                            if let v = capturedVersion, !offerResponse.lista!.isEmpty {
+        Task {
+            let version = await manager.version
+            if let versionDefaults = UserDefaults.standard.string(forKey: key.getKey), version == versionDefaults {
+                callback(.ofertas(OffersResponse(success: true, lista: nil)), nil)
+            } else {
+                Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+                    if let result = response, let data = result.data, result.success {
+                        do {
+                            let offerResponse = try JSONDecoder().decode(OffersResponse.self, from: data)
+                            self.callbackServices?(ServicesPlugInResponse(.finish))
+                            if let v = version, !offerResponse.lista!.isEmpty {
                                 UserDefaults.standard.set(v, forKey: key.getKey)
                             }
+                            callback(.ofertas(offerResponse), nil)
+                        } catch {
+                            let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                            self.callbackServices?(ServicesPlugInResponse(.finish))
+                            callback(.ofertas(nil), error)
                         }
-                        callback(.ofertas(offerResponse), nil)
-                    } catch {
-                        let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                    } else if let error = failure {
                         self.callbackServices?(ServicesPlugInResponse(.finish))
                         callback(.ofertas(nil), error)
                     }
-                } else if let error = failure {
-                    self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.ofertas(nil), error)
                 }
             }
         }
@@ -751,5 +754,17 @@ extension WebService{
             self.callbackServices?(ServicesPlugInResponse(.finish))
             callback(.cambiarNir(nil), error)
         }
+    }
+}
+
+actor VersionManager {
+    var version: String?
+
+    func setVersion(_ version: String) {
+        self.version = version
+    }
+
+    func getVersion() -> String? {
+        return self.version
     }
 }

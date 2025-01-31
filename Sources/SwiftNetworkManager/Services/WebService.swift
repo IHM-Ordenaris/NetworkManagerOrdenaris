@@ -18,7 +18,6 @@ public class WebService: @unchecked Sendable {
         Headers(name: Cons.origen, value: Cons.origenValue),
         Headers(name: Cons.origin, value: Cons.origenValue)
     ]
-    internal var version: String?
     
     /// Inicializador
     /// - Parameters:
