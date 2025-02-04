@@ -223,7 +223,7 @@ public struct InformacionClientePush: Encodable {
     }
 }
 
-public struct Temas: Encodable {
+public struct Temas: Encodable, @unchecked Sendable {
     private let nombre: String?
     private let identificador: String?
     private let fechaExpiracion: String?
