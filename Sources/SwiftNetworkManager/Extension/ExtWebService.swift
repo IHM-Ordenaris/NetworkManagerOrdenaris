@@ -758,7 +758,7 @@ extension WebService{
     
     internal func callServiceAdvertising(_ service: inout Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         service.url = service.url?.replacingOccurrences(of: "#os#", with: Cons.iOS)
-        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+        Network.callNetworking(servicio: service, params: nil, printResponse, timeOut: 3) { response, failure in
             if let result = response, let data = result.data, result.success {
                 do {
                     let areaCodes = try JSONDecoder().decode(AdvertisingResponse.self, from: data)

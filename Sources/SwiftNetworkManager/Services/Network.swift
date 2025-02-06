@@ -16,7 +16,7 @@ internal struct Network {
     ///   - params: Diccionario de parámetros
     ///   - printResponse: Bandera para imprimir log de la petición
     ///   - completion: CustomResponseObject (case response) / ErrorResponse (case failure)
-    static func callNetworking(servicio: Servicio, params: Any?, _ printResponse: Bool, _ completion: @escaping CallbackCustomResponse) {
+    static func callNetworking(servicio: Servicio, params: Any?, _ printResponse: Bool, timeOut: Double? = nil, _ completion: @escaping CallbackCustomResponse) {
         guard Reachability.isConnectedToNetwork() else {
             let error = ErrorResponse(statusCode: -1, responseCode: -1, errorMessage: CustomError.noData.errorDescription)
             completion(nil, error)
@@ -49,6 +49,10 @@ internal struct Network {
         var request = URLRequest(url: url)
         request.httpMethod = servicio.method
         request.httpBody = body
+        
+        if let time = timeOut {
+            request.timeoutInterval = TimeInterval(time)
+        }
         
         if servicio.method == "POST"{
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
