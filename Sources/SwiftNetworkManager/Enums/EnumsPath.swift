@@ -45,6 +45,7 @@ public enum ServiceName: @unchecked Sendable {
     case enviarOtpNir(params: OTPRequest)
     case validarOtpNir(params: ValidateOtpRequest)
     case cambiarNir(params: UpdateNirRequest)
+    case advertising
     
     var getKey: String {
         switch self {
@@ -84,6 +85,7 @@ public enum ServiceName: @unchecked Sendable {
         case .enviarOtpNir: return "sendOTP_NIR"
         case .validarOtpNir: return "validateOTP_NIR"
         case .cambiarNir: return "updateNIR"
+        case .advertising: return "list_ads"
         }
     }
 }
@@ -120,4 +122,5 @@ public enum ServiceClass {
     case enviarOtpNir(DefaultResponse?)
     case validarOtpNir(OTPResponse?)
     case cambiarNir(UpdateNirResponse?)
+    case advertising(AdvertisingResponse?)
 }

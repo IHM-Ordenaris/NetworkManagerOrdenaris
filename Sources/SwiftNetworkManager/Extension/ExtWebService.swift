@@ -755,6 +755,26 @@ extension WebService{
             callback(.cambiarNir(nil), error)
         }
     }
+    
+    internal func callServiceAdvertising(_ service: inout Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        service.url = service.url?.replacingOccurrences(of: "#os#", with: Cons.iOS)
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let areaCodes = try JSONDecoder().decode(AdvertisingResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.advertising(areaCodes), nil)
+                } catch {
+                    let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.advertising(nil), error)
+                }
+            } else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish))
+                callback(.advertising(nil), error)
+            }
+        }
+    }
 }
 
 actor VersionManager {

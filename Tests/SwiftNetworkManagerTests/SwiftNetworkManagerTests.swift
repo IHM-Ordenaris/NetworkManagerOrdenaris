@@ -174,6 +174,17 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
         self.wait(for: [self.expectetion], timeout: 5)
     }
     
+    func testServiceAdvertising() {
+        self.sut.fetchData(target: .advertising){ response, error in
+            if case .advertising(let objc) = response {
+                print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
     override func tearDown() {
         self.sut = nil
         self.expectetion = nil

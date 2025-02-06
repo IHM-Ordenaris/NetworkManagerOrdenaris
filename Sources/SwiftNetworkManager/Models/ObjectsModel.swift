@@ -147,6 +147,26 @@ public struct InfoAppBait {
     public let mandatory: Bool
 }
 
+//TODO: Modelo del servicio de publicidad
+///Atributos de response
+public struct AdvertisingResponse: Decodable {
+    public let success: Bool?
+    public let data: AdvertisingData?
+}
+
+public struct AdvertisingData: Decodable {
+    public let time: Int?
+    public let banners: [AdvertisingBanner]?
+}
+
+public struct AdvertisingBanner: Decodable {
+    public let image: String?
+    public let name: String?
+    public let position: Int?
+    public let time: Int?
+    public let uuid: String?
+}
+
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
 //TODO: Modelo del servicio Pago Seguro
 ///Atributos de request

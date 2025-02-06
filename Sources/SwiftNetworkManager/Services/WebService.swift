@@ -157,6 +157,8 @@ public class WebService: @unchecked Sendable {
             self.callServiceValidateOTPNir(service, params, printResponse, callback)
         case .cambiarNir(let params):
             self.callServiceUpdateNir(service, params, printResponse, callback)
+        case .advertising:
+            self.callServiceAdvertising(&service, printResponse, callback)
         }
     }
 }
