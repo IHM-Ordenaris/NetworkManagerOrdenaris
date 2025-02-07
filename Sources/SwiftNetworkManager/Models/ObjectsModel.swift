@@ -167,6 +167,43 @@ public struct AdvertisingBanner: Decodable {
     public let uuid: String?
 }
 
+//TODO: Modelo del servicio Ofertas eSim
+///Atributos de response
+public struct OffersESimResponse: Decodable {
+    public let success: Bool?
+    public let lista: [ListaESim]?
+}
+
+public struct ListaESim: Decodable {
+    public let offeringid: String?
+    public let nombre: String?
+    public let image: String?
+    public let incluye: String?
+    public let disfruta: String?
+    public let duracion: Int?
+    public let pesos: Double?
+    public let tipo: Int?
+}
+
+//TODO: Modelo del servicio Ofertas Sim
+///Atributos de response
+public struct OffersSimResponse: Decodable {
+    public let success: Bool?
+    public let lista: [ListaSim]?
+}
+
+public struct ListaSim: Decodable {
+    public let offeringid: String?
+    public let nombre: String?
+    public let image: String?
+    public let imagenOferta: String?
+    public let incluye: [String]?
+    public let disfruta: String?
+    public let duracion: String?
+    public let pesos: Double?
+    public let visible: Bool?
+}
+
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
 //TODO: Modelo del servicio Pago Seguro
 ///Atributos de request

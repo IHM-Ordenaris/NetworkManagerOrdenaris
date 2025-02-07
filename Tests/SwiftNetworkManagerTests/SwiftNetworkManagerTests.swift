@@ -97,7 +97,7 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
     }
     
     func testFetchRecurrencyReload() {
-        self.sut.fetchData(target: .listaRecurrentes(params: RecurrenciasActivasRequest(identificador: "5655889516"))) { response, error in
+        self.sut.fetchData(target: .listaRecurrentes(params: RecurrenciasActivasRequest(identificador: "5660502377"))) { response, error in
             if case .listaRecurrentes(let objc) = response {
                 print(objc)
                 print(objc?.lista?.count)
@@ -110,8 +110,8 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
     }
     
     func testFetchSupplies() {
-        self.sut.fetchData(target: .asociados(updateForce: false)) { response, error in
-            if case .ofertas(let objc) = response {
+        self.sut.fetchData(target: .ofertaSim) { response, error in
+            if case .ofertaSim(let objc) = response {
                 print(objc)
                 print(objc?.lista?.count)
                 XCTAssertTrue(objc?.success ?? false)

@@ -159,6 +159,10 @@ public class WebService: @unchecked Sendable {
             self.callServiceUpdateNir(service, params, printResponse, callback)
         case .advertising:
             self.callServiceAdvertising(&service, printResponse, callback)
+        case .ofertaSim:
+            self.callServiceOffersSim(service, printResponse, callback)
+        case .ofertaESim:
+            self.callServiceOffersESim(service, printResponse, callback)
         }
     }
 }
