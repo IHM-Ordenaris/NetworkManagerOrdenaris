@@ -110,8 +110,8 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
     }
     
     func testFetchSupplies() {
-        self.sut.fetchData(target: .ofertaSim) { response, error in
-            if case .ofertaSim(let objc) = response {
+        self.sut.fetchData(target: .ofertaeSim) { response, error in
+            if case .ofertaeSim(let objc) = response {
                 print(objc)
                 print(objc?.lista?.count)
                 XCTAssertTrue(objc?.success ?? false)

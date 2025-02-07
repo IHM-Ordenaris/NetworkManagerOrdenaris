@@ -47,7 +47,7 @@ public enum ServiceName: @unchecked Sendable {
     case cambiarNir(params: UpdateNirRequest)
     case advertising
     case ofertaSim
-    case ofertaESim
+    case ofertaeSim
     
     var getKey: String {
         switch self {
@@ -89,7 +89,7 @@ public enum ServiceName: @unchecked Sendable {
         case .cambiarNir: return "updateNIR"
         case .advertising: return "list_ads"
         case .ofertaSim: return "availableOffersSIM"
-        case .ofertaESim: return "availableOffersEsim"
+        case .ofertaeSim: return "availableOffersEsim"
         }
     }
 }
@@ -128,5 +128,5 @@ public enum ServiceClass {
     case cambiarNir(UpdateNirResponse?)
     case advertising(AdvertisingResponse?)
     case ofertaSim(OffersSimResponse?)
-    case ofertaESim(OffersESimResponse?)
+    case ofertaeSim(OfferseSimResponse?)
 }

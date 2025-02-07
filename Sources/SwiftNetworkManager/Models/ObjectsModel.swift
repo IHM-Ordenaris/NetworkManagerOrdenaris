@@ -169,15 +169,15 @@ public struct AdvertisingBanner: Decodable {
 
 //TODO: Modelo del servicio Ofertas eSim
 ///Atributos de response
-public struct OffersESimResponse: Decodable {
+public struct OfferseSimResponse: Decodable {
     public let success: Bool?
-    public let lista: [ListaESim]?
+    public let lista: [ListaeSim]?
 }
 
-public struct ListaESim: Decodable {
+public struct ListaeSim: Decodable {
     public let offeringid: String?
     public let nombre: String?
-    public let image: String?
+    public let imagen: String?
     public let incluye: String?
     public let disfruta: String?
     public let duracion: Int?
@@ -195,7 +195,7 @@ public struct OffersSimResponse: Decodable {
 public struct ListaSim: Decodable {
     public let offeringid: String?
     public let nombre: String?
-    public let image: String?
+    public let imagen: String?
     public let imagenOferta: String?
     public let incluye: [String]?
     public let disfruta: String?

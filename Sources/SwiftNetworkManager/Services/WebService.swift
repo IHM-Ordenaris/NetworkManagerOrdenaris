@@ -161,8 +161,8 @@ public class WebService: @unchecked Sendable {
             self.callServiceAdvertising(&service, printResponse, callback)
         case .ofertaSim:
             self.callServiceOffersSim(service, printResponse, callback)
-        case .ofertaESim:
-            self.callServiceOffersESim(service, printResponse, callback)
+        case .ofertaeSim:
+            self.callServiceOfferseSim(service, printResponse, callback)
         }
     }
 }
