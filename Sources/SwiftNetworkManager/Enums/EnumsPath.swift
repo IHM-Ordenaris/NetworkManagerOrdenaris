@@ -24,6 +24,7 @@ public enum ServiceName: @unchecked Sendable {
     case eliminacion(params: EliminacionRequest)
     case acceso(params: AccesoRequest)
     case cambiarPerfil(params: PerfilRequest)
+    case userInfo(params: UserInfoRequest)
     case cambiarPass(params: PasswordRequest)
     case reestablecerPassword(params: ResetPasswordRequest)
     case registrarCuenta(params: CompletarRegistro)
@@ -66,6 +67,7 @@ public enum ServiceName: @unchecked Sendable {
         case .eliminacion: return "deleteAccount"
         case .acceso: return "login"
         case .cambiarPerfil: return "updateAccount"
+        case .userInfo: return "user_information"
         case .cambiarPass: return "updateAccount"
         case .reestablecerPassword: return "recoveryPassword"
         case .registrarCuenta: return "signup"

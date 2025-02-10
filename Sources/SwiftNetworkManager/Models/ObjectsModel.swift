@@ -350,6 +350,15 @@ public struct PerfilRequest: Encodable {
     }
 }
 
+public struct UserInfoRequest: Encodable {
+    private let access: String
+    private let operacion: String = "informacion"
+    
+    public init(access: String) {
+        self.access = access
+    }
+}
+
 public struct PasswordRequest: Encodable {
     private let access: String
     private let operacion: String = "actualizacionv2"
