@@ -112,6 +112,7 @@ public enum ServiceClass {
     case ofertasInternacionales(RecargaInternacionalResponse?)
     case eliminacion(DefaultResponse?)
     case datosUsuario(UsuarioResponse?)
+    case informacionUsuario(UserInfoResponse?)
     case solicitudOtp(DefaultResponse?)
     case verificarOtp(OTPResponse?)
     case consumo(MobileHotspotResponse?)

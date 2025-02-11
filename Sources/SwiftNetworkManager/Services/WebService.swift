@@ -120,7 +120,7 @@ public class WebService: @unchecked Sendable {
         case .cambiarPerfil(let params):
             self.callServiceUserData(service, params, printResponse, callback)
         case .userInfo(let params):
-            self.callServiceUserData(service, params, printResponse, callback)
+            self.callServiceUserInfo(service, params, printResponse, callback)
         case .cambiarPass(let params):
             self.callServiceUserData(service, params, printResponse, callback)
         case .reestablecerPassword(let params):

@@ -359,6 +359,12 @@ public struct UserInfoRequest: Encodable {
     }
 }
 
+///Atributos de response
+public struct UserInfoResponse: Decodable {
+    public let success: Bool?
+    public let data: UsuarioResponse?
+}
+
 public struct PasswordRequest: Encodable {
     private let access: String
     private let operacion: String = "actualizacionv2"

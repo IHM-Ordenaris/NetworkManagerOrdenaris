@@ -307,6 +307,33 @@ extension WebService{
         }
     }
     
+    internal func callServiceUserInfo(_ service: Servicio, _ body: UserInfoRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let userData = try JSONDecoder().decode(UserInfoResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.informacionUsuario(userData), nil)
+                    } catch {
+                        let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.informacionUsuario(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.informacionUsuario(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noBody.errorDescription)
+            self.callbackServices?(ServicesPlugInResponse(.finish))
+            callback(.informacionUsuario(nil), error)
+        }
+    }
+    
     internal func callServiceSendOTP(_ service: Servicio, _ body: OTPRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         do {
             let encoder = JSONEncoder()

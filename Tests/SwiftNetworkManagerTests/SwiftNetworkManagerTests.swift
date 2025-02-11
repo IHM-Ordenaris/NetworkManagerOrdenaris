@@ -152,6 +152,17 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
         self.wait(for: [self.expectetion], timeout: 5)
     }
     
+    func testUserInfo() {
+        self.sut.fetchData(target: .userInfo(params: UserInfoRequest(access: "1mDHodYN9AihUKaSsACVF6gm9dhuqdkc"))) { response, error in
+            if case .informacionUsuario(let objc) = response {
+                print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
     func testRegisterRequestChangeSim() {
         self.sut.fetchData(target: .solicitudReemplazoSim(params: ReplaceSimRequest(dn: "5646671491", iccid: "8952140063007187175", email: "qwerty@qwerty.com", reason: .lostOrStolen))) { response, error in
             if case .solicitudReemplazoSim(let objc) = response {
