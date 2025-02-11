@@ -655,7 +655,7 @@ public struct UpdateNirRequest: Encodable {
     private let origen: String = "ios"
     private let uuid: String
     
-    init(nir: String, numero: String, uuid: String) {
+    public init(nir: String, numero: String, uuid: String) {
         self.nir = nir
         self.numero = numero
         self.uuid = uuid
