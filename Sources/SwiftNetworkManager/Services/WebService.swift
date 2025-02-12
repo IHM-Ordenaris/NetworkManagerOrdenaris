@@ -147,8 +147,8 @@ public class WebService: @unchecked Sendable {
             self.callServiceLogOut(service, params, printResponse, callback)
         case .solicitudReemplazoSim(let params):
             self.callServiceReplaceSim(service, params, printResponse, callback)
-        case .enviarOtpReemplazoSim(let params):
-            self.callServiceSendOtpReplaceSim(service, params, printResponse, callback)
+        case let .enviarOtpReemplazoSim(params, uuid):
+            self.callServiceSendOtpReplaceSim(service, params, uuidHeader: uuid, printResponse, callback)
         case let .validarOtpReemplazoSim(params, uuid):
             self.callServiceValidateOtpReplaceSim(service, params, uuidHeader: uuid, printResponse, callback)
         case .listaCodigoArea:

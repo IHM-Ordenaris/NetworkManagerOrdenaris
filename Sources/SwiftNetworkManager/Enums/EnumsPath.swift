@@ -40,7 +40,7 @@ public enum ServiceName: @unchecked Sendable {
     case redencionTicket(params: RedencionTicketRequest)
     case cerrarSesion(params: LogOutRequest)
     case solicitudReemplazoSim(params: ReplaceSimRequest)
-    case enviarOtpReemplazoSim(params: SendSimOtpRequest)
+    case enviarOtpReemplazoSim(params: SendSimOtpRequest, uuid: String)
     case validarOtpReemplazoSim(params: ValidateSimOtpRequest, uuidOtp: String)
     case listaCodigoArea
     case enviarOtpNir(params: OTPRequest)

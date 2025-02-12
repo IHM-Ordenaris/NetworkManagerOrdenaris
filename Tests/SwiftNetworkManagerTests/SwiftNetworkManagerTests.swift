@@ -175,9 +175,21 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
     }
     
     func testRegisterRequestChangeSim() {
-        self.sut.fetchData(target: .solicitudReemplazoSim(params: ReplaceSimRequest(dn: "5646671491", iccid: "8952140063007187175", email: "qwerty@qwerty.com", reason: .lostOrStolen))) { response, error in
+        self.sut.fetchData(target: .solicitudReemplazoSim(params: ReplaceSimRequest(dn: "5660609075", iccid: "8952140063104636850", email: "qwerty@qwerty.com", reason: .lostOrStolen))) { response, error in
             if case .solicitudReemplazoSim(let objc) = response {
                 print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testOptRemplacementSimRequest() {
+        self.sut.fetchData(target: .enviarOtpReemplazoSim(params: SendSimOtpRequest(dn: "5661066502"), uuid: "ed9ce7ee1e9b4e3ea8eec2040c3093bf")) { response, error in
+            if case let .enviarOtpReemplazoSim(objc, headers) = response {
+                print(objc)
+                print(headers)
                 XCTAssertTrue(objc?.success ?? false)
                 self.expectetion.fulfill()
             }

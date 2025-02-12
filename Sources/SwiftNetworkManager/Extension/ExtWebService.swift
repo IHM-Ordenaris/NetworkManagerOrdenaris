@@ -619,11 +619,13 @@ extension WebService{
         }
     }
     
-    internal func callServiceSendOtpReplaceSim(_ service: Servicio, _ body: SendSimOtpRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+    internal func callServiceSendOtpReplaceSim(_ service: Servicio, _ body: SendSimOtpRequest, uuidHeader: String, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
         do {
             let encoder = JSONEncoder()
             let bodyData = try encoder.encode(body)
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+            var contentService = service
+            contentService.headers?.append(Headers(name: Cons.uuidHeader, value: uuidHeader))
+            Network.callNetworking(servicio: contentService, params: bodyData, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
                         let success = try JSONDecoder().decode(ReplaceSimResponse.self, from: data)
@@ -656,7 +658,7 @@ extension WebService{
             let bodyData = try encoder.encode(body)
             var contentService = service
             contentService.headers?.append(Headers(name: Cons.uuidHeader, value: uuidHeader))
-            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+            Network.callNetworking(servicio: contentService, params: bodyData, printResponse) { response, failure in
                 if let result = response, let data = result.data, result.success {
                     do {
                         let success = try JSONDecoder().decode(ReplaceSimResponse.self, from: data)
