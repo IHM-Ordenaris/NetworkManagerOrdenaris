@@ -840,6 +840,25 @@ extension WebService{
             }
         }
     }
+    
+    internal func callServiceAvataresList(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let avataresService = try JSONDecoder().decode(AvatarServiceResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.avatares(avataresService), nil)
+                } catch {
+                    let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.avatares(nil), error)
+                }
+            } else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish))
+                callback(.avatares(nil), error)
+            }
+        }
+    }
 }
 
 actor VersionManager {

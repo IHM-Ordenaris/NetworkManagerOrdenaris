@@ -165,6 +165,8 @@ public class WebService: @unchecked Sendable {
             self.callServiceOffersSim(service, printResponse, callback)
         case .ofertaeSim:
             self.callServiceOfferseSim(service, printResponse, callback)
+        case .avatares:
+            self.callServiceAvataresList(service, printResponse, callback)
         }
     }
 }

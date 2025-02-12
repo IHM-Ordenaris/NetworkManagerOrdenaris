@@ -204,6 +204,17 @@ public struct ListaSim: Decodable {
     public let visible: Bool?
 }
 
+///Atributos de response lista Avatares
+public struct AvatarServiceResponse: Decodable {
+    public let success: Bool?
+    public let data: [AvatarObj]?
+}
+
+public struct AvatarObj: Decodable {
+    public let id: Int?
+    public let image: String?
+}
+
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
 //TODO: Modelo del servicio Pago Seguro
 ///Atributos de request
