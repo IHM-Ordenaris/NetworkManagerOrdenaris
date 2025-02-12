@@ -678,6 +678,10 @@ public struct UpdateNirResponse: Decodable {
     public let success: Bool?
     public let detalle: String?
     public let idusuario: Int?
+    public let mensaje: String?
+    public let orderid: String?
+    public let newMsisdn: String?
+    public let effectiveDate: String?
 }
 
 // MARK: - ⚠️ typealias & Objects PUT/PATCH ::::::::::::::::
