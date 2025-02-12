@@ -648,13 +648,11 @@ public struct ReplaceSimResponse: Decodable {
 //TODO: Modelo del servicio de Reemplazo de SIM
 ///Atributos de request  - Envio de OTP
 public struct SendSimOtpRequest: Encodable {
-    public let dn: String
-}
-
-///Atributos de request - Validar OTP
-public struct ValidateSimOtpRequest: Encodable {
-    public let dn: String
-    public let code: String
+    private let dn: String
+    
+    public init(dn: String) {
+        self.dn = dn
+    }
 }
 
 //TODO: Modelo del servicio de cambio de código de área
@@ -685,5 +683,16 @@ public struct UpdateNirResponse: Decodable {
 }
 
 // MARK: - ⚠️ typealias & Objects PUT/PATCH ::::::::::::::::
+//TODO: Modelo del servicio de Reemplazo de SIM
+///Atributos de request - Validar OTP
+public struct ValidateSimOtpRequest: Encodable {
+    private let dn: String
+    private let code: String
+    
+    public init(dn: String, code: String) {
+        self.dn = dn
+        self.code = code
+    }
+}
 
 // MARK: - ⚠️ typealias & Objects DELETE ::::::::::::::::
