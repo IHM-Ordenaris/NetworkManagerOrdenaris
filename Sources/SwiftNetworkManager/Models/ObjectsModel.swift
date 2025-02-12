@@ -597,8 +597,8 @@ public struct RedencionTicketResponse: Decodable {
 //TODO: Modelo del servicio de Cerrar Sesión
 ///Atributos de request
 public struct LogOutRequest: Encodable {
-    internal let operacion: String = "logout"
-    internal let access: String
+    private let operacion: String = "logout"
+    private let access: String
     
     public init(access: String) {
         self.access = access
@@ -660,11 +660,17 @@ public struct ValidateSimOtpRequest: Encodable {
 //TODO: Modelo del servicio de cambio de código de área
 ///Atributos de request
 public struct UpdateNirRequest: Encodable {
-    public let nir: String
-    public let numero: String
-    internal let operacion: String = "confirmacion_nir"
-    internal let origen: String = "ios"
-    public let uuid: String
+    private let nir: String
+    private let numero: String
+    private let operacion: String = "confirmacion_nir"
+    private let origen: String = "ios"
+    private let uuid: String
+    
+    public init(nir: String, numero: String, uuid: String) {
+        self.nir = nir
+        self.numero = numero
+        self.uuid = uuid
+    }
 }
 
 ///Atributos de response
