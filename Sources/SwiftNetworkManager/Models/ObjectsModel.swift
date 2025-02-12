@@ -630,7 +630,7 @@ public struct ReplaceSimRequest: Encodable {
     private let email: String
     private let reason: Int
     
-    init(dn: String, iccid: String, email: String, reason: RemplaceSimBait) {
+    public init(dn: String, iccid: String, email: String, reason: RemplaceSimBait) {
         self.dn = dn
         self.iccid = iccid
         self.email = email
