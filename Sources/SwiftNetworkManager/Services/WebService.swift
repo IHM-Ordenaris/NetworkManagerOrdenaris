@@ -167,6 +167,10 @@ public class WebService: @unchecked Sendable {
             self.callServiceOfferseSim(service, printResponse, callback)
         case .avatares:
             self.callServiceAvataresList(service, printResponse, callback)
+        case .solicitarUuidSim(let params):
+            self.callServiceRequestUuidSim(service, params, printResponse, callback)
+        case .solicitarUuideSim:
+            self.callServiceRequestUuideSim(service, printResponse, callback)
         }
     }
 }

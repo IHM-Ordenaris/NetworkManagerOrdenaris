@@ -861,6 +861,52 @@ extension WebService{
             }
         }
     }
+    
+    internal func callServiceRequestUuidSim(_ service: Servicio, _ body: PurchaseUuidRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let success = try JSONDecoder().decode(PurchaseUuidResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.solicitarUuidSim(success), nil)
+                    } catch {
+                        let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.solicitarUuidSim(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.solicitarUuidSim(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noBody.errorDescription)
+            self.callbackServices?(ServicesPlugInResponse(.finish))
+            callback(.solicitarUuidSim(nil), error)
+        }
+    }
+    
+    internal func callServiceRequestUuideSim(_ service: Servicio, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let avataresService = try JSONDecoder().decode(PurchaseUuidResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.solicitarUuideSim(avataresService), nil)
+                } catch {
+                    let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.solicitarUuideSim(nil), error)
+                }
+            } else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish))
+                callback(.solicitarUuideSim(nil), error)
+            }
+        }
+    }
 }
 
 actor VersionManager {

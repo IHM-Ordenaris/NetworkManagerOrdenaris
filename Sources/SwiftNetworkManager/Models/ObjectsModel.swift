@@ -642,7 +642,7 @@ public struct ReplaceSimRequest: Encodable {
 public struct ReplaceSimResponse: Decodable {
     public let success: Bool?
     public let message: String?
-    public let uuid: String?
+    public let id: String?
 }
 
 //TODO: Modelo del servicio de Reemplazo de SIM
@@ -680,6 +680,23 @@ public struct UpdateNirResponse: Decodable {
     public let orderid: String?
     public let newMsisdn: String?
     public let effectiveDate: String?
+}
+
+//TODO: Modelo del servicio de solicitar un UUID para la compra de una SIM y eSim
+///Atributos de request  - Comprar una tarjeta SIM
+public struct PurchaseUuidRequest: Encodable {
+    private let verificacion: Bool
+    private let visitante: Bool
+    
+    public init(verificacion: Bool, visitante: Bool) {
+        self.verificacion = verificacion
+        self.visitante = visitante
+    }
+}
+///Atributos de response
+public struct PurchaseUuidResponse: Decodable {
+    public let success: Bool?
+    public let uuid: String?
 }
 
 // MARK: - ⚠️ typealias & Objects PUT/PATCH ::::::::::::::::
