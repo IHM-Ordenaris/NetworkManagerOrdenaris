@@ -642,7 +642,7 @@ public struct ReplaceSimRequest: Encodable {
 public struct ReplaceSimResponse: Decodable {
     public let success: Bool?
     public let message: String?
-    public let id: String?
+    public let uuid: String?
 }
 
 //TODO: Modelo del servicio de Reemplazo de SIM
