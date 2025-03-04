@@ -96,8 +96,8 @@ public enum ServiceName: @unchecked Sendable {
         case .ofertaSim: return "availableOffersSIM"
         case .ofertaeSim: return "availableOffersEsim"
         case .avatares: return "avatars_list"
-        case .solicitarUuidSim: return ""
-        case .solicitarUuideSim: return ""
+        case .solicitarUuidSim: return "getVisitorForSIM"
+        case .solicitarUuideSim: return "getVisitorForEsim"
         }
     }
 }
