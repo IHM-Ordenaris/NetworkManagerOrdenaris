@@ -215,6 +215,54 @@ public struct AvatarObj: Decodable {
     public let image: String?
 }
 
+//TODO: Modelo del servicio lista de colonias
+///Atributos de request
+public struct ZipCodeRequest {
+    internal let zipCode: String
+    
+    public init(zipCode: String) {
+        self.zipCode = zipCode
+    }
+}
+
+///Atributos de response
+public struct ZipCodeResponse: Decodable {
+    public let success: Bool
+    public let informacion: ZipCodeInfo?
+}
+
+public struct ZipCodeInfo: Decodable {
+    public let pais: ZipCodeCountry?
+    public let estado: ZipCodeState?
+    public let municipio: ZipCodeCity?
+    public let colonias: [ZipCodeDistrict]?
+}
+
+public struct ZipCodeCountry: Decodable {
+    public let id: Int?
+    public let nombre: String?
+    public let codigo: String?
+    public let divisa: String?
+}
+
+public struct ZipCodeState: Decodable {
+    public let id: Int?
+    public let nombre: String?
+}
+
+public struct ZipCodeCity: Decodable {
+    public let id: Int?
+    public let nombre: String?
+}
+
+public struct ZipCodeDistrict: Decodable {
+    public let id: Int?
+    public let tipo: String?
+    public let codigoPostal: String?
+    public let nombre: String?
+    public let ciudad: String?
+}
+
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
 //TODO: Modelo del servicio Pago Seguro
 ///Atributos de request

@@ -52,6 +52,7 @@ public enum ServiceName: @unchecked Sendable {
     case avatares
     case solicitarUuidSim(params: PurchaseUuidRequest)
     case solicitarUuideSim
+    case listaColonias(params: ZipCodeRequest)
     
     var getKey: String {
         switch self {
@@ -98,6 +99,7 @@ public enum ServiceName: @unchecked Sendable {
         case .avatares: return "avatars_list"
         case .solicitarUuidSim: return "getVisitorForSIM"
         case .solicitarUuideSim: return "getVisitorForEsim"
+        case .listaColonias: return "zipCodeInformation"
         }
     }
 }
@@ -141,4 +143,5 @@ public enum ServiceClass {
     case avatares(AvatarServiceResponse?)
     case solicitarUuidSim(PurchaseUuidResponse?)
     case solicitarUuideSim(PurchaseUuidResponse?)
+    case listaColonias(ZipCodeResponse?)
 }

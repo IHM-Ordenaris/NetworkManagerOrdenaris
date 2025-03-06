@@ -171,6 +171,8 @@ public class WebService: @unchecked Sendable {
             self.callServiceRequestUuidSim(service, params, printResponse, callback)
         case .solicitarUuideSim:
             self.callServiceRequestUuideSim(service, printResponse, callback)
+        case .listaColonias(let params):
+            self.callDistrictListRequestService(&service, params, printResponse, callback)
         }
     }
 }

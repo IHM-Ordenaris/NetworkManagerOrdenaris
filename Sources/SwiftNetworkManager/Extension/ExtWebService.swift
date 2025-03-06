@@ -907,6 +907,26 @@ extension WebService{
             }
         }
     }
+    
+    internal func callDistrictListRequestService(_ service: inout Servicio, _ body: ZipCodeRequest ,_ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        service.url = service.url?.replacingOccurrences(of: "#zip_code#", with: body.zipCode)
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let recurrencias = try JSONDecoder().decode(ZipCodeResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.listaColonias(recurrencias), nil)
+                } catch {
+                    let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.listaColonias(nil), error)
+                }
+            } else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish))
+                callback(.listaColonias(nil), error)
+            }
+        }
+    }
 }
 
 actor VersionManager {

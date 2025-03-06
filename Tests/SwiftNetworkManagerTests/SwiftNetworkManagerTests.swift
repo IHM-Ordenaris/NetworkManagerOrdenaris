@@ -219,6 +219,17 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
         self.wait(for: [self.expectetion], timeout: 5)
     }
     
+    func testServiceZipCode() {
+        self.sut.fetchData(target: .listaColonias(params: ZipCodeRequest(zipCode: "42088"))){ response, error in
+            if case .listaColonias(let objc) = response {
+                print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
     override func tearDown() {
         self.sut = nil
         self.expectetion = nil
