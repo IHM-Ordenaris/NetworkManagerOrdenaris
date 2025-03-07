@@ -913,9 +913,9 @@ extension WebService{
         Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
             if let result = response, let data = result.data, result.success {
                 do {
-                    let recurrencias = try JSONDecoder().decode(ZipCodeResponse.self, from: data)
+                    let infoZipCode = try JSONDecoder().decode(ZipCodeResponse.self, from: data)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
-                    callback(.listaColonias(recurrencias), nil)
+                    callback(.listaColonias(infoZipCode), nil)
                 } catch {
                     let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
                     self.callbackServices?(ServicesPlugInResponse(.finish))
@@ -925,6 +925,34 @@ extension WebService{
                 self.callbackServices?(ServicesPlugInResponse(.finish))
                 callback(.listaColonias(nil), error)
             }
+        }
+    }
+    
+    internal func callSavePurchaseeSimRequestService(_ service: inout Servicio, _ body: PurchaseSimRequest, _ uuid: String, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        service.url = service.url?.replacingOccurrences(of: "#uuid#", with: uuid)
+        do {
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            Network.callNetworking(servicio: service, params: bodyData, printResponse) { response, failure in
+                if let result = response, let data = result.data, result.success {
+                    do {
+                        let eSimResponse = try JSONDecoder().decode(PurchaseSimResponse.self, from: data)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.registrarCompraeSim(eSimResponse), nil)
+                    } catch {
+                        let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                        self.callbackServices?(ServicesPlugInResponse(.finish))
+                        callback(.registrarCompraeSim(nil), error)
+                    }
+                } else if let error = failure {
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.registrarCompraeSim(nil), error)
+                }
+            }
+        } catch {
+            let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noBody.errorDescription)
+            self.callbackServices?(ServicesPlugInResponse(.finish))
+            callback(.registrarCompraeSim(nil), error)
         }
     }
 }

@@ -760,4 +760,30 @@ public struct ValidateSimOtpRequest: Encodable {
     }
 }
 
+//TODO: Modelo para registrar la solicitud de compra eSim
+///Atributos de request  - Comprar una tarjeta  eSIM
+public struct PurchaseSimRequest: Encodable {
+    private let imei: String
+    private let email: String
+    private let numero: String
+    private let oferta: String
+    private let esBait: Bool
+    private let procedePago: Bool = true
+    private let portabilidad: String
+    
+    public init(imei: String, email: String, numero: String, oferta: String, esBait: Bool, portabilidad: String) {
+        self.imei = imei
+        self.email = email
+        self.numero = numero
+        self.oferta = oferta
+        self.esBait = esBait
+        self.portabilidad = portabilidad
+    }
+}
+///Atributos de response
+public struct PurchaseSimResponse: Decodable {
+    public let success: Bool?
+    public let data: String?
+}
+
 // MARK: - ⚠️ typealias & Objects DELETE ::::::::::::::::
