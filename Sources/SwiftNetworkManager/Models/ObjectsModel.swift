@@ -80,7 +80,11 @@ public struct OffersResponse: Decodable, @unchecked Sendable {
 //TODO: Modelo del servicio Portabilidad
 ///Atributos de request
 public struct ImeiRequest: Encodable {
-    public let IMEI: String
+    private let IMEI: String
+    
+    public init(imei: String) {
+        self.IMEI = imei
+    }
 }
 
 ///Atributos de response
@@ -120,8 +124,13 @@ public struct AreaCode: Decodable {
 //TODO: Modelo del servicio iTunes (appStore)
 ///Atributos de request
 public struct InfoAppStoreRequest {
-    public let bundleId: String
-    public let country: String?
+    internal let bundleId: String
+    internal let country: String?
+    
+    public init(bundleId: String, country: String?) {
+        self.bundleId = bundleId
+        self.country = country
+    }
 }
 
 ///Atributos de response
@@ -209,7 +218,11 @@ public struct AvatarObj: Decodable {
 //TODO: Modelo del servicio lista de colonias
 ///Atributos de request
 public struct ZipCodeRequest {
-    public let zipCode: String
+    internal let zipCode: String
+    
+    public init(zipCode: String) {
+        self.zipCode = zipCode
+    }
 }
 
 ///Atributos de response
@@ -356,8 +369,13 @@ public struct Temas: Encodable, @unchecked Sendable {
 //TODO: Modelo del servicio de eliminación
 ///Atributos de request
 public struct EliminacionRequest: Encodable {
-    public let access: String
-    public let pass: String
+    private let access: String
+    private let pass: String
+    
+    public init(access: String, pass: String) {
+        self.access = access
+        self.pass = pass
+    }
 }
 
 //TODO: Modelo del servicio de LogIn
@@ -508,7 +526,11 @@ public struct OTPResponse: Decodable{
 //TODO: Modelo del servicio de Consumo
 ///Atributos de request
 public struct MobileHotspotRequest: Encodable {
-    public let access: String
+    private let access: String
+    
+    public init(access: String) {
+        self.access = access
+    }
 }
 
 ///Atributos de response
@@ -689,7 +711,11 @@ public struct ReplaceSimResponse: Decodable {
 //TODO: Modelo del servicio de Reemplazo de SIM
 ///Atributos de request  - Envio de OTP
 public struct SendSimOtpRequest: Encodable {
-    public let dn: String
+    private let dn: String
+    
+    public init(dn: String) {
+        self.dn = dn
+    }
 }
 
 //TODO: Modelo del servicio de cambio de código de área
@@ -740,8 +766,13 @@ public struct PurchaseUuidResponse: Decodable {
 //TODO: Modelo del servicio de Reemplazo de SIM
 ///Atributos de request - Validar OTP
 public struct ValidateSimOtpRequest: Encodable {
-    public let dn: String
-    public let code: String
+    private let dn: String
+    private let code: String
+    
+    public init(dn: String, code: String) {
+        self.dn = dn
+        self.code = code
+    }
 }
 
 //TODO: Modelo para registrar la solicitud de compra eSim
