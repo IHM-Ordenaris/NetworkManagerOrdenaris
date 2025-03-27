@@ -54,6 +54,7 @@ public enum ServiceName: @unchecked Sendable {
     case solicitarUuideSim
     case listaColonias(params: ZipCodeRequest)
     case registrarCompraeSim(params: PurchaseSimRequest, uuid: String)
+    case tapNotificacion(params: TapNotificationRequest)
     
     var getKey: String {
         switch self {
@@ -102,6 +103,7 @@ public enum ServiceName: @unchecked Sendable {
         case .solicitarUuideSim: return "getVisitorForEsim"
         case .listaColonias: return "zipCodeInformation"
         case .registrarCompraeSim: return "saveDataEsim"
+        case .tapNotificacion: return "notify_clic_event"
         }
     }
 }
@@ -147,4 +149,5 @@ public enum ServiceClass {
     case solicitarUuideSim(PurchaseUuidResponse?)
     case listaColonias(ZipCodeResponse?)
     case registrarCompraeSim(PurchaseSimResponse?)
+    case tapNotificacion(DefaultResponse?)
 }

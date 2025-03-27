@@ -955,6 +955,25 @@ extension WebService{
             callback(.registrarCompraeSim(nil), error)
         }
     }
+    
+    internal func callServiceViaTapNotification(_ service: Servicio, _ body: TapNotificationRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        Network.callNetworking(servicio: service, params: body.toDictionary(), printResponse) { response, failure in
+            if let result = response, let data = result.data, result.success {
+                do {
+                    let defaultResponse = try JSONDecoder().decode(DefaultResponse.self, from: data)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.tapNotificacion(defaultResponse), nil)
+                } catch {
+                    let error = ErrorResponse(statusCode: Cons.error2, responseCode: Cons.error2, errorMessage: CustomError.noData.errorDescription)
+                    self.callbackServices?(ServicesPlugInResponse(.finish))
+                    callback(.tapNotificacion(nil), error)
+                }
+            } else if let error = failure {
+                self.callbackServices?(ServicesPlugInResponse(.finish))
+                callback(.tapNotificacion(nil), error)
+            }
+        }
+    }
 }
 
 actor VersionManager {

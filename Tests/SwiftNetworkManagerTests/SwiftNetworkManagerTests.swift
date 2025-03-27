@@ -59,7 +59,7 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
     }
     
     func testImei() {
-        self.sut.fetchData(target: .validarImei(params: ImeiRequest(imei: "351073871526101"))) { response, error in
+        self.sut.fetchData(target: .validarImei(params: ImeiRequest(IMEI: "351073871526101"))) { response, error in
             if case .validarImei(let objc) = response {
                 print(objc)
                 XCTAssertEqual(objc?.data?.homologated, "HOMOLOGADOS O VOLTE")
@@ -222,6 +222,17 @@ final class NetworkManagerSDKTests: XCTestCase, @unchecked Sendable {
     func testServiceZipCode() {
         self.sut.fetchData(target: .listaColonias(params: ZipCodeRequest(zipCode: "42088"))){ response, error in
             if case .listaColonias(let objc) = response {
+                print(objc)
+                XCTAssertTrue(objc?.success ?? false)
+                self.expectetion.fulfill()
+            }
+        }
+        self.wait(for: [self.expectetion], timeout: 5)
+    }
+    
+    func testTapNotification() {
+        self.sut.fetchData(target: .tapNotificacion(params: TapNotificationRequest(dn: "0000000000", idNotification: "1743093488578475", token: "cNDHbfXyP04Pm7Ezl3_LfU:APA91bHtOFlPDlJtWwJ8AS1tW16RuPC0G1C1hg8w0zPz4Kvbtbd5CikprHyqGyZjS_aZnHUqdkpVgPsloiRum_rk1l_6wdNjzexMnHanJUexDxMX83Hib58"))){ response, error in
+            if case .tapNotificacion(let objc) = response {
                 print(objc)
                 XCTAssertTrue(objc?.success ?? false)
                 self.expectetion.fulfill()

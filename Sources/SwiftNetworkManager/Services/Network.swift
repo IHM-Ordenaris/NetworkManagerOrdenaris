@@ -30,7 +30,7 @@ internal struct Network {
         }
         
         var body: Data?
-        if let body = params as? Dictionary<String, String>{
+        if let body = params as? Dictionary<String, String> {
             let queryItems: [URLQueryItem] = body.map {
                 URLQueryItem(name: $0.key, value: $0.value)
             }

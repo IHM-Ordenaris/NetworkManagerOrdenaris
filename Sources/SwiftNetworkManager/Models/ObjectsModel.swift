@@ -80,11 +80,7 @@ public struct OffersResponse: Decodable, @unchecked Sendable {
 //TODO: Modelo del servicio Portabilidad
 ///Atributos de request
 public struct ImeiRequest: Encodable {
-    private let IMEI: String
-    
-    public init(imei: String) {
-        self.IMEI = imei
-    }
+    public let IMEI: String
 }
 
 ///Atributos de response
@@ -124,13 +120,8 @@ public struct AreaCode: Decodable {
 //TODO: Modelo del servicio iTunes (appStore)
 ///Atributos de request
 public struct InfoAppStoreRequest {
-    internal let bundleId: String
-    internal let country: String?
-    
-    public init(bundleId: String, country: String?) {
-        self.bundleId = bundleId
-        self.country = country
-    }
+    public let bundleId: String
+    public let country: String?
 }
 
 ///Atributos de response
@@ -218,11 +209,7 @@ public struct AvatarObj: Decodable {
 //TODO: Modelo del servicio lista de colonias
 ///Atributos de request
 public struct ZipCodeRequest {
-    internal let zipCode: String
-    
-    public init(zipCode: String) {
-        self.zipCode = zipCode
-    }
+    public let zipCode: String
 }
 
 ///Atributos de response
@@ -261,6 +248,21 @@ public struct ZipCodeDistrict: Decodable {
     public let codigoPostal: String?
     public let nombre: String?
     public let ciudad: String?
+}
+
+//TODO: Modelo de informar que la notificación fue abierta
+///Atributos de request
+public struct TapNotificationRequest: Encodable {
+    private let dn: String
+    private let idNotification: String
+    private let token: String
+    private let event: String = "onClick"
+    
+    public init(dn: String, idNotification: String, token: String) {
+        self.dn = dn
+        self.idNotification = idNotification
+        self.token = token
+    }
 }
 
 // MARK: - ⚠️ typealias & Objects POST ::::::::::::::::
@@ -354,13 +356,8 @@ public struct Temas: Encodable, @unchecked Sendable {
 //TODO: Modelo del servicio de eliminación
 ///Atributos de request
 public struct EliminacionRequest: Encodable {
-    private let access: String
-    private let pass: String
-    
-    public init(access: String, pass: String) {
-        self.access = access
-        self.pass = pass
-    }
+    public let access: String
+    public let pass: String
 }
 
 //TODO: Modelo del servicio de LogIn
@@ -511,11 +508,7 @@ public struct OTPResponse: Decodable{
 //TODO: Modelo del servicio de Consumo
 ///Atributos de request
 public struct MobileHotspotRequest: Encodable {
-    private let access: String
-    
-    public init(access: String) {
-        self.access = access
-    }
+    public let access: String
 }
 
 ///Atributos de response
@@ -696,11 +689,7 @@ public struct ReplaceSimResponse: Decodable {
 //TODO: Modelo del servicio de Reemplazo de SIM
 ///Atributos de request  - Envio de OTP
 public struct SendSimOtpRequest: Encodable {
-    private let dn: String
-    
-    public init(dn: String) {
-        self.dn = dn
-    }
+    public let dn: String
 }
 
 //TODO: Modelo del servicio de cambio de código de área
@@ -751,13 +740,8 @@ public struct PurchaseUuidResponse: Decodable {
 //TODO: Modelo del servicio de Reemplazo de SIM
 ///Atributos de request - Validar OTP
 public struct ValidateSimOtpRequest: Encodable {
-    private let dn: String
-    private let code: String
-    
-    public init(dn: String, code: String) {
-        self.dn = dn
-        self.code = code
-    }
+    public let dn: String
+    public let code: String
 }
 
 //TODO: Modelo para registrar la solicitud de compra eSim
@@ -787,3 +771,30 @@ public struct PurchaseSimResponse: Decodable {
 }
 
 // MARK: - ⚠️ typealias & Objects DELETE ::::::::::::::::
+
+// MARK: - Extension
+// MARK: - Encodable
+extension Encodable {
+    func toDictionary() -> [String: String] {
+        var dict: [String: String] = [:]
+        let mirror = Mirror(reflecting: self)
+
+        for child in mirror.children {
+            if let key = child.label {
+                switch child.value {
+                case let value as String:
+                    dict[key] = value
+                case let value as Int:
+                    dict[key] = String(value)
+                case let value as Double:
+                    dict[key] = String(value)
+                case let value as Bool:
+                    dict[key] = String(value)
+                default:
+                    continue // Ignorar otros tipos no convertibles
+                }
+            }
+        }
+        return dict
+    }
+}
