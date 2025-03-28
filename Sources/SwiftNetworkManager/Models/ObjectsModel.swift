@@ -265,11 +265,11 @@ public struct ZipCodeDistrict: Decodable {
 
 //TODO: Modelo de informar que la notificación fue abierta
 ///Atributos de request
-public struct TapNotificationRequest: Encodable {
-    private let dn: String
-    private let idNotification: String
-    private let token: String
-    private let event: String = "onClick"
+public struct TapNotificationRequest {
+    internal let dn: String
+    internal let idNotification: String
+    internal let token: String
+    internal let event: String = "onClick"
     
     public init(dn: String, idNotification: String, token: String) {
         self.dn = dn

@@ -176,7 +176,7 @@ public class WebService: @unchecked Sendable {
         case let .registrarCompraeSim(params, uuid):
             self.callSavePurchaseeSimRequestService(&service, params, uuid, printResponse, callback)
         case .tapNotificacion(let params):
-            self.callServiceViaTapNotification(service, params, printResponse, callback)
+            self.callServiceViaTapNotification(&service, params, printResponse, callback)
         }
     }
 }

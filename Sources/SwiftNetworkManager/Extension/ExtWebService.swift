@@ -956,8 +956,12 @@ extension WebService{
         }
     }
     
-    internal func callServiceViaTapNotification(_ service: Servicio, _ body: TapNotificationRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
-        Network.callNetworking(servicio: service, params: body.toDictionary(), printResponse) { response, failure in
+    internal func callServiceViaTapNotification(_ service: inout Servicio, _ body: TapNotificationRequest, _ printResponse: Bool, _ callback: @escaping CallbackResponseTarget) {
+        service.url = service.url?.replacingOccurrences(of: "#token#", with: body.token)
+        service.url = service.url?.replacingOccurrences(of: "#idNotification#", with: body.idNotification)
+        service.url = service.url?.replacingOccurrences(of: "#event#", with: body.event)
+        service.url = service.url?.replacingOccurrences(of: "#dn#", with: body.dn)
+        Network.callNetworking(servicio: service, params: nil, printResponse) { response, failure in
             if let result = response, let data = result.data, result.success {
                 do {
                     let defaultResponse = try JSONDecoder().decode(DefaultResponse.self, from: data)
